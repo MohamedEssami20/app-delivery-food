@@ -51,7 +51,7 @@ class CustomTextFormFiled extends StatelessWidget {
       onSaved: onSaved,
       keyboardType: textInputType,
       textAlign: textAlign,
-      style: theme.textStyles.titleSmall?.copyWith(
+      style: theme.textStyles.titleMedium?.copyWith(
         color: theme.colors.typography500,
       ),
       decoration: InputDecoration(
@@ -63,18 +63,23 @@ class CustomTextFormFiled extends StatelessWidget {
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
         enabledBorder: buildBorder(theme),
-        focusedBorder: buildBorder(theme),
+        focusedBorder: buildBorder(theme, theme.colors.primary600),
         border: buildBorder(theme),
+        //focusedErrorBorder: buildBorder(theme, theme.colors.primary600),
+        errorBorder: buildBorder(theme, theme.colors.red),
         filled: true,
         fillColor: theme.colors.white,
       ),
     );
   }
 
-  OutlineInputBorder buildBorder(AppThemeHelper theme) {
+  OutlineInputBorder buildBorder(AppThemeHelper theme, [Color? color]) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
-      borderSide: BorderSide(width: 0.8, color: theme.colors.typography100),
+      borderSide: BorderSide(
+        width: 1,
+        color: color ?? theme.colors.typography100,
+      ),
     );
   }
 }
