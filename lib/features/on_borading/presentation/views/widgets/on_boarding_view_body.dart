@@ -1,15 +1,23 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
+import 'package:app_delivey_food/features/auth/presentation/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import 'on_boarding_body_item.dart';
+import '../../../../../core/function/get_onboarding_view.dart';
 import 'on_boarding_dots_indicator.dart';
 
-class OnBoardingViewBody extends StatelessWidget {
+class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
 
+  @override
+  State<OnBoardingViewBody> createState() => _OnBoardingViewBodyState();
+}
+
+class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
+  PageController pageController = PageController();
+  bool isActiveDots = false;
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -24,34 +32,30 @@ class OnBoardingViewBody extends StatelessWidget {
             children: [SvgPicture.asset(Assets.assetsImagesLogoText)],
           ),
           const SizedBox(height: 30),
-          OnBoardingBodyItem(),
-          Text(
-            "Welcome to the most tastiest app",
-            style: theme.textStyles.displayMedium!.copyWith(
-              color: theme.colors.typography500,
-              fontFamily: "Poppins",
-              height: 1.2,
+          SizedBox(
+            height: 490,
+            child: PageView.builder(
+              controller: pageController,
+              itemBuilder: (context, index) {
+                return getOnBoardingViews()[index];
+              },
+              onPageChanged: (value) {
+                setState(() {
+                  currentIndex = value;
+                });
+              },
+              itemCount: getOnBoardingViews().length,
             ),
-            textAlign: TextAlign.center,
           ),
-          Text(
-            "You know, this app is edible meaning you can eat it!",
-            style: theme.textStyles.titleSmall!.copyWith(
-              color: theme.colors.typography200,
-              fontFamily: "Poppins",
-              height: 1.2,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              OnBoardingDotsIndicator(isActive: true),
+            children: [
+              OnBoardingDotsIndicator(isActive: currentIndex == 0),
               SizedBox(width: 8),
-              OnBoardingDotsIndicator(isActive: false),
+              OnBoardingDotsIndicator(isActive: currentIndex == 1),
               SizedBox(width: 8),
-              OnBoardingDotsIndicator(isActive: false),
+              OnBoardingDotsIndicator(isActive: currentIndex == 2),
             ],
           ),
           const SizedBox(height: 0),
@@ -62,14 +66,38 @@ class OnBoardingViewBody extends StatelessWidget {
                 flex: 1,
                 child: CustomButton(
                   label: "Skip",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      LoginView.routeName,
+                    );
+                  },
                   backgroundColor: theme.colors.grey200,
                   textColor: theme.colors.primary600,
                 ),
               ),
               Expanded(
                 flex: 2,
-                child: CustomButton(label: "Next", onPressed: () {}),
+                child: CustomButton(
+                  label: "Next",
+                  onPressed: () {
+                    if (pageController.page == 2) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        LoginView.routeName,
+                      );
+                    } else {
+                      pageController.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                      setState(() {
+                        isActiveDots = true;
+                        currentIndex += 1;
+                      });
+                    }
+                  },
+                ),
               ),
             ],
           ),

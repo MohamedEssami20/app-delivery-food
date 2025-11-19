@@ -1,8 +1,12 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
+import 'package:app_delivey_food/features/auth/presentation/views/login_view.dart';
 import 'package:app_delivey_food/features/on_borading/presentation/views/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../../core/services/shared_pref_services.dart';
+import '../../../../../core/utils/app_keys.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -22,7 +26,15 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   Future<void> navigateToOnBoardingView() async {
     await Future.delayed(const Duration(seconds: 3));
     if (!mounted) return;
-    Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+    final isShowOnboarding =
+        SharedPrefrenceSigelton.getBoolean(key: AppKeys.isShowedOnboarding) ??
+        false;
+    if (isShowOnboarding) {
+      Navigator.pushReplacementNamed(context, LoginView.routeName);
+    } else {
+      SharedPrefrenceSigelton.setBoolean(AppKeys.isShowedOnboarding, true);
+      Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+    }
   }
 
   @override
