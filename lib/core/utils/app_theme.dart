@@ -202,7 +202,6 @@ class AppTheme {
   static ThemeData lightTheme() {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: AppTextStyles.poppineFontFamily,
       scaffoldBackgroundColor: AppColors.whiteLight,
       extensions: <ThemeExtension<dynamic>>[
         AppThemeColors(
@@ -254,7 +253,6 @@ class AppTheme {
   static ThemeData darkTheme() {
     return ThemeData(
       useMaterial3: true,
-      fontFamily: AppTextStyles.poppineFontFamily,
       scaffoldBackgroundColor: AppColors.blackDark,
       extensions: <ThemeExtension<dynamic>>[
         AppThemeColors(
