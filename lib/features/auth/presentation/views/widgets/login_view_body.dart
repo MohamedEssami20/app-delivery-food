@@ -6,6 +6,8 @@ import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:app_delivey_food/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
+import '../forgot_password_view.dart';
+
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
 
@@ -92,10 +94,15 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ],
             ),
           ),
-          Text(
-            "Forgot your password?",
-            style: theme.textStyles.headlineSmall?.copyWith(
-              color: theme.colors.primary700,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ForgotPasswordView.routeName);
+            },
+            child: Text(
+              "Forgot your password?",
+              style: theme.textStyles.headlineSmall?.copyWith(
+                color: theme.colors.primary700,
+              ),
             ),
           ),
           const SizedBox(height: 0),
