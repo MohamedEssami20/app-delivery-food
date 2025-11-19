@@ -1,23 +1,26 @@
 import 'dart:developer';
 
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
-import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
-import 'package:app_delivey_food/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
-class LoginViewBody extends StatefulWidget {
-  const LoginViewBody({super.key});
+import '../../../../../core/utils/custom_button.dart';
+import 'terms_and_condititon.dart';
+import 'you_have_account_login.dart';
+
+class SignUpViewBody extends StatefulWidget {
+  const SignUpViewBody({super.key});
 
   @override
-  State<LoginViewBody> createState() => _LoginViewBodyState();
+  State<SignUpViewBody> createState() => _SignUpViewBodyState();
 }
 
-class _LoginViewBodyState extends State<LoginViewBody> {
+class _SignUpViewBodyState extends State<SignUpViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   bool isSecure = false;
-  String? email, password;
+  String? email, password, userName;
+  bool? isCheck = false;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -25,16 +28,16 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
+        spacing: 8,
         children: [
-          SizedBox(height: 0),
+          SizedBox(height: 10),
           Text(
-            "Log in to your account",
+            "Create a new account",
             style: theme.textStyles.displayLarge?.copyWith(
               color: theme.colors.typography500,
             ),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           Form(
             key: formKey,
             autovalidateMode: autovalidateMode,
@@ -42,6 +45,19 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
               children: [
+                CustomTextFormFiled(
+                  hintText: "user name",
+                  textInputType: TextInputType.text,
+                  onSaved: (value) {
+                    email = value;
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your user name';
+                    }
+                    return null;
+                  },
+                ),
                 CustomTextFormFiled(
                   hintText: "email address",
                   textInputType: TextInputType.emailAddress,
@@ -92,17 +108,20 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ],
             ),
           ),
-          Text(
-            "Forgot your password?",
-            style: theme.textStyles.headlineSmall?.copyWith(
-              color: theme.colors.primary700,
-            ),
+          TermsAndCondititonCheckBox(
+            theme: theme,
+            isChecked: isCheck,
+            onChanged: (value) {
+              setState(() {
+                isCheck = value;
+              });
+            },
           ),
           const SizedBox(height: 0),
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              label: "Log in",
+              label: "Create account",
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   log("form is valid");
@@ -115,32 +134,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               backgroundColor: theme.colors.primary600,
             ),
           ),
-          const SizedBox(height: 0),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Don't have an account? ",
-                style: theme.textStyles.titleSmall?.copyWith(
-                  color: theme.colors.typography400,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, SignUpView.routeName);
-                },
-                child: Text(
-                  "Sign up",
-                  style: theme.textStyles.titleMedium?.copyWith(
-                    color: theme.colors.typography500,
-                    decoration: TextDecoration.underline,
-                    decorationColor: theme.colors.primary700,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          YouHaveAccountLoginIn(theme: theme),
         ],
       ),
     );

@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../helper/app_theme_helper.dart';
 import '../utils/assets.dart';
 
-AppBar buildCustomAppBar(AppThemeHelper theme, [bool? showBackButton]) {
+AppBar buildCustomAppBar({required AppThemeHelper theme, bool? showBackButton, required BuildContext context}) {
   return AppBar(
     backgroundColor: theme.colors.white,
     elevation: 0,
@@ -13,7 +13,7 @@ AppBar buildCustomAppBar(AppThemeHelper theme, [bool? showBackButton]) {
       Assets.assetsImagesLogoText,
       alignment: Alignment.center,
     ),
-    leadingWidth: 100,
+    leadingWidth: 90,
     leading: Visibility(
       visible: showBackButton ?? false,
       child: Padding(
@@ -21,7 +21,11 @@ AppBar buildCustomAppBar(AppThemeHelper theme, [bool? showBackButton]) {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.arrow_back_ios, color: theme.colors.grey500, size: 20),
+            GestureDetector(onTap: (){
+              if(Navigator.canPop(context)){
+                Navigator.pop(context);
+              }
+            },child: Icon(Icons.arrow_back_ios, color: theme.colors.grey500, size: 20)),
             Text(
               'Back',
               style: theme.textStyles.headlineSmall?.copyWith(

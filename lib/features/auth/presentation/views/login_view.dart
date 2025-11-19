@@ -11,7 +11,11 @@ class LoginView extends StatelessWidget {
     final theme = AppThemeHelper(context);
     return Scaffold(
       backgroundColor: theme.colors.white,
-      appBar: buildCustomAppBar(theme),
+      appBar: buildCustomAppBar(
+        theme: theme,
+        showBackButton: false,
+        context: context,
+      ),
       body: SafeArea(child: LoginViewBody()),
     );
   }
