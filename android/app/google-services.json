@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "214933420752",
+    "project_id": "bobo-delivery-food",
+    "storage_bucket": "bobo-delivery-food.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214933420752:android:3c563b0f2fef8e5211bcd5",
+        "android_client_info": {
+          "package_name": "com.example.app_delivey_food"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyBiLp0w6VEe83r1kIKrRqHaC8JboM4p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
