@@ -45,3 +45,4 @@ app.*.map.json
 /android/app/release
 lib/core/utils/app_keys.dart
 lib/firebase_options.dart
+lib/core/utils/backend_end_point.dart

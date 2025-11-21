@@ -1,13 +1,13 @@
 class UserEntity {
-  final String id;
-  final String name;
-  final String email;
-  final String imageUrl;
+  final String uid;
+  final String username;
+  final String userEmail;
+  final String userImage;
 
   UserEntity({
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.imageUrl,
+    required this.uid,
+    required this.username,
+    required this.userEmail,
+    required this.userImage,
   });
 }
