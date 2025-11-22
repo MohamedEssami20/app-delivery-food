@@ -5,14 +5,14 @@ import '../entities/user_entity.dart';
 
 abstract class AuthRepos {
   //create method that sign up user with email and password;
-  Future<void> createUserWithEmailAndPassword({
+  Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword({
     required String name,
     required String email,
     required String password,
   });
 
   //create method that sign in user with email and password;
-  Future<void> signInWithEmailAndPassword({
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword({
     required String email,
     required String password,
   });

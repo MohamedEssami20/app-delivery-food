@@ -3,10 +3,11 @@ import 'dart:developer';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
-import 'package:app_delivey_food/features/auth/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
 import '../forgot_password_view.dart';
+import 'another_auth_provider_list.dart';
+import 'dont_have_account.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -123,31 +124,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             ),
           ),
           const SizedBox(height: 0),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Don't have an account? ",
-                style: theme.textStyles.titleSmall?.copyWith(
-                  color: theme.colors.typography400,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, SignUpView.routeName);
-                },
-                child: Text(
-                  "Sign up",
-                  style: theme.textStyles.titleMedium?.copyWith(
-                    color: theme.colors.typography500,
-                    decoration: TextDecoration.underline,
-                    decorationColor: theme.colors.primary700,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          DontHaveAccount(theme: theme),
+          AnotherAuthProviderList(),
         ],
       ),
     );

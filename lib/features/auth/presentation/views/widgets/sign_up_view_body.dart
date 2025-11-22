@@ -4,7 +4,6 @@ import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/custom_button.dart';
-import 'another_auth_provider_list.dart';
 import 'terms_and_condititon.dart';
 import 'you_have_account_login.dart';
 
@@ -135,7 +134,6 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             ),
           ),
           YouHaveAccountLoginIn(theme: theme),
-          AnotherAuthProviderList(),
         ],
       ),
     );
