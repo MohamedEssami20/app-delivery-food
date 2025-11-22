@@ -1,9 +1,12 @@
-import 'dart:developer';
+
 
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
+import 'package:app_delivey_food/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:app_delivey_food/features/auth/presentation/views/widgets/builder/login_button_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../forgot_password_view.dart';
 import 'another_auth_provider_list.dart';
@@ -110,10 +113,13 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              label: "Log in",
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  log("form is valid");
+                  formKey.currentState!.save();
+                  context.read<LoginCubit>().loginUser(
+                    email: email!,
+                    password: password!,
+                  );
                 } else {
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;
@@ -121,6 +127,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 }
               },
               backgroundColor: theme.colors.primary600,
+              child: LoginButtonBuilder(),
             ),
           ),
           const SizedBox(height: 0),

@@ -1,9 +1,12 @@
-import 'dart:developer';
 
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
+import 'package:app_delivey_food/core/utils/error_snackbar.dart';
+import 'package:app_delivey_food/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/custom_button.dart';
+import 'builder/signup_button_builder.dart';
 import 'terms_and_condititon.dart';
 import 'you_have_account_login.dart';
 
@@ -48,7 +51,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   hintText: "user name",
                   textInputType: TextInputType.text,
                   onSaved: (value) {
-                    email = value;
+                    userName = value;
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -120,10 +123,22 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              label: "Create account",
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  log("form is valid");
+                  if (isCheck == false) {
+                    buildErrorSnackbar(
+                      message: "Please agree to the terms and conditions",
+                      theme: theme,
+                      context: context,
+                    );
+                  } else {
+                    formKey.currentState!.save();
+                    BlocProvider.of<SignupCubit>(context).signUpUser(
+                      email: email!,
+                      password: password!,
+                      name: userName!,
+                    );
+                  }
                 } else {
                   setState(() {
                     autovalidateMode = AutovalidateMode.always;
@@ -131,6 +146,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 }
               },
               backgroundColor: theme.colors.primary600,
+              child: SignupButtonBlocBuilder(),
             ),
           ),
           YouHaveAccountLoginIn(theme: theme),
