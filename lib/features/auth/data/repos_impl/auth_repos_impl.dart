@@ -189,4 +189,28 @@ class AuthRepoImpl extends AuthRepos {
       documentId: documentId!,
     );
   }
+
+  @override
+  Future<Either<Failure, void>> resetPassword({required String email}) async {
+    try {
+      // check if email is exists;
+      final List<Map<String, dynamic>> data = await dataBaseService.getData(
+        path: BackendEndpoints.addUser,
+      );
+      if (data.any((element) => element['email'] == email)) {
+        await firebaseAuthService.sendPasswordResetEmail(email: email);
+        return right(null);
+      }
+      return left(Failure(errorMessage: "Email not found"));
+    } on FirebaseAuthException catch (error) {
+      return left(FirebaseAuthErrorHandler.fromFirebaseAuthException(error));
+    } catch (error) {
+      log("Exception in reset password repo impl signin= ${error.toString()}");
+      return left(
+        Failure(
+          errorMessage: "An unexpected error occurred. Please try again later.",
+        ),
+      );
+    }
+  }
 }

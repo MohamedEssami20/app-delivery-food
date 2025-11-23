@@ -32,4 +32,7 @@ abstract class AuthRepos {
 
   // create method that check if user data is exits in database;
   Future<bool> isDataExists({required String path, required String documentId});
+
+  // create method that reset password;
+  Future<Either<Failure, void>> resetPassword({required String email});
 }

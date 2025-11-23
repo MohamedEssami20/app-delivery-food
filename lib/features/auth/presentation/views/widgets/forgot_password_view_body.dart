@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
-import 'package:app_delivey_food/features/auth/presentation/views/login_view.dart';
+import 'package:app_delivey_food/features/auth/presentation/views/widgets/builder/reset_password_button_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../manager/reset_password_cubit/reset_password_cubit.dart';
 
 class ForgotPasswordViewBody extends StatefulWidget {
   const ForgotPasswordViewBody({super.key});
@@ -72,17 +75,12 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              label: "Forgot Password",
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   log("form is valid");
                   formKey.currentState!.save();
-                  // send email link to reset password;
-                  // navigate to login;
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    LoginView.routeName,
-                    (route) => false,
+                  context.read<ResetPasswordCubit>().resetPassword(
+                    email: email!,
                   );
                 } else {
                   setState(() {
@@ -91,6 +89,7 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
                 }
               },
               backgroundColor: theme.colors.primary600,
+              child: ResetPasswordButtonBuilder(),
             ),
           ),
         ],
