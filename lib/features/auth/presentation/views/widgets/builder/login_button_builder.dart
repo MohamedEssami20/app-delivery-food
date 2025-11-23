@@ -15,7 +15,9 @@ class LoginButtonBuilder extends StatelessWidget {
     final theme = AppThemeHelper(context);
     return BlocConsumer<LoginCubit, LoginState>(
       builder: (context, state) {
-        if (state is LoginInitial || state is LogInFailureState) {
+        if (state is LogInLoadingState) {
+          return CircularProgressIndicator(color: theme.colors.white);
+        } else {
           return Text(
             "create account",
             style: theme.textStyles.headlineSmall!.copyWith(
@@ -24,8 +26,6 @@ class LoginButtonBuilder extends StatelessWidget {
               fontWeight: FontWeight.w900,
             ),
           );
-        } else {
-          return CircularProgressIndicator(color: theme.colors.white);
         }
       },
       listener: (context, state) {

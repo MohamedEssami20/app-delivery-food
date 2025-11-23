@@ -15,7 +15,9 @@ class SignupButtonBlocBuilder extends StatelessWidget {
     final theme = AppThemeHelper(context);
     return BlocConsumer<SignupCubit, SignupState>(
       builder: (context, state) {
-        if (state is SignupInitial || state is SignUpFailureState) {
+        if (state is SignUpSuccessState) {
+          return CircularProgressIndicator(color: theme.colors.white);
+        } else {
           return Text(
             "create account",
             style: theme.textStyles.headlineSmall!.copyWith(
@@ -24,8 +26,6 @@ class SignupButtonBlocBuilder extends StatelessWidget {
               fontWeight: FontWeight.w900,
             ),
           );
-        } else {
-          return CircularProgressIndicator(color: theme.colors.white);
         }
       },
       listener: (context, state) {

@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:app_delivey_food/core/errors/failure.dart';
+import 'package:app_delivey_food/core/errors/google_signin_exeception_handler.dart';
 import 'package:app_delivey_food/core/utils/app_keys.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/errors/firebse_auth_exception_handler.dart';
 import '../../../../core/services/data_base_services.dart';
 import '../../../../core/services/firebase_auth_services.dart';
@@ -115,9 +117,11 @@ class AuthRepoImpl extends AuthRepos {
         await addUserData(userEntity: UserModel.fromFirebaseUser(user: user));
       }
       return right(UserModel.fromFirebaseUser(user: user));
-    } on FirebaseAuthException catch (error) {
+    } on GoogleSignInException catch (error) {
       deleteUser(user);
-      return left(FirebaseAuthErrorHandler.fromFirebaseAuthException(error));
+      return left(
+        GoogleSigninExeceptionHandler.fromGoogleSignInException(error.code),
+      );
     } catch (error) {
       log("Exception in auth repo impl signin= ${error.toString()}");
       return left(

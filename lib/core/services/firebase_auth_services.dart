@@ -9,7 +9,38 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../errors/custom_exception.dart';
 
 class FirebaseAuthService {
-   final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn.instance;
+
+  // initialize google sign in;
+  Future<void> initializeGoogleSignIn() async {
+    await googleSignIn.initialize(
+      clientId:
+          "214933420752-tst5ppsfs00hfofajs6avadh77r8icr3.apps.googleusercontent.com",
+      serverClientId:
+          "214933420752-jn4jidtg6oks3arhpddijrmvmebstvbs.apps.googleusercontent.com",
+    );
+    googleSignIn.authenticationEvents
+        .listen((event) {
+          log('Google Sign-In event: $event');
+        })
+        .onError((error) {
+          log('Google Sign-In error: $error');
+        });
+    await googleSignIn.attemptLightweightAuthentication();
+  }
+
+  //create google sign in method
+  Future<User> signInWithGoogle() async {
+    final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+    final credential = GoogleAuthProvider.credential(
+      idToken: googleAuth.idToken,
+    );
+    final UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithCredential(credential);
+    return userCredential.user!;
+  }
+
   // create an signup method that takes email and password ;
   Future<User> createUserWithEmailAndPassword({
     required String email,
@@ -42,32 +73,6 @@ class FirebaseAuthService {
       password: password,
     );
     return credential.user!;
-  }
-
-  // initialize google sign in;
-  Future<void> initializeGoogleSignIn() async {
-    await googleSignIn.initialize();
-    googleSignIn.authenticationEvents
-        .listen((event) {
-          log('Google Sign-In event: $event');
-        })
-        .onError((error) {
-          log('Google Sign-In error: $error');
-        });
-
-    await googleSignIn.attemptLightweightAuthentication();
-  }
-
-  //create google sign in method
-  Future<User> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
-    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
-    final credential = GoogleAuthProvider.credential(
-      idToken: googleAuth.idToken,
-    );
-    final UserCredential userCredential = await FirebaseAuth.instance
-        .signInWithCredential(credential);
-    return userCredential.user!;
   }
 
   //create sigin method with facebook
