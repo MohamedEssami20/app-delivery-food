@@ -4,6 +4,7 @@ import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
+import 'featured_item_list_view.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -31,6 +32,8 @@ class HomeViewBody extends StatelessWidget {
               textInputType: TextInputType.text,
             ),
           ),
+          const SizedBox(height: 8),
+          const FeaturedItemListView(),
         ],
       ),
     );
