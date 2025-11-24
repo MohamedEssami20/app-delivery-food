@@ -1,6 +1,8 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
+import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/features/auth/presentation/views/login_view.dart';
+import 'package:app_delivey_food/features/home/presentation/views/home_view.dart';
 import 'package:app_delivey_food/features/on_borading/presentation/views/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,10 +31,12 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     final isShowOnboarding =
         SharedPrefrenceSigelton.getBoolean(key: AppKeys.isShowedOnboarding) ??
         false;
-    if (isShowOnboarding) {
+    final isLogin = FirebaseAuthService().isUserAuthenticated();
+    if (isShowOnboarding && isLogin) {
+      Navigator.pushReplacementNamed(context, HomeView.routeName);
+    } else if (isShowOnboarding && !isLogin) {
       Navigator.pushReplacementNamed(context, LoginView.routeName);
     } else {
-      SharedPrefrenceSigelton.setBoolean(AppKeys.isShowedOnboarding, true);
       Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
     }
   }
