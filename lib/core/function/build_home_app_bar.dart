@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 Widget buildHomeAppBar(AppThemeHelper theme) {
   return ListTile(
+    contentPadding: const EdgeInsets.all(0),
     title: Text(
       'Hi John',
       style: theme.textStyles.titleSmall!.copyWith(

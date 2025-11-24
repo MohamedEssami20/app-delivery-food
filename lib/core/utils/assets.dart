@@ -10,6 +10,10 @@ class Assets {
   /// assets/icons/google_icon.png
   static const String assetsIconsGoogleIcon = "assets/icons/google_icon.png";
 
+  /// Assets for assetsIconsSearchIcon
+  /// assets/icons/search_icon.svg
+  static const String assetsIconsSearchIcon = "assets/icons/search_icon.svg";
+
   /// Assets for assetsImagesBackgroundOfImageOnBording1
   /// assets/images/background_of_image_onBording1.svg
   static const String assetsImagesBackgroundOfImageOnBording1 = "assets/images/background_of_image_onBording1.svg";
