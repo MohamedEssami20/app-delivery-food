@@ -61,7 +61,39 @@ class AnotherAuthProviderList extends StatelessWidget {
                 },
               ),
             ),
-            AnotherAuthProviderItem(Assets.assetsIconsFacebookIcon),
+            GestureDetector(
+              onTap: () =>
+                  BlocProvider.of<LoginCubit>(context).loginUserWithFacebook(),
+              child: BlocConsumer<LoginCubit, LoginState>(
+                listener: (context, state) {
+                  if (state is LogInWithFacebookSuccessState) {
+                    Navigator.pushReplacementNamed(context, HomeView.routeName);
+                    buildSuccessSnackbar(
+                      message: "Sign up Successfuly",
+                      theme: theme,
+                      context: context,
+                    );
+                  }
+
+                  if (state is LogInWithFacebookFailureState) {
+                    buildErrorSnackbar(
+                      message: state.errorMessage,
+                      theme: theme,
+                      context: context,
+                    );
+                  }
+
+                  if (state is LogInWithFacebookLoadingState) {
+                    CircularProgressIndicator(color: theme.colors.primary600);
+                  }
+                },
+                builder: (context, state) {
+                  return AnotherAuthProviderItem(
+                    Assets.assetsIconsFacebookIcon,
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ],
