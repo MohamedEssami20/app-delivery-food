@@ -3,14 +3,27 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/utils/custom_naviagtion_bar.dart';
 
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   const MainView({super.key});
   static const String routeName = 'main';
+
+  @override
+  State<MainView> createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomBottomNavigationBar(),
-      body: SafeArea(child: MainViewBody()),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        onTap: (value) {
+          setState(() {
+            currentIndex = value;
+          });
+        },
+      ),
+      body: SafeArea(child: MainViewBody(selectedIndex: currentIndex)),
     );
   }
 }

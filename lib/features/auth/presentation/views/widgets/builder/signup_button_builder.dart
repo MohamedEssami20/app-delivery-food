@@ -1,7 +1,7 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/success_snackbar.dart';
 import 'package:app_delivey_food/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
-import 'package:app_delivey_food/features/home/presentation/views/home_view.dart';
+import 'package:app_delivey_food/features/home/presentation/views/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +30,7 @@ class SignupButtonBlocBuilder extends StatelessWidget {
       },
       listener: (context, state) {
         if (state is SignUpSuccessState) {
-          Navigator.pushReplacementNamed(context, HomeView.routeName);
+          Navigator.pushReplacementNamed(context, MainView.routeName);
           buildSuccessSnackbar(
             message: "Sign up Successfuly",
             theme: theme,

@@ -1,4 +1,5 @@
 import 'package:app_delivey_food/features/auth/presentation/manager/login_cubit/login_cubit.dart';
+import 'package:app_delivey_food/features/home/presentation/views/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,7 +7,6 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/assets.dart';
 import '../../../../../core/utils/error_snackbar.dart';
 import '../../../../../core/utils/success_snackbar.dart';
-import '../../../../home/presentation/views/home_view.dart';
 import 'another_auth_provider_item.dart';
 
 class AnotherAuthProviderList extends StatelessWidget {
@@ -36,7 +36,7 @@ class AnotherAuthProviderList extends StatelessWidget {
               child: BlocConsumer<LoginCubit, LoginState>(
                 listener: (context, state) {
                   if (state is LogInWithGoogleSuccessState) {
-                    Navigator.pushReplacementNamed(context, HomeView.routeName);
+                    Navigator.pushReplacementNamed(context, MainView.routeName);
                     buildSuccessSnackbar(
                       message: "Sign up Successfuly",
                       theme: theme,
@@ -67,7 +67,7 @@ class AnotherAuthProviderList extends StatelessWidget {
               child: BlocConsumer<LoginCubit, LoginState>(
                 listener: (context, state) {
                   if (state is LogInWithFacebookSuccessState) {
-                    Navigator.pushReplacementNamed(context, HomeView.routeName);
+                    Navigator.pushReplacementNamed(context, MainView.routeName);
                     buildSuccessSnackbar(
                       message: "Sign up Successfuly",
                       theme: theme,
