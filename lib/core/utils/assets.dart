@@ -2,13 +2,33 @@
 class Assets {
   Assets._();
   
+  /// Assets for assetsIconsCartNavigationIcon
+  /// assets/icons/cart_navigation_icon.svg
+  static const String assetsIconsCartNavigationIcon = "assets/icons/cart_navigation_icon.svg";
+
+  /// Assets for assetsIconsExplorerNavigationIcon
+  /// assets/icons/explorer_navigation_icon.svg
+  static const String assetsIconsExplorerNavigationIcon = "assets/icons/explorer_navigation_icon.svg";
+
   /// Assets for assetsIconsFacebookIcon
   /// assets/icons/facebook_icon.png
   static const String assetsIconsFacebookIcon = "assets/icons/facebook_icon.png";
 
+  /// Assets for assetsIconsFavoriteNavigatioinIcon
+  /// assets/icons/favorite_navigatioin_icon.svg
+  static const String assetsIconsFavoriteNavigatioinIcon = "assets/icons/favorite_navigatioin_icon.svg";
+
   /// Assets for assetsIconsGoogleIcon
   /// assets/icons/google_icon.png
   static const String assetsIconsGoogleIcon = "assets/icons/google_icon.png";
+
+  /// Assets for assetsIconsHomeNavigationIcon
+  /// assets/icons/home_navigation_icon.svg
+  static const String assetsIconsHomeNavigationIcon = "assets/icons/home_navigation_icon.svg";
+
+  /// Assets for assetsIconsNotificationNavigationIcon
+  /// assets/icons/Notification_navigation_icon.svg
+  static const String assetsIconsNotificationNavigationIcon = "assets/icons/Notification_navigation_icon.svg";
 
   /// Assets for assetsIconsSearchIcon
   /// assets/icons/search_icon.svg
