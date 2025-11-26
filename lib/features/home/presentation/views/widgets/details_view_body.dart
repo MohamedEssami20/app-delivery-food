@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'details_product_images_list.dart';
 import 'dots_indicator_list.dart';
+import 'product_rating_and_calorey.dart';
 
 class DetailsViewBody extends StatefulWidget {
   const DetailsViewBody({super.key});
@@ -33,6 +33,7 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
         children: [
           DetailsProductImageList(pageController: pageController),
           DotsIndicatorList(currentIndex: selectedIndex),
+          const ProductRatingAndCalorey(),
         ],
       ),
     );

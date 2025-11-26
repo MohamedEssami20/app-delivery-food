@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
   
+  /// Assets for assetsIconsCaloryIcon
+  /// assets/icons/calory_icon.svg
+  static const String assetsIconsCaloryIcon = "assets/icons/calory_icon.svg";
+
   /// Assets for assetsIconsCartNavigationIcon
   /// assets/icons/cart_navigation_icon.svg
   static const String assetsIconsCartNavigationIcon = "assets/icons/cart_navigation_icon.svg";
@@ -41,6 +45,10 @@ class Assets {
   /// Assets for assetsIconsSearchIcon
   /// assets/icons/search_icon.svg
   static const String assetsIconsSearchIcon = "assets/icons/search_icon.svg";
+
+  /// Assets for assetsIconsTimeIcon
+  /// assets/icons/time_icon.svg
+  static const String assetsIconsTimeIcon = "assets/icons/time_icon.svg";
 
   /// Assets for assetsImagesBackgroundOfImageOnBording1
   /// assets/images/background_of_image_onBording1.svg
