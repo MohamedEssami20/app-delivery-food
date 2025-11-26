@@ -30,6 +30,10 @@ class Assets {
   /// assets/icons/Notification_navigation_icon.svg
   static const String assetsIconsNotificationNavigationIcon = "assets/icons/Notification_navigation_icon.svg";
 
+  /// Assets for assetsIconsRatingIcon
+  /// assets/icons/rating_icon.svg
+  static const String assetsIconsRatingIcon = "assets/icons/rating_icon.svg";
+
   /// Assets for assetsIconsSearchIcon
   /// assets/icons/search_icon.svg
   static const String assetsIconsSearchIcon = "assets/icons/search_icon.svg";
@@ -58,6 +62,10 @@ class Assets {
   /// assets/images/Burger_on_boarding_background.svg
   static const String assetsImagesBurgerOnBoardingBackground = "assets/images/Burger_on_boarding_background.svg";
 
+  /// Assets for assetsImagesBurgerProduct
+  /// assets/images/burger_product.jpg
+  static const String assetsImagesBurgerProduct = "assets/images/burger_product.jpg";
+
   /// Assets for assetsImagesChefCookingBackground
   /// assets/images/Chef_cooking_background.svg
   static const String assetsImagesChefCookingBackground = "assets/images/Chef_cooking_background.svg";
@@ -81,5 +89,9 @@ class Assets {
   /// Assets for assetsImagesSplash
   /// assets/images/splash.svg
   static const String assetsImagesSplash = "assets/images/splash.svg";
+
+  /// Assets for assetsImagesSplashBackground
+  /// assets/images/splash_background.png
+  static const String assetsImagesSplashBackground = "assets/images/splash_background.png";
 }
 

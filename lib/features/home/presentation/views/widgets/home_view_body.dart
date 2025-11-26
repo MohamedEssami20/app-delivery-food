@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 import 'featured_item_list_view.dart';
+import 'product_list_view.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -41,6 +42,8 @@ class HomeViewBody extends StatelessWidget {
                 const FeaturedItemListView(),
                 const SizedBox(height: 8),
                 CategoryItemsList(),
+                const SizedBox(height: 8),
+                Expanded(child: const ProductsListView()),
               ],
             ),
           ),

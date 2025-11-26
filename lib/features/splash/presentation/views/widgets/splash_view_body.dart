@@ -43,9 +43,25 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppThemeHelper(context).colors.primary100,
-      child: Center(child: SvgPicture.asset(Assets.assetsImagesSplash)),
+    final width = MediaQuery.sizeOf(context).width;
+    final height = MediaQuery.sizeOf(context).height;
+    return Stack(
+      children: [
+        Container(
+          color: Colors.transparent,
+          child: Image.asset(
+            Assets.assetsImagesSplashBackground,
+            height: height * 2,
+            width: width * 2,
+            fit: BoxFit.cover,
+            scale: 6,
+            color: AppThemeHelper(
+              context,
+            ).colors.typography100.withValues(alpha: 0.3),
+          ),
+        ),
+        Center(child: SvgPicture.asset(Assets.assetsImagesSplash)),
+      ],
     );
   }
 }
