@@ -14,14 +14,14 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
     return BlocProvider(
-      create: (context) => SignupCubit(
-        authRepos: GetItService.getIt.get<AuthRepos>(),
-      ),
+      create: (context) =>
+          SignupCubit(authRepos: GetItService.getIt.get<AuthRepos>()),
       child: Scaffold(
         appBar: buildCustomAppBar(
           theme: theme,
           showBackButton: true,
           context: context,
+          showTitle: true,
         ),
         body: SignUpViewBody(),
       ),

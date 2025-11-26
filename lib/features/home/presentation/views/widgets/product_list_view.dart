@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/features/home/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 
 import 'product_item.dart';
@@ -15,7 +16,12 @@ class ProductsListView extends StatelessWidget {
         childAspectRatio: 0.8,
       ),
       itemCount: 10,
-      itemBuilder: (context, index) => const ProductItem(),
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, DetailsView.routeName);
+        },
+        child: const ProductItem(),
+      ),
     );
   }
 }

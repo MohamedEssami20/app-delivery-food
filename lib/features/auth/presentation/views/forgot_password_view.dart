@@ -22,6 +22,7 @@ class ForgotPasswordView extends StatelessWidget {
           theme: theme,
           context: context,
           showBackButton: true,
+          showTitle: true,
         ),
         body: SafeArea(child: const ForgotPasswordViewBody()),
       ),
