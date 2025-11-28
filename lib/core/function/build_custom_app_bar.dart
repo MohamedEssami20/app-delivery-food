@@ -12,7 +12,7 @@ AppBar buildCustomAppBar({
   required BuildContext context,
 }) {
   return AppBar(
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.grey0,
     elevation: 0,
     centerTitle: true,
     title: Visibility(

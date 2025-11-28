@@ -9,7 +9,7 @@ class DetailsProductImageList extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     return SizedBox(
-      height: height * 0.5,
+      height: height * 0.45,
       child: PageView.builder(
         controller: pageController,
         padEnds: true,

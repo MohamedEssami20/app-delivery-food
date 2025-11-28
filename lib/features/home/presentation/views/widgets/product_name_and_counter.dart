@@ -27,13 +27,18 @@ class ProductNameAndCounter extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(color: theme.colors.grey200, width: 1.2),
             borderRadius: BorderRadius.circular(50),
-            color: theme.colors.white,
+            color: theme.colors.grey0,
           ),
           child: Row(
             spacing: 12,
             children: [
               IncrementAndDecremntItem(iconData: Icons.remove),
-              Text("1", style: theme.textStyles.bodyMedium),
+              Text(
+                "1",
+                style: theme.textStyles.bodyMedium!.copyWith(
+                  color: theme.colors.typography500,
+                ),
+              ),
               IncrementAndDecremntItem(iconData: Icons.add),
             ],
           ),

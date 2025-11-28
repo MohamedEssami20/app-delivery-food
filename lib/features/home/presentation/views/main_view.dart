@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/main_view_body.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,9 @@ class _MainViewState extends State<MainView> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final theme = AppThemeHelper(context);
     return Scaffold(
+      backgroundColor: theme.colors.grey0,
       bottomNavigationBar: CustomBottomNavigationBar(
         onTap: (value) {
           setState(() {

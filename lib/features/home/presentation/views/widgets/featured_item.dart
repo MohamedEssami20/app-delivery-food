@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart' show SvgPicture;
@@ -12,6 +14,7 @@ class FeaturedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
     final width = MediaQuery.sizeOf(context).width;
+    log("is Dark Mode = ${theme.isDarkMode}");
     return Container(
       padding: EdgeInsets.only(left: 20, top: 20, bottom: 0),
       width: width * 0.9,
@@ -71,6 +74,12 @@ class FeaturedItem extends StatelessWidget {
                       fit: BoxFit.fill,
                       height: 150,
                       clipBehavior: Clip.none,
+                      colorFilter: ColorFilter.mode(
+                        theme.isDarkMode
+                            ? Color(0xFF52574E)
+                            : Color(0xffCADABD),
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                   SvgPicture.asset(

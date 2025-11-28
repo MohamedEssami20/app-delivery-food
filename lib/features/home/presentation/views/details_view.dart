@@ -11,6 +11,7 @@ class DetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
     return Scaffold(
+      backgroundColor: theme.colors.grey0,
       appBar: buildCustomAppBar(
         theme: theme,
         context: context,

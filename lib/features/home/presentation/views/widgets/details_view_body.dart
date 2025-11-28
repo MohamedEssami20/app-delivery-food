@@ -1,3 +1,5 @@
+import 'package:app_delivey_food/features/home/presentation/views/widgets/product_description.dart';
+import 'package:app_delivey_food/features/home/presentation/views/widgets/product_price_and_add_tocart.dart';
 import 'package:flutter/material.dart';
 import 'details_product_images_list.dart';
 import 'dots_indicator_list.dart';
@@ -30,13 +32,16 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
-        spacing: 8,
+        spacing: 12,
         children: [
           DetailsProductImageList(pageController: pageController),
           DotsIndicatorList(currentIndex: selectedIndex),
           const ProductRatingAndCalorey(),
-          const SizedBox(height: 8),
           const ProductNameAndCounter(),
+          ProductDescription(),
+          const Spacer(),
+          Expanded(flex: 2, child: ProductPriceAndAddToCart()),
+          // const SizedBox(height: 20),
         ],
       ),
     );

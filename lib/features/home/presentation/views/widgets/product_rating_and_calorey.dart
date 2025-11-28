@@ -13,7 +13,7 @@ class ProductRatingAndCalorey extends StatelessWidget {
     return Container(
       height: 40,
       decoration: BoxDecoration(
-        color: AppThemeHelper(context).colors.white,
+        color: AppThemeHelper(context).colors.grey0,
         border: Border.all(color: theme.colors.grey200, width: 1.2),
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),

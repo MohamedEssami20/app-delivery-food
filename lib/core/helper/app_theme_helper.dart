@@ -1,4 +1,4 @@
-import 'package:app_delivey_food/core/utils/app_theme.dart';
+import 'package:app_delivey_food/core/utils/app_theme_color.dart';
 import 'package:flutter/material.dart';
 
 class AppThemeHelper {
@@ -11,4 +11,7 @@ class AppThemeHelper {
 
   // access to all text styles of app;
   TextTheme get textStyles => Theme.of(context).textTheme;
+
+  // access to check if is dark mode or not;
+  bool get isDarkMode => Theme.of(context).brightness == Brightness.dark;
 }

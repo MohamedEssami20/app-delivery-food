@@ -68,7 +68,7 @@ class CustomTextFormFiled extends StatelessWidget {
         //focusedErrorBorder: buildBorder(theme, theme.colors.primary600),
         errorBorder: buildBorder(theme, theme.colors.red),
         filled: true,
-        fillColor: theme.colors.white,
+        fillColor: theme.colors.grey0,
       ),
     );
   }

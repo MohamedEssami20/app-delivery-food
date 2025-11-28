@@ -25,7 +25,7 @@ class CategoryItem extends StatelessWidget {
         width: isActive ? 120 : 110,
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
         decoration: BoxDecoration(
-          color: isActive ? theme.colors.primary500 : theme.colors.white,
+          color: isActive ? theme.colors.primary500 : theme.colors.grey0,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isActive ? theme.colors.primary500 : theme.colors.grey200,
@@ -47,9 +47,15 @@ class CategoryItem extends StatelessWidget {
           curve: Curves.easeOut,
           style: theme.textStyles.titleMedium!.copyWith(
             color: isActive ? Colors.white : theme.colors.typography500,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+            fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
           ),
-          child: Text(title),
+          child: Text(
+            title,
+            style: theme.textStyles.titleMedium!.copyWith(
+              color: isActive ? Colors.white : theme.colors.black,
+              fontWeight: isActive ? FontWeight.w700 : FontWeight.w600,
+            ),
+          ),
         ),
       ),
     );

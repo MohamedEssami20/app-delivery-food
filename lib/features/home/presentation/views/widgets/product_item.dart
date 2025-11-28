@@ -14,7 +14,7 @@ class ProductItem extends StatelessWidget {
       padding: EdgeInsets.all(6),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: theme.colors.white,
+        color: theme.colors.grey0,
         borderRadius: BorderRadius.all(Radius.circular(18)),
         border: Border.all(color: theme.colors.grey100, width: 2),
       ),
@@ -49,7 +49,7 @@ class ProductItem extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: theme.colors.white,
+                    color: theme.colors.grey50,
                   ),
                   child: Row(
                     spacing: 8,
