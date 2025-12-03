@@ -1,5 +1,5 @@
 import 'package:app_delivey_food/core/function/build_custom_app_bar.dart';
-import 'package:app_delivey_food/core/services/gei_it_services.dart';
+import 'package:app_delivey_food/core/services/get_it_services.dart';
 import 'package:app_delivey_food/features/auth/presentation/manager/reset_password_cubit/reset_password_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

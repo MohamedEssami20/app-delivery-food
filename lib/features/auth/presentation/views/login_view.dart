@@ -1,5 +1,5 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
-import 'package:app_delivey_food/core/services/gei_it_services.dart';
+import 'package:app_delivey_food/core/services/get_it_services.dart';
 import 'package:app_delivey_food/features/auth/domain/repos/auth_repos.dart';
 import 'package:app_delivey_food/features/auth/presentation/views/widgets/login_view_body.dart';
 import 'package:flutter/material.dart';

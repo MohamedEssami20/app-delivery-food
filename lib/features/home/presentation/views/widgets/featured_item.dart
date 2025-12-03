@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ class FeaturedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
     final width = MediaQuery.sizeOf(context).width;
-    log("is Dark Mode = ${theme.isDarkMode}");
     return Container(
       padding: EdgeInsets.only(left: 20, top: 20, bottom: 0),
       width: width * 0.9,

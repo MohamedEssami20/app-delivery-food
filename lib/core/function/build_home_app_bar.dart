@@ -1,19 +1,25 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
-import 'package:app_delivey_food/core/utils/assets.dart';
+import 'package:app_delivey_food/core/helper/custom_network_image.dart';
+import 'package:app_delivey_food/features/auth/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 
-Widget buildHomeAppBar(AppThemeHelper theme) {
+Widget buildHomeAppBar(AppThemeHelper theme, UserEntity user) {
   return ListTile(
     contentPadding: const EdgeInsets.all(0),
     title: Text(
-      'Hi John',
+      user.username,
       style: theme.textStyles.titleSmall!.copyWith(
         color: theme.colors.typography500,
       ),
     ),
     trailing: CircleAvatar(
-      // radius: 40,
-      child: Image.asset(Assets.assetsImagesProfileImage, fit: BoxFit.fill),
+      radius: 40,
+      backgroundColor: Colors.grey.shade100,
+      child: CustomNetowrkImage(
+        imageUrl: user.userImage,
+        width: 40,
+        fit: BoxFit.fill,
+      ),
     ),
     subtitle: Text(
       "What are you carving?",
