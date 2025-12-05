@@ -1,46 +1,57 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'data_base_services.dart';
 
 class FirestoreService implements DataBaseService {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   @override
-  Future<void> addData(
-      {required String path,
-      required Map<String, dynamic> data,
-      String? documentId}) async {
+  Future<void> addData({
+    required String path,
+    required Map<String, dynamic> data,
+    String? documentId,
+  }) async {
     if (documentId == null) {
       await firebaseFirestore.collection(path).add(data);
     } else {
-      await firebaseFirestore.collection(path).doc(documentId).set(
-            data,
-            SetOptions(merge: true),
-          );
+      await firebaseFirestore
+          .collection(path)
+          .doc(documentId)
+          .set(data, SetOptions(merge: true));
     }
   }
 
   @override
-  Future<dynamic> getData(
-      {required String path,
-      String? documentId,
-      Map<String, dynamic>? query}) async {
+  Future<dynamic> getData({
+    required String path,
+    String? documentId,
+    Map<String, dynamic>? query,
+  }) async {
     if (documentId != null) {
       DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await firebaseFirestore.collection(path).doc(documentId).get();
       return documentSnapshot.data();
     } else {
-      Query<Map<String, dynamic>> documentSnapshot =
-          firebaseFirestore.collection(path);
+      Query<Map<String, dynamic>> documentSnapshot = firebaseFirestore
+          .collection(path);
       if (query != null) {
         if (query['orderBy'] != null) {
           String orderBy = query['orderBy'];
           bool isAscending = query['descending'];
-          documentSnapshot =
-              documentSnapshot.orderBy(orderBy, descending: isAscending);
+          documentSnapshot = documentSnapshot.orderBy(
+            orderBy,
+            descending: isAscending,
+          );
         }
         if (query['limit'] != null) {
           int limit = query['limit'];
           documentSnapshot = documentSnapshot.limit(limit);
+        }
+        if (query.containsKey("where") && query.containsKey("isEqualTo")) {
+          String where = query['where'];
+          String isEqualTo = query['isEqualTo'];
+          documentSnapshot = documentSnapshot.where(
+            where,
+            isEqualTo: isEqualTo,
+          );
         }
       }
       QuerySnapshot<Map<String, dynamic>> result = await documentSnapshot.get();
@@ -49,22 +60,28 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Future<bool> checkDataExists(
-      {required String path, required String documentId}) async {
+  Future<bool> checkDataExists({
+    required String path,
+    required String documentId,
+  }) async {
     DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
         await firebaseFirestore.collection(path).doc(documentId).get();
     return documentSnapshot.exists;
   }
 
   @override
-  Future<void> deleteData(
-      {required String path, required String documentId}) async {
+  Future<void> deleteData({
+    required String path,
+    required String documentId,
+  }) async {
     await firebaseFirestore.collection(path).doc(documentId).delete();
   }
 
   @override
-  Future<bool> checkEmailExists(
-      {required String path, required String email}) async {
+  Future<bool> checkEmailExists({
+    required String path,
+    required String email,
+  }) async {
     final result = await firebaseFirestore
         .collection(path)
         .where('email', isEqualTo: email)
@@ -73,10 +90,11 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Stream<Map<String, dynamic>> getStreamData(
-      {required String path,
-      String? documentId,
-      Map<String, dynamic>? query}) async* {
+  Stream<Map<String, dynamic>> getStreamData({
+    required String path,
+    String? documentId,
+    Map<String, dynamic>? query,
+  }) async* {
     Stream<DocumentSnapshot<Map<String, dynamic>>> documentSnapshot =
         firebaseFirestore.collection(path).doc(documentId).snapshots();
 
@@ -84,12 +102,13 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Future<void> addDataWithDocumentId(
-      {required String mainPath,
-      required String subPath,
-      required Map<String, dynamic> data,
-      required String mainDocumentId,
-      String? subDocumentId}) async {
+  Future<void> addDataWithDocumentId({
+    required String mainPath,
+    required String subPath,
+    required Map<String, dynamic> data,
+    required String mainDocumentId,
+    String? subDocumentId,
+  }) async {
     if (subDocumentId == null) {
       await firebaseFirestore
           .collection(mainPath)
@@ -102,20 +121,18 @@ class FirestoreService implements DataBaseService {
           .doc(mainDocumentId)
           .collection(subPath)
           .doc(subDocumentId)
-          .set(
-            data,
-            SetOptions(merge: true),
-          );
+          .set(data, SetOptions(merge: true));
     }
   }
 
   @override
   Stream<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
-      getStreamDataWithDocumentId(
-          {required String mainPath,
-          required String subPath,
-          String? documentId,
-          Map<String, dynamic>? query}) async* {
+  getStreamDataWithDocumentId({
+    required String mainPath,
+    required String subPath,
+    String? documentId,
+    Map<String, dynamic>? query,
+  }) async* {
     Stream<QuerySnapshot<Map<String, dynamic>>> documentSnapshot =
         firebaseFirestore
             .collection(mainPath)
@@ -127,28 +144,30 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Stream<List<String>> getStreamStringData(
-      {required String mainPath,
-      required String subPath,
-      String? mainDocumentId,
-      Map<String, dynamic>? query}) {
+  Stream<List<String>> getStreamStringData({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    Map<String, dynamic>? query,
+  }) {
     final result = firebaseFirestore
         .collection(mainPath)
         .doc(mainDocumentId)
         .collection(subPath)
         .snapshots()
         .map((e) {
-      return e.docs.map((e) => e.id).toList();
-    });
+          return e.docs.map((e) => e.id).toList();
+        });
     return result;
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamMapData(
-      {required String mainPath,
-      required String subPath,
-      String? mainDocumentId,
-      Map<String, dynamic>? query}) {
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamMapData({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    Map<String, dynamic>? query,
+  }) {
     final result = firebaseFirestore
         .collection(mainPath)
         .doc(mainDocumentId)
@@ -158,11 +177,12 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Future<void> deleteDataWithDocumentId(
-      {required String mainPath,
-      required String subPath,
-      required String mainDocumentId,
-      required String subDocumentId}) async {
+  Future<void> deleteDataWithDocumentId({
+    required String mainPath,
+    required String subPath,
+    required String mainDocumentId,
+    required String subDocumentId,
+  }) async {
     await firebaseFirestore
         .collection(mainPath)
         .doc(mainDocumentId)
@@ -172,11 +192,12 @@ class FirestoreService implements DataBaseService {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getDataWithDocumentId(
-      {required String mainPath,
-      required String subPath,
-      String? mainDocumentId,
-      Map<String, dynamic>? query}) async {
+  Future<List<Map<String, dynamic>>> getDataWithDocumentId({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    Map<String, dynamic>? query,
+  }) async {
     if (mainDocumentId != null) {
       final result = await firebaseFirestore
           .collection(mainPath)
@@ -186,20 +207,22 @@ class FirestoreService implements DataBaseService {
       return result.docs.map((e) => e.data()).toList();
     } else {
       if (query != null) {
-        Query<Map<String, dynamic>> documentSnapshot =
-            firebaseFirestore.collection(mainPath);
+        Query<Map<String, dynamic>> documentSnapshot = firebaseFirestore
+            .collection(mainPath);
         if (query['orderBy'] != null) {
           String orderBy = query['orderBy'];
           bool isAscending = query['descending'];
-          documentSnapshot =
-              documentSnapshot.orderBy(orderBy, descending: isAscending);
+          documentSnapshot = documentSnapshot.orderBy(
+            orderBy,
+            descending: isAscending,
+          );
         }
         if (query['limit'] != null) {
           int limit = query['limit'];
           documentSnapshot = documentSnapshot.limit(limit);
         }
-        QuerySnapshot<Map<String, dynamic>> result =
-            await documentSnapshot.get();
+        QuerySnapshot<Map<String, dynamic>> result = await documentSnapshot
+            .get();
         return result.docs.map((e) => e.data()).toList();
       }
     }

@@ -5,6 +5,8 @@ import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/core/utils/backend_end_point.dart';
 
 import 'package:app_delivey_food/features/auth/domain/entities/user_entity.dart';
+import 'package:app_delivey_food/features/home/data/models/product_model.dart';
+import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +27,26 @@ class HomeRepoImpl implements HomeRepo {
       );
       final user = UserModel.fromMap(await userData).toEntity();
       return Right(user);
+    } on FirebaseException catch (e) {
+      return left(FirebaseExceptionHandler.fromFirebaseException(e));
+    } catch (e) {
+      return left(Failure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ProductEntity>>> getProductsOfCategory({
+    required int category,
+  }) async {
+    try {
+      final List<Map<String, dynamic>> data = await dataBaseService.getData(
+        path: BackendEndpoints.getProducts,
+        query: {'where': 'code', 'isEqualTo': category},
+      );
+      final products = data
+          .map((e) => ProductModel.fromJson(e).toEntity())
+          .toList();
+      return Right(products);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionHandler.fromFirebaseException(e));
     } catch (e) {
