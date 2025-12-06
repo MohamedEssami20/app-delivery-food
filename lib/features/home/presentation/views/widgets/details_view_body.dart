@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/product_description.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/product_price_and_add_tocart.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,8 @@ import 'product_name_and_counter.dart';
 import 'product_rating_and_calorey.dart';
 
 class DetailsViewBody extends StatefulWidget {
-  const DetailsViewBody({super.key});
-
+  const DetailsViewBody({super.key, required this.productEntity});
+  final ProductEntity productEntity;
   @override
   State<DetailsViewBody> createState() => _DetailsViewBodyState();
 }
@@ -34,9 +35,12 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
       child: Column(
         spacing: 12,
         children: [
-          DetailsProductImageList(pageController: pageController),
+          DetailsProductImageList(
+            pageController: pageController,
+            productImages: widget.productEntity.productImageUrls,
+          ),
           DotsIndicatorList(currentIndex: selectedIndex),
-          const ProductRatingAndCalorey(),
+          ProductRatingAndCalorey(product: widget.productEntity),
           const ProductNameAndCounter(),
           ProductDescription(),
           const Spacer(),

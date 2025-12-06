@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/forgot_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/sign_up_view.dart';
+import '../../features/home/domain/entities/product_entity.dart';
 import '../../features/home/presentation/views/details_view.dart';
 import '../../features/home/presentation/views/main_view.dart';
 import '../../features/on_borading/presentation/views/on_boarding_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
+
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
     case SplashView.routeName:
@@ -24,13 +26,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case MainView.routeName:
       return MaterialPageRoute(builder: (_) => const MainView());
     case DetailsView.routeName:
-      return MaterialPageRoute(builder: (_) => const DetailsView());
+      return MaterialPageRoute(
+        builder: (_) =>
+            DetailsView(product: settings.arguments as ProductEntity),
+      );
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(
-          body: Center(
-            child: Text('No route defined for ${settings.name}'),
-          ),
+          body: Center(child: Text('No route defined for ${settings.name}')),
         ),
       );
   }

@@ -19,7 +19,11 @@ class ProductsListView extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (context, index) => GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, DetailsView.routeName);
+          Navigator.pushNamed(
+            context,
+            DetailsView.routeName,
+            arguments: products[index],
+          );
         },
         child: ProductItem(productEntity: products[index]),
       ),

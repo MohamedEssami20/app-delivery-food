@@ -1,3 +1,5 @@
+import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
@@ -5,8 +7,8 @@ import '../../../../../core/utils/assets.dart';
 import 'product_rating_and_calory_item.dart';
 
 class ProductRatingAndCalorey extends StatelessWidget {
-  const ProductRatingAndCalorey({super.key});
-
+  const ProductRatingAndCalorey({super.key, required this.product});
+  final ProductEntity product;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -22,22 +24,28 @@ class ProductRatingAndCalorey extends StatelessWidget {
         children: [
           ProductRatingAndCaloreyItem(
             icon: Assets.assetsIconsRatingIcon,
-            title: "4.8",
+            title: product.avrageRating.toString(),
             showDivider: false,
           ),
 
           ProductRatingAndCaloreyItem(
             icon: Assets.assetsIconsCaloryIcon,
-            title: "400 Kcal",
+            title: "${product.calories} Kcal",
             showDivider: true,
           ),
           ProductRatingAndCaloreyItem(
             icon: Assets.assetsIconsTimeIcon,
-            title: "30 min",
+            title: "${convertTime(product.createdAt)} min",
             showDivider: true,
           ),
         ],
       ),
     );
   }
+}
+
+// create method that return time from TimeStamp;
+
+String convertTime(Timestamp time){
+  return time.toDate().minute.toString();
 }
