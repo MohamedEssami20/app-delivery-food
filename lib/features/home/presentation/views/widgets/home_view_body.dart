@@ -1,13 +1,14 @@
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
+import 'package:app_delivey_food/features/home/presentation/manager/get_product_cubit/get_products_cubit.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/build/build_user_home_bar_builder.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/category_items_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../manager/user_cubit/user_cubit.dart';
+import 'build/get_products_list_builder.dart';
 import 'featured_item_list_view.dart';
-import 'product_list_view.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -20,6 +21,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   @override
   void initState() {
     context.read<UserCubit>().getUserData();
+    context.read<GetProductsCubit>().getProductsOfCategory(category: 1);
     super.initState();
   }
 
@@ -54,7 +56,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                 const SizedBox(height: 8),
                 CategoryItemsList(),
                 const SizedBox(height: 8),
-                Expanded(child: const ProductsListView()),
+                Expanded(child: GetProductsListBuilder()),
               ],
             ),
           ),

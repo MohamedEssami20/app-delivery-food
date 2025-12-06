@@ -1,3 +1,5 @@
+import 'package:app_delivey_food/core/helper/custom_network_image.dart';
+import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -5,8 +7,8 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/assets.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
-
+  const ProductItem({super.key, required this.productEntity});
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -22,54 +24,58 @@ class ProductItem extends StatelessWidget {
         spacing: 8,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(18),
-                  topRight: Radius.circular(18),
-                  bottomLeft: Radius.circular(5),
-                  bottomRight: Radius.circular(5),
-                ),
-                child: Image.asset(
-                  Assets.assetsImagesBurgerProduct,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Positioned(
-                left: 0,
-                bottom: 8,
-                child: Container(
-                  margin: EdgeInsets.only(left: 4),
-                  padding: EdgeInsets.only(
-                    left: 12,
-                    right: 12,
-                    top: 4,
-                    bottom: 4,
+          AspectRatio(
+            aspectRatio: 1.05,
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(18),
+                    topRight: Radius.circular(18),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: theme.colors.grey50,
+                  child: CustomNetowrkImage(
+                    imageUrl: productEntity.baseImageUrl,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
                   ),
-                  child: Row(
-                    spacing: 8,
-                    children: [
-                      SvgPicture.asset(
-                        Assets.assetsIconsRatingIcon,
-                        height: 14,
-                        width: 14,
-                      ),
-                      Text(
-                        "4.5",
-                        style: theme.textStyles.bodyLarge!.copyWith(
-                          color: theme.colors.typography500,
+                ),
+                Positioned(
+                  left: 0,
+                  bottom: 8,
+                  child: Container(
+                    margin: EdgeInsets.only(left: 4),
+                    padding: EdgeInsets.only(
+                      left: 12,
+                      right: 12,
+                      top: 4,
+                      bottom: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: theme.colors.grey50,
+                    ),
+                    child: Row(
+                      spacing: 8,
+                      children: [
+                        SvgPicture.asset(
+                          Assets.assetsIconsRatingIcon,
+                          height: 14,
+                          width: 14,
                         ),
-                      ),
-                    ],
+                        Text(
+                          productEntity.avrageRating.toString(),
+                          style: theme.textStyles.bodyLarge!.copyWith(
+                            color: theme.colors.typography500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 12, left: 12),
@@ -77,7 +83,7 @@ class ProductItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Burger",
+                  productEntity.name,
                   style: theme.textStyles.titleSmall!.copyWith(
                     color: theme.colors.typography500,
                     fontWeight: FontWeight.w500,
@@ -86,7 +92,7 @@ class ProductItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "120 \$",
+                      "${productEntity.price} \$",
                       style: theme.textStyles.bodyLarge!.copyWith(
                         color: theme.colors.typography500,
                       ),

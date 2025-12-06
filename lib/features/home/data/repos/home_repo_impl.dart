@@ -35,13 +35,14 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> getProductsOfCategory({
+  Future<Either<Failure, List<ProductEntity>>> getProducts({
     required int category,
   }) async {
     try {
       final List<Map<String, dynamic>> data = await dataBaseService.getData(
         path: BackendEndpoints.getProducts,
         query: {'where': 'code', 'isEqualTo': category},
+        documentId: null,
       );
       final products = data
           .map((e) => ProductModel.fromJson(e).toEntity())

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ProductEntity {
   final String id;
   final String name;
@@ -10,9 +12,9 @@ class ProductEntity {
   final num avrageRating;
   final bool isFavourite;
   final String baseImageUrl;
-  final List<String> productImageUrls;
+  final List<dynamic> productImageUrls;
   final num calories;
-  final DateTime createdAt;
+  final Timestamp createdAt;
 
   ProductEntity({
     required this.id,
@@ -44,7 +46,7 @@ class ProductEntity {
     String? baseImageUrl,
     List<String>? productImageUrls,
     num? calories,
-    DateTime? createdAt,
+    Timestamp? createdAt,
   }) {
     return ProductEntity(
       id: id ?? this.id,

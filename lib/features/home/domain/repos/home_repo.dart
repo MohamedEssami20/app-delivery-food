@@ -9,5 +9,7 @@ abstract class HomeRepo {
   Future<Either<Failure, UserEntity>> getUserData();
 
   // create method that get products of Category;
-  Future<Either<Failure, List<ProductEntity>>> getProductsOfCategory({required int category});
+  Future<Either<Failure, List<ProductEntity>>> getProducts({
+    required int category,
+  });
 }

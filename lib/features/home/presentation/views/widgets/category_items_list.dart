@@ -1,6 +1,9 @@
 import 'package:app_delivey_food/core/helper/category_prdoucts_item.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/category_products_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../manager/get_product_cubit/get_products_cubit.dart';
 
 class CategoryItemsList extends StatefulWidget {
   const CategoryItemsList({super.key});
@@ -25,6 +28,9 @@ class _CategoryItemsListState extends State<CategoryItemsList> {
               setState(() {
                 selectedIndex = index;
               });
+              context.read<GetProductsCubit>().getProductsOfCategory(
+                category: index + 1,
+              );
             },
             title: CategoryPrdouctsItem.getCategoryItems()[index],
           ),

@@ -47,7 +47,7 @@ class FirestoreService implements DataBaseService {
         }
         if (query.containsKey("where") && query.containsKey("isEqualTo")) {
           String where = query['where'];
-          String isEqualTo = query['isEqualTo'];
+          int isEqualTo = query['isEqualTo'];
           documentSnapshot = documentSnapshot.where(
             where,
             isEqualTo: isEqualTo,

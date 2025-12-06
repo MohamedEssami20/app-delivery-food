@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/entities/product_entity.dart';
 
 class ProductModel {
@@ -10,9 +12,9 @@ class ProductModel {
   final num avrageRating;
   final bool isFavourite;
   final String imageFile;
-  final List<String> productImages;
+  final List<dynamic> productImages;
   final num calories;
-  final DateTime createdAt;
+  final Timestamp createdAt;
 
   ProductModel({
     required this.id,
@@ -57,9 +59,9 @@ class ProductModel {
       avrageRating: map['avrageRating'] as num,
       isFavourite: map['isFavourite'] as bool,
       imageFile: map['imageFile'] as String,
-      productImages: map['productImages'] as List<String>,
+      productImages: map['productImages'] as List<dynamic>,
       calories: map['calories'] as num,
-      createdAt: map['createdAt'] as DateTime,
+      createdAt: map['createdAt'] as Timestamp,
     );
   }
 
