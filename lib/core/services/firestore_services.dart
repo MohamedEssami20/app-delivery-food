@@ -131,7 +131,7 @@ class FirestoreService implements DataBaseService {
     required String mainPath,
     required String? subPath,
     String? documentId,
-    Map<String, dynamic>? query,
+    String? query,
   }) async* {
     Stream<QuerySnapshot<Map<String, dynamic>>> documentSnapshot;
    if(subPath != null && query == null){

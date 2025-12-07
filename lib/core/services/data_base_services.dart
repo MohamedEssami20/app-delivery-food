@@ -37,7 +37,7 @@ abstract class DataBaseService {
           {required String mainPath,
           required String? subPath,
           String? documentId,
-          Map<String, dynamic>? query});
+          String  query});
 
   Future<bool> checkDataExists(
       {required String path, required String documentId});

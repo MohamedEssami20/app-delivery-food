@@ -6,6 +6,7 @@ import 'package:app_delivey_food/features/search/presentation/manager/search_mod
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../search/presentation/manager/search_products_cubit/search_products_cubit.dart';
 import '../../manager/user_cubit/user_cubit.dart';
 import 'build/Home_view_body_builder.dart';
 
@@ -45,6 +46,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                     onChanged: (value) {
                       if (value.isNotEmpty && value.trim().isNotEmpty) {
                         context.read<SearchModeCubit>().changeSearchMode();
+                        context.read<SearchProductsCubit>().getSearchProducts(
+                          query: value.trim(),
+                        );
                       } else {
                         context.read<SearchModeCubit>().changeNormalMode();
                       }

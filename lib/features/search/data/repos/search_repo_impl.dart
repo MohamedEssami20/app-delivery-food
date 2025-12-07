@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_delivey_food/core/errors/failure.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
 import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
@@ -20,7 +22,7 @@ class SearchRepoImpl implements SearchRepo {
     try {
       final data = dataBaseService.getStreamDataWithDocumentId(
         mainPath: BackendEndpoints.getProducts,
-        query: {'where': 'name', 'isEqualTo': query},
+        query: query,
         documentId: null,
         subPath: null,
       );
@@ -29,9 +31,10 @@ class SearchRepoImpl implements SearchRepo {
         products = product
             .map((e) => ProductModel.fromJson(e.data()).toEntity())
             .toList();
-      }
 
-      yield Right(products);
+        log("products = ${products[0].name}");
+        yield Right(products);
+      }
     } on FirebaseException catch (e) {
       yield Left(FirebaseExceptionHandler.fromFirebaseException(e));
     } catch (e) {

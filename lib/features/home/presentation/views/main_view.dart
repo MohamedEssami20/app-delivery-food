@@ -1,10 +1,13 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/main_view_body.dart';
 import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/search_products_cubit/search_products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/services/get_it_services.dart';
 import '../../../../core/utils/custom_naviagtion_bar.dart';
+import '../../../search/domain/repos/search_repo.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -29,8 +32,15 @@ class _MainViewState extends State<MainView> {
         },
       ),
       body: SafeArea(
-        child: BlocProvider(
-          create: (context) => SearchModeCubit(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => SearchModeCubit()),
+            BlocProvider(
+              create: (context) => SearchProductsCubit(
+                searchRepos: GetItService.getIt.get<SearchRepo>(),
+              ),
+            ),
+          ],
           child: MainViewBody(selectedIndex: currentIndex),
         ),
       ),
