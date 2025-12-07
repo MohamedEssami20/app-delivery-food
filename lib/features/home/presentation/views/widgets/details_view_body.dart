@@ -51,3 +51,4 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
     );
   }
 }
+
