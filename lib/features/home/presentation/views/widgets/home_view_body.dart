@@ -2,13 +2,12 @@ import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:app_delivey_food/features/home/presentation/manager/get_product_cubit/get_products_cubit.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/build/build_user_home_bar_builder.dart';
-import 'package:app_delivey_food/features/home/presentation/views/widgets/category_items_list.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../manager/user_cubit/user_cubit.dart';
-import 'build/get_products_list_builder.dart';
-import 'featured_item_list_view.dart';
+import 'build/Home_view_body_builder.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -43,6 +42,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   height: 50,
                   child: CustomTextFormFiled(
                     onSaved: (value) {},
+                    onChanged: (value) {
+                      if (value.isNotEmpty && value.trim().isNotEmpty) {
+                        context.read<SearchModeCubit>().changeSearchMode();
+                      } else {
+                        context.read<SearchModeCubit>().changeNormalMode();
+                      }
+                    },
                     prefixIcon: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: SvgPicture.asset(Assets.assetsIconsSearchIcon),
@@ -52,11 +58,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const FeaturedItemListView(),
-                const SizedBox(height: 8),
-                CategoryItemsList(),
-                const SizedBox(height: 8),
-                Expanded(child: GetProductsListBuilder()),
+                Expanded(child: HomeViewBodyBuilder()),
               ],
             ),
           ),

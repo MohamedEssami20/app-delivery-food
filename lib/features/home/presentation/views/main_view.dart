@@ -1,6 +1,8 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/main_view_body.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/custom_naviagtion_bar.dart';
 
@@ -26,7 +28,12 @@ class _MainViewState extends State<MainView> {
           });
         },
       ),
-      body: SafeArea(child: MainViewBody(selectedIndex: currentIndex)),
+      body: SafeArea(
+        child: BlocProvider(
+          create: (context) => SearchModeCubit(),
+          child: MainViewBody(selectedIndex: currentIndex),
+        ),
+      ),
     );
   }
 }
