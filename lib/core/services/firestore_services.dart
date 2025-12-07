@@ -129,16 +129,25 @@ class FirestoreService implements DataBaseService {
   Stream<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
   getStreamDataWithDocumentId({
     required String mainPath,
-    required String subPath,
+    required String? subPath,
     String? documentId,
     Map<String, dynamic>? query,
   }) async* {
-    Stream<QuerySnapshot<Map<String, dynamic>>> documentSnapshot =
-        firebaseFirestore
-            .collection(mainPath)
-            .doc(documentId)
-            .collection(subPath)
-            .snapshots();
+    Stream<QuerySnapshot<Map<String, dynamic>>> documentSnapshot;
+   if(subPath != null && query == null){
+     documentSnapshot = firebaseFirestore
+        .collection(mainPath)
+        .doc(documentId)
+        .collection(subPath)
+        .snapshots();
+   }
+   else{
+     documentSnapshot = firebaseFirestore
+        .collection(mainPath)
+        .where("name", isGreaterThanOrEqualTo: query)
+        .where("name", isLessThan: "${query!}\uf8ff")
+        .snapshots();
+   }
 
     yield* documentSnapshot.map((event) => event.docs);
   }

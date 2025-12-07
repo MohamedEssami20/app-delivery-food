@@ -35,7 +35,7 @@ abstract class DataBaseService {
   Stream<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
       getStreamDataWithDocumentId(
           {required String mainPath,
-          required String subPath,
+          required String? subPath,
           String? documentId,
           Map<String, dynamic>? query});
 

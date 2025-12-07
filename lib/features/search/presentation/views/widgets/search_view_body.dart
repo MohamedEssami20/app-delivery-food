@@ -1,3 +1,5 @@
+import 'package:app_delivey_food/core/helper/get_dummy_product_entitiy.dart';
+import 'package:app_delivey_food/features/search/presentation/views/widgets/search_product_list_view.dart';
 import 'package:flutter/material.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -5,6 +7,10 @@ class SearchViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: const [Center(child: Text("Search View"))]);
+    return Column(
+      children: [
+        Expanded(child: SearchProductListView(products: getListDummyProduct())),
+      ],
+    );
   }
 }
