@@ -18,11 +18,18 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
+  TextEditingController searchController = TextEditingController();
   @override
   void initState() {
     context.read<UserCubit>().getUserData();
     context.read<GetProductsCubit>().getProductsOfCategory(category: 1);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -37,11 +44,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               spacing: 8,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BuildUserHomeBarBuilder(),
+                BuildUserHomeBarBuilder(searchController: searchController),
                 const SizedBox(height: 8),
                 SizedBox(
                   height: 50,
                   child: CustomTextFormFiled(
+                    controller: searchController,
                     onSaved: (value) {},
                     onChanged: (value) {
                       if (value.isNotEmpty && value.trim().isNotEmpty) {

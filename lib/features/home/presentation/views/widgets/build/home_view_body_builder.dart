@@ -1,3 +1,5 @@
+
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';

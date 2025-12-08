@@ -3,7 +3,7 @@ import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:app_delivey_food/features/auth/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 
-Widget buildHomeAppBar(AppThemeHelper theme, UserEntity user) {
+Widget buildNormalHomeAppBar(AppThemeHelper theme, UserEntity user) {
   return ListTile(
     contentPadding: const EdgeInsets.all(0),
     title: Text(
