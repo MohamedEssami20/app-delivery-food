@@ -1,5 +1,6 @@
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
+import 'package:app_delivey_food/features/home/presentation/manager/get_advertising_product/get_advertising_product_cubit.dart';
 import 'package:app_delivey_food/features/home/presentation/manager/get_product_cubit/get_products_cubit.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/build/build_user_home_bar_builder.dart';
 import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
@@ -23,6 +24,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   void initState() {
     context.read<UserCubit>().getUserData();
     context.read<GetProductsCubit>().getProductsOfCategory(category: 1);
+    context.read<GetAdvertisingProductCubit>().getAdvertisingProduct();
     super.initState();
   }
 

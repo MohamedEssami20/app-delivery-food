@@ -1,5 +1,8 @@
-
+import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
+import 'package:app_delivey_food/features/home/domain/entities/advertising_product_entity.dart';
+import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/features/home/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart' show SvgPicture;
 
@@ -7,8 +10,8 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/custom_button.dart';
 
 class FeaturedItem extends StatelessWidget {
-  const FeaturedItem({super.key});
-
+  const FeaturedItem({super.key, required this.advertisingProduct});
+  final AdvertisingProductEntity advertisingProduct;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -28,7 +31,7 @@ class FeaturedItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "35% OFF on Burgers!",
+                  "${advertisingProduct.productDiscount}% OFF on Burgers!",
                   style: theme.textStyles.displayMedium!.copyWith(
                     color: theme.colors.typography500,
                   ),
@@ -40,7 +43,13 @@ class FeaturedItem extends StatelessWidget {
                   height: 40,
                   child: CustomButton(
                     eleveation: 1.45,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        DetailsView.routeName,
+                        arguments: convertToProductEntity(advertisingProduct),
+                      );
+                    },
                     backgroundColor: theme.colors.primary500,
                     child: Text(
                       "Buy now",
@@ -58,7 +67,6 @@ class FeaturedItem extends StatelessWidget {
           ),
           Expanded(
             child: Align(
-              alignment: Alignment.bottomRight,
               child: Stack(
                 alignment: Alignment.bottomRight,
                 children: [
@@ -80,12 +88,9 @@ class FeaturedItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SvgPicture.asset(
-                    Assets.assetsImagesBurgerOnBoardingBackground,
-                    alignment: AlignmentGeometry.bottomRight,
+                  CustomNetowrkImage(
+                    imageUrl: advertisingProduct.baseImageUrl,
                     fit: BoxFit.fill,
-                    height: 160,
-                    clipBehavior: Clip.none,
                   ),
                 ],
               ),
@@ -93,6 +98,23 @@ class FeaturedItem extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  ProductEntity convertToProductEntity(AdvertisingProductEntity product) {
+    return ProductEntity(
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      code: 1,
+      productType: product.productType,
+      avrageRating: product.avrageRating,
+      isFavourite: product.isFavourite ?? false,
+      baseImageUrl: product.baseImageUrl!,
+      productImageUrls: product.productImageUrls!,
+      calories: product.calories,
+      createdAt: product.createdAt!,
     );
   }
 }

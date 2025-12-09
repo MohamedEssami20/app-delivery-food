@@ -1,6 +1,6 @@
-import 'dart:io';
 
 import 'package:app_delivey_food/features/home/domain/entities/advertising_product_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class AdvertisingProductModel {
   final String id;
   final String name;
@@ -10,12 +10,10 @@ class AdvertisingProductModel {
   final String productType;
   final num avrageRating;
   final bool? isFavourite;
-  final File? image;
-  final List<File?>? productImagesFile;
   final String imageFile;
-  final List<String> productImages;
+  final List<dynamic> productImages;
   final num calories;
-  final DateTime? createdAt;
+  final Timestamp? createdAt;
 
   AdvertisingProductModel({
     required this.id,
@@ -29,8 +27,7 @@ class AdvertisingProductModel {
     required this.productImages,
     required this.calories,
     required this.createdAt,
-    this.image,
-    this.productImagesFile, required this.productDiscount,
+    required this.productDiscount
   });
 
   AdvertisingProductEntity toEntity() {
@@ -42,8 +39,6 @@ class AdvertisingProductModel {
       productType: productType,
       avrageRating: avrageRating,
       isFavourite: isFavourite,
-      imageFile: image,
-      productImages: productImagesFile,
       baseImageUrl: imageFile,
       productImageUrls: productImages,
       calories: calories,
@@ -62,9 +57,9 @@ class AdvertisingProductModel {
       avrageRating: map['avrageRating'] as num,
       isFavourite: map['isFavourite'] as bool,
       imageFile: map['imageFile'] as String,
-      productImages: map['productImages'] as List<String>,
+      productImages: map['productImages'] as List<dynamic>,
       calories: map['calories'] as num,
-      createdAt: map['createdAt'] as DateTime,
+      createdAt: map['createdAt'] as Timestamp,
       productDiscount: map['productDiscount'] as num,
     );
   }
@@ -83,8 +78,6 @@ class AdvertisingProductModel {
       productImages: product.productImageUrls?? [],
       calories: product.calories,
       createdAt: product.createdAt,
-      image: product.imageFile,
-      productImagesFile: product.productImages,
     );
   }
 }

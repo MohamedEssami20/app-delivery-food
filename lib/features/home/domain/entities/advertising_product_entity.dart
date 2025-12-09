@@ -1,4 +1,5 @@
-import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdvertisingProductEntity {
   final String id;
@@ -9,22 +10,18 @@ class AdvertisingProductEntity {
   final String productType;
   final num avrageRating;
   final bool? isFavourite;
-  final File? imageFile;
-  final List<File?>? productImages;
   final String? baseImageUrl;
-  final List<String>? productImageUrls;
+  final List<dynamic>? productImageUrls;
   final num calories;
-  final DateTime? createdAt;
+  final Timestamp? createdAt;
 
   AdvertisingProductEntity({
-    this.productImages,
     required this.id,
     required this.name,
     required this.description,
     required this.price,
     required this.productType,
     required this.avrageRating,
-    this.imageFile,
     this.isFavourite = false,
     required this.calories,
     this.createdAt,
@@ -41,12 +38,10 @@ class AdvertisingProductEntity {
     String? productType,
     num? avrageRating,
     bool? isFavourite,
-    File? imageFile,
-    List<File?>? productImages,
     String? baseImageUrl,
-    List<String>? productImageUrls,
+    List<dynamic>? productImageUrls,
     num? calories,
-    DateTime? createdAt,
+    Timestamp? createdAt,
     num? productDiscount
   }) {
     return AdvertisingProductEntity(
@@ -58,8 +53,6 @@ class AdvertisingProductEntity {
       productType: productType ?? this.productType,
       avrageRating: avrageRating ?? this.avrageRating,
       isFavourite: isFavourite ?? this.isFavourite,
-      imageFile: imageFile ?? this.imageFile,
-      productImages: productImages ?? this.productImages,
       baseImageUrl: baseImageUrl ?? this.baseImageUrl,
       productImageUrls: productImageUrls ?? this.productImageUrls,
       calories: calories ?? this.calories,
