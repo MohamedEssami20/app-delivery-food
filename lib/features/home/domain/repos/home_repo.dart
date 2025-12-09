@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/features/home/domain/entities/advertising_product_entity.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/failure.dart';
@@ -12,4 +13,7 @@ abstract class HomeRepo {
   Future<Either<Failure, List<ProductEntity>>> getProducts({
     required int category,
   });
+
+  // create method that get advertise products;
+  Future<Either<Failure, List<AdvertisingProductEntity>>> getAdvertiseProducts();
 }
