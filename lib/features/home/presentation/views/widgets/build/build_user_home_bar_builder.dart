@@ -17,7 +17,8 @@ class BuildUserHomeBarBuilder extends StatelessWidget {
     final theme = AppThemeHelper(context);
     return BlocBuilder<SearchModeCubit, SearchModeState>(
       builder: (context, state) {
-        if (state is SearchModeChanged && state.isSearchMode) {
+        if (state is SearchModeChanged && state.isSearchMode ||
+            state is LatestSearchedModeChanged && state.isLatestSearchedMode) {
           return buildSearchHomeAppBar(
             context: context,
             theme: theme,

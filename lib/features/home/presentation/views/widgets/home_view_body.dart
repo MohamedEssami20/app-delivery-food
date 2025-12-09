@@ -58,7 +58,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                           query: value.trim(),
                         );
                       } else {
-                        context.read<SearchModeCubit>().changeNormalMode();
+                        context
+                            .read<SearchModeCubit>()
+                            .changeLatestSearchedMode();
                       }
                     },
                     prefixIcon: FittedBox(
