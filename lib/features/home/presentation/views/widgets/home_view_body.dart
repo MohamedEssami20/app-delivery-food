@@ -51,6 +51,14 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   child: CustomTextFormFiled(
                     controller: searchController,
                     onSaved: (value) {},
+                    onSubmit: (value) {
+                      context.read<SearchProductsCubit>().storeSearchQuery(
+                        query: value,
+                      );
+                      context.read<SearchProductsCubit>().getSearchProducts(
+                        query: value.trim(),
+                      );
+                    },
                     onChanged: (value) {
                       if (value.isNotEmpty && value.trim().isNotEmpty) {
                         context.read<SearchModeCubit>().changeSearchMode();
@@ -61,6 +69,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                         context
                             .read<SearchModeCubit>()
                             .changeLatestSearchedMode();
+                        context.read<SearchProductsCubit>().getSearchQuery();
                       }
                     },
                     prefixIcon: FittedBox(

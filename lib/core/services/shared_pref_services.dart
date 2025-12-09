@@ -23,7 +23,23 @@ class SharedPrefrenceSigelton {
     return _instance.getString(key);
   }
 
+  static Future<void> setStringList(String key, List<String> value) async {
+    await _instance.setStringList(key, value);
+  }
+
+  static List<String>? getStringList({required String key}) {
+    return _instance.getStringList(key);
+  }
+
+  static void clear() async {
+    await _instance.clear();
+  }
+
   static void remove(String key,) async {
+    await _instance.remove(key);
+  }
+
+  static void deleteListOfStrings(String key,) async {
     await _instance.remove(key);
   }
 }

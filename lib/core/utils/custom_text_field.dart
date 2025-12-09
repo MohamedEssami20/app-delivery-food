@@ -18,7 +18,7 @@ class CustomTextFormFiled extends StatelessWidget {
     this.initialValue,
     this.validator,
     this.enabled,
-    this.prefixIcon,
+    this.prefixIcon, this.onSubmit,
   });
 
   final String hintText;
@@ -30,6 +30,7 @@ class CustomTextFormFiled extends StatelessWidget {
   final int? maxLength;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String)? onChanged;
+  final void Function(String)? onSubmit;
   final TextEditingController? controller;
   final TextAlign textAlign;
   final String? initialValue;
@@ -44,6 +45,7 @@ class CustomTextFormFiled extends StatelessWidget {
       controller: controller,
       maxLength: maxLength,
       onChanged: onChanged,
+      onFieldSubmitted: onSubmit,
       inputFormatters: inputFormatters,
       validator: validator,
       obscureText: obscureText,

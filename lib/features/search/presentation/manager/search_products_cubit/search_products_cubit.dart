@@ -32,46 +32,45 @@ class SearchProductsCubit extends Cubit<SearchProductsState> {
     });
   }
 
-  // // create method that store search query for search products;
-  // Future<void> storeSearchQuery({required String query}) async {
-  //   emit(const StoreQueryLoading());
-  //   try {
-  //     await searchRepos.storeSearchQuery(query: query);
-  //     emit(StoreQuerySuccess(query: query));
-  //   } catch (e) {
-  //     emit(const StoreQueryFailure(
-  //         errormessage: "failed to store search query"));
-  //   }
-  // }
+  // create method that store search query for search products;
+  Future<void> storeSearchQuery({required String query}) async {
+    emit(const StoreQueryLoading());
+    try {
+      await searchRepos.storeSearchQuery(query: query);
+      emit(StoreQuerySuccess(query: query));
+    } catch (e) {
+      emit(const StoreQueryFailure(
+          errormessage: "failed to store search query"));
+    }
+  }
 
-  // // create method that get search query for search products;
-  // void getSearchQuery() {
-  //   emit(const GetSearchQueryLoading());
-  //   try {
-  //     final query = searchRepos.getSearchQuery();
-  //     emit(
-  //       GetSearchQuerySuccess(query: query),
-  //     );
-  //   } catch (e) {
-  //     emit(
-  //       const GetSearchQueryFailure(errormessage: "failed to get search query"),
-  //     );
-  //   }
-  // }
+  // create method that get search query for search products;
+  void getSearchQuery() {
+    emit(const GetSearchQueryLoading());
+    try {
+      final query = searchRepos.getSearchQuery();
+      emit(
+        GetSearchQuerySuccess(query: query),
+      );
+    } catch (e) {
+      emit(
+        const GetSearchQueryFailure(errormessage: "failed to get search query"),
+      );
+    }
+  }
 
-  // // create method that delete search query for search products;
-  // Future<void> deleteSearchQuery({String? query}) async {
-  //   emit(const DeleteSearchQueryLoading());
-  //   try {
-  //     await searchRepos.deleteSearchQuery(query: query);
-  //     final queryUpdated = searchRepos.getSearchQuery();
-  //     emit(GetSearchQuerySuccess(query: queryUpdated));
-  //   } catch (e) {
-  //     log("failed to delete search query");
-  //     emit(const DeleteSearchQueryFailure(
-  //         errormessage: "failed to delete search query"));
-  //   }
-  // }
+  // create method that delete search query for search products;
+  Future<void> deleteSearchQuery({ String? query}) async {
+    emit(const DeleteSearchQueryLoading());
+    try {
+      await searchRepos.deleteSearchQuery(query: query);
+      final queryUpdated = searchRepos.getSearchQuery();
+      emit(GetSearchQuerySuccess(query: queryUpdated));
+    } catch (e) {
+      emit(const DeleteSearchQueryFailure(
+          errormessage: "failed to delete search query"));
+    }
+  }
 
   @override
   Future<void> close() {

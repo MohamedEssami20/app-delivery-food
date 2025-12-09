@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:app_delivey_food/core/errors/failure.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
+import 'package:app_delivey_food/core/services/shared_pref_services.dart';
 import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
 import 'package:app_delivey_food/features/search/domain/repos/search_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,6 +40,56 @@ class SearchRepoImpl implements SearchRepo {
       yield Left(FirebaseExceptionHandler.fromFirebaseException(e));
     } catch (e) {
       yield Left(Failure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<void> storeSearchQuery({required String query}) async {
+    final oldQueries = SharedPrefrenceSigelton.getStringList(
+      key: BackendEndpoints.getSearchQuery,
+    );
+    oldQueries?.remove(query);
+    if (oldQueries != null) {
+      oldQueries.insert(0, query);
+      await SharedPrefrenceSigelton.setStringList(
+        BackendEndpoints.getSearchQuery,
+        oldQueries,
+      );
+    } else {
+      await SharedPrefrenceSigelton.setStringList(
+        BackendEndpoints.getSearchQuery,
+        [query],
+      );
+    }
+  }
+
+  @override
+  List<String?> getSearchQuery() {
+    final List<String>? data = SharedPrefrenceSigelton.getStringList(
+      key: BackendEndpoints.getSearchQuery,
+    );
+    return data ?? [];
+  }
+
+  @override
+  Future<void> deleteSearchQuery({String? query}) async {
+    final list =
+        SharedPrefrenceSigelton.getStringList(
+          key: BackendEndpoints.getSearchQuery,
+        ) ??
+        [];
+    if (list.isNotEmpty) {
+      if (query != null) {
+        list.remove(query);
+        await SharedPrefrenceSigelton.setStringList(
+          BackendEndpoints.setQuerySearch,
+          list,
+        );
+      } else {
+        SharedPrefrenceSigelton.deleteListOfStrings(
+          BackendEndpoints.setQuerySearch,
+        );
+      }
     }
   }
 }
