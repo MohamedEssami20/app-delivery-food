@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:app_delivey_food/core/errors/failure.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
@@ -32,8 +31,6 @@ class SearchRepoImpl implements SearchRepo {
         products = product
             .map((e) => ProductModel.fromJson(e.data()).toEntity())
             .toList();
-
-        log("products = ${products[0].name}");
         yield Right(products);
       }
     } on FirebaseException catch (e) {
