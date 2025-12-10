@@ -86,9 +86,21 @@ class Assets {
   /// assets/images/Delivery_guy_background.svg
   static const String assetsImagesDeliveryGuyBackground = "assets/images/Delivery_guy_background.svg";
 
+  /// Assets for assetsImagesDessertFood
+  /// assets/images/dessert_food.png
+  static const String assetsImagesDessertFood = "assets/images/dessert_food.png";
+
+  /// Assets for assetsImagesFastFood
+  /// assets/images/fast_food.png
+  static const String assetsImagesFastFood = "assets/images/fast_food.png";
+
   /// Assets for assetsImagesFeaturedBackground
   /// assets/images/featured_background.svg
   static const String assetsImagesFeaturedBackground = "assets/images/featured_background.svg";
+
+  /// Assets for assetsImagesIndianFood
+  /// assets/images/indian_food.png
+  static const String assetsImagesIndianFood = "assets/images/indian_food.png";
 
   /// Assets for assetsImagesLogoText
   /// assets/images/Logo_text.svg
@@ -97,6 +109,10 @@ class Assets {
   /// Assets for assetsImagesProfileImage
   /// assets/images/profile_image.png
   static const String assetsImagesProfileImage = "assets/images/profile_image.png";
+
+  /// Assets for assetsImagesSeaFood
+  /// assets/images/sea_food.png
+  static const String assetsImagesSeaFood = "assets/images/sea_food.png";
 
   /// Assets for assetsImagesSplash
   /// assets/images/splash.svg

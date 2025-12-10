@@ -6,6 +6,6 @@ class ExplorePrductsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExploreProductsViewBody();
+    return SafeArea(child: ExploreProductsViewBody());
   }
 }
