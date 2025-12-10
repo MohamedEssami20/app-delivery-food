@@ -3,8 +3,8 @@ import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class ProductPriceAndAddToCart extends StatelessWidget {
-  const ProductPriceAndAddToCart({super.key});
-
+  const ProductPriceAndAddToCart({super.key, required this.price});
+  final String price;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -14,7 +14,7 @@ class ProductPriceAndAddToCart extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "\$9.99",
+          "\$ $price",
           style: theme.textStyles.displaySmall!.copyWith(
             color: theme.colors.typography500,
           ),

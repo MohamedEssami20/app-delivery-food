@@ -44,11 +44,13 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
           const ProductNameAndCounter(),
           ProductDescription(),
           const Spacer(),
-          Expanded(flex: 2, child: ProductPriceAndAddToCart()),
+          Expanded(
+            flex: 2,
+            child: ProductPriceAndAddToCart(price: widget.productEntity.price),
+          ),
           // const SizedBox(height: 20),
         ],
       ),
     );
   }
 }
-
