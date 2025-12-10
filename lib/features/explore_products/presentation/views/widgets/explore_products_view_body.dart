@@ -3,8 +3,7 @@ import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'food_type_section.dart';
+import 'food_type_section_builder.dart';
 
 class ExploreProductsViewBody extends StatelessWidget {
   const ExploreProductsViewBody({super.key});
@@ -31,7 +30,7 @@ class ExploreProductsViewBody extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(child: FoodTypeSection()),
+          Expanded(child: FoodTypeSectionBuilder()),
         ],
       ),
     );

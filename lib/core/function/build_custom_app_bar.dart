@@ -9,6 +9,8 @@ AppBar buildCustomAppBar({
   bool? showBackButton,
   bool? showActionButton,
   bool? showTitle,
+  String? title,
+  VoidCallback? onBackPress,
   required BuildContext context,
 }) {
   return AppBar(
@@ -17,25 +19,34 @@ AppBar buildCustomAppBar({
     centerTitle: true,
     title: Visibility(
       visible: showTitle ?? false,
-      child: SvgPicture.asset(
-        Assets.assetsImagesLogoText,
-        alignment: Alignment.center,
-      ),
+      child: title == null
+          ? SvgPicture.asset(
+              Assets.assetsImagesLogoText,
+              alignment: Alignment.center,
+            )
+          : Text(
+              title,
+              style: theme.textStyles.headlineSmall?.copyWith(
+                color: theme.colors.typography500,
+              ),
+            ),
     ),
     leadingWidth: 90,
     leading: Visibility(
       visible: showBackButton ?? false,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(left:20),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
-              onTap: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
+              onTap:
+                  onBackPress ??
+                  () {
+                    if (Navigator.canPop(context)) {
+                      Navigator.pop(context);
+                    }
+                  },
               child: Icon(
                 Icons.arrow_back_ios,
                 color: theme.colors.grey500,
