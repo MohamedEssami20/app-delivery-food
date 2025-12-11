@@ -35,6 +35,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
+        border: Border.fromBorderSide(BorderSide(color: theme.colors.grey200)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,

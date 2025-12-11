@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/features/explore_products/presentation/views/widgets/food_type_list.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 import 'back_to_normal_food_type_view.dart';
@@ -14,7 +15,7 @@ class DessertFoodSection extends StatelessWidget {
           spacing: 16,
           children: [
             BackToNormalFoodTypeView(theme: theme),
-            Text("dessert Food"),
+            FoodTypeListView(),
           ],
         ),
       ),
