@@ -1,5 +1,5 @@
 import 'package:app_delivey_food/core/helper/custom_network_image.dart';
-import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

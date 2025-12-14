@@ -8,6 +8,8 @@ class ProductEntity {
   final String description;
   final String price;
   final int code;
+  final int discount;
+  final String category;
   final String productType;
   final num avrageRating;
   final bool isFavourite;
@@ -19,6 +21,8 @@ class ProductEntity {
   ProductEntity({
     required this.id,
     required this.code,
+    required this.category,
+    required this.discount,
     required this.name,
     required this.description,
     required this.price,
@@ -38,6 +42,8 @@ class ProductEntity {
     String? description,
     String? price,
     int? code,
+    int? discount,
+    String? category,
     String? productType,
     num? avrageRating,
     bool? isFavourite,
@@ -52,6 +58,8 @@ class ProductEntity {
       id: id ?? this.id,
       name: name ?? this.name,
       code: code ?? this.code,
+      discount: discount ?? this.discount,
+      category: category ?? this.category,
       description: description ?? this.description,
       price: price ?? this.price,
       productType: productType ?? this.productType,

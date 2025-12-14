@@ -1,4 +1,4 @@
-import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 ProductEntity getDummyProduct(){
@@ -7,6 +7,8 @@ ProductEntity getDummyProduct(){
       name: 'Product 1',
       description: 'Description 1',
       price: '10',
+      discount: 10,
+      category: 'Category 1',
       code: 1,
       productType: 'type 1',
       avrageRating: 4.5,

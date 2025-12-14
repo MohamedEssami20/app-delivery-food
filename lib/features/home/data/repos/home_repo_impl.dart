@@ -5,9 +5,9 @@ import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/core/utils/backend_end_point.dart';
 
 import 'package:app_delivey_food/features/auth/domain/entities/user_entity.dart';
-import 'package:app_delivey_food/features/home/data/models/product_model.dart';
+import 'package:app_delivey_food/core/models/product_model.dart';
 import 'package:app_delivey_food/features/home/domain/entities/advertising_product_entity.dart';
-import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/core/entities/product_entity.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../home/domain/entities/product_entity.dart';
+import '../../../../../core/entities/product_entity.dart';
 import '../../../domain/repos/search_repo.dart';
 
 part 'search_products_state.dart';

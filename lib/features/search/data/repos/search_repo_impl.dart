@@ -2,14 +2,14 @@
 import 'package:app_delivey_food/core/errors/failure.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
 import 'package:app_delivey_food/core/services/shared_pref_services.dart';
-import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:app_delivey_food/features/search/domain/repos/search_repo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/firebase_exception_handler.dart';
 import '../../../../core/utils/backend_end_point.dart';
-import '../../../home/data/models/product_model.dart';
+import '../../../../core/models/product_model.dart';
 
 class SearchRepoImpl implements SearchRepo {
   final DataBaseService dataBaseService;

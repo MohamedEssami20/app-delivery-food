@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/errors/failure.dart';
 import '../../../auth/domain/entities/user_entity.dart';
-import '../entities/product_entity.dart';
+import '../../../../core/entities/product_entity.dart';
 
 abstract class HomeRepo {
   // create method that get user data;

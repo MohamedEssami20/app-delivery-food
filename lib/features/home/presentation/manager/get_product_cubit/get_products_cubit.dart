@@ -1,7 +1,7 @@
 import 'package:app_delivey_food/features/home/domain/repos/home_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entities/product_entity.dart';
+import '../../../../../core/entities/product_entity.dart';
 
 part 'get_products_state.dart';
 

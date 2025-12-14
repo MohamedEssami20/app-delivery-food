@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../domain/entities/product_entity.dart';
+import '../entities/product_entity.dart';
 
 class ProductModel {
   final String id;
@@ -8,6 +8,8 @@ class ProductModel {
   final String description;
   final String price;
   final int code;
+  final int discount;
+  final String category;
   final String productType;
   final num avrageRating;
   final bool isFavourite;
@@ -22,6 +24,8 @@ class ProductModel {
     required this.description,
     required this.price,
     required this.code,
+    required this.discount,
+    required this.category,
     required this.productType,
     required this.avrageRating,
     required this.isFavourite,
@@ -38,6 +42,8 @@ class ProductModel {
       'description': description,
       'price': price,
       'code': code,
+      'discount': discount,
+      'category': category,
       'productType': productType,
       'avrageRating': avrageRating,
       'isFavourite': isFavourite,
@@ -55,6 +61,8 @@ class ProductModel {
       description: map['description'] as String,
       price: map['price'] as String,
       code: map['code'] as int,
+      discount: map['discount'] as int,
+      category: map['category'] as String,
       productType: map['productType'] as String,
       avrageRating: map['avrageRating'] as num,
       isFavourite: map['isFavourite'] as bool,
@@ -72,6 +80,8 @@ class ProductModel {
       description: product.description,
       price: product.price,
       code: product.code,
+      discount: product.discount,
+      category: product.category,
       productType: product.productType,
       avrageRating: product.avrageRating,
       isFavourite: product.isFavourite,
@@ -89,6 +99,8 @@ class ProductModel {
       description: description,
       price: price,
       code: code,
+      discount: discount,
+      category: category,
       productType: productType,
       avrageRating: avrageRating,
       isFavourite: isFavourite,

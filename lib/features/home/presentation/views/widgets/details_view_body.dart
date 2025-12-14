@@ -1,4 +1,4 @@
-import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/product_description.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/product_price_and_add_tocart.dart';
 import 'package:flutter/material.dart';

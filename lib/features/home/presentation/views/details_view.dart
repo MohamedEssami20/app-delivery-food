@@ -1,6 +1,6 @@
 import 'package:app_delivey_food/core/function/build_custom_app_bar.dart';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
-import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/details_view_body.dart';

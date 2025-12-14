@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/forgot_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/sign_up_view.dart';
-import '../../features/home/domain/entities/product_entity.dart';
+import '../entities/product_entity.dart';
 import '../../features/home/presentation/views/details_view.dart';
 import '../../features/home/presentation/views/main_view.dart';
 import '../../features/on_borading/presentation/views/on_boarding_view.dart';

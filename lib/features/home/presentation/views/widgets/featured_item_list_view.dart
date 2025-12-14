@@ -13,6 +13,9 @@ class FeaturedItemListView extends StatelessWidget {
       width: double.infinity,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
+        physics: products.length == 1
+            ? const NeverScrollableScrollPhysics()
+            : null,
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Padding(

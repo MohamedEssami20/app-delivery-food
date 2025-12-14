@@ -1,7 +1,7 @@
 import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/features/home/domain/entities/advertising_product_entity.dart';
-import 'package:app_delivey_food/features/home/domain/entities/product_entity.dart';
+import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:app_delivey_food/features/home/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart' show SvgPicture;
@@ -105,6 +105,8 @@ class FeaturedItem extends StatelessWidget {
     return ProductEntity(
       id: product.id,
       name: product.name,
+      discount: product.productDiscount.toInt(),
+      category: "Advertising",
       description: product.description,
       price: product.price,
       code: 1,
