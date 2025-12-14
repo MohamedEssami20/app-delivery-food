@@ -1,4 +1,4 @@
-import 'package:app_delivey_food/core/helper/get_dummy_ads_products.dart';
+import 'package:app_delivey_food/core/helper/get_dummy_product_entitiy.dart';
 import 'package:app_delivey_food/features/home/presentation/manager/get_advertising_product/get_advertising_product_cubit.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/featured_item_list_view.dart'
     show FeaturedItemListView;
@@ -19,9 +19,7 @@ class GetFeaturedItemBuilder extends StatelessWidget {
           return Center(child: Text(state.errorMessage));
         }
         return Skeletonizer(
-          child: FeaturedItemListView(
-            products: getDummyAdvertisingProductEntities(),
-          ),
+          child: FeaturedItemListView(products: getListDummyProduct()),
         );
       },
     );

@@ -46,8 +46,8 @@ class FirestoreService implements DataBaseService {
           documentSnapshot = documentSnapshot.limit(limit);
         }
         if (query.containsKey("where") && query.containsKey("isEqualTo")) {
-          String where = query['where'];
-          int isEqualTo = query['isEqualTo'];
+          final where = query['where'];
+          final isEqualTo = query['isEqualTo'];
           documentSnapshot = documentSnapshot.where(
             where,
             isEqualTo: isEqualTo,
@@ -134,20 +134,19 @@ class FirestoreService implements DataBaseService {
     String? query,
   }) async* {
     Stream<QuerySnapshot<Map<String, dynamic>>> documentSnapshot;
-   if(subPath != null && query == null){
-     documentSnapshot = firebaseFirestore
-        .collection(mainPath)
-        .doc(documentId)
-        .collection(subPath)
-        .snapshots();
-   }
-   else{
-     documentSnapshot = firebaseFirestore
-        .collection(mainPath)
-        .where("name", isGreaterThanOrEqualTo: query)
-        .where("name", isLessThan: "${query!}\uf8ff")
-        .snapshots();
-   }
+    if (subPath != null && query == null) {
+      documentSnapshot = firebaseFirestore
+          .collection(mainPath)
+          .doc(documentId)
+          .collection(subPath)
+          .snapshots();
+    } else {
+      documentSnapshot = firebaseFirestore
+          .collection(mainPath)
+          .where("name", isGreaterThanOrEqualTo: query)
+          .where("name", isLessThan: "${query!}\uf8ff")
+          .snapshots();
+    }
 
     yield* documentSnapshot.map((event) => event.docs);
   }

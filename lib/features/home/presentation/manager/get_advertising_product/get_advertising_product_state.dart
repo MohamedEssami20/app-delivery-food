@@ -11,7 +11,7 @@ final class GetAdvertisingProductInitial extends GetAdvertisingProductState {}
 
 // create all state to get advertising product;
 final class GetAdvertisingProductSuccess extends GetAdvertisingProductState {
-  final List<AdvertisingProductEntity> products;
+  final List<ProductEntity> products;
   const GetAdvertisingProductSuccess({required this.products});
 }
 

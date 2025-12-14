@@ -1,6 +1,5 @@
 import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
-import 'package:app_delivey_food/features/home/domain/entities/advertising_product_entity.dart';
 import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:app_delivey_food/features/home/presentation/views/details_view.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +9,8 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/custom_button.dart';
 
 class FeaturedItem extends StatelessWidget {
-  const FeaturedItem({super.key, required this.advertisingProduct});
-  final AdvertisingProductEntity advertisingProduct;
+  const FeaturedItem({super.key, required this.productEntity});
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -31,7 +30,7 @@ class FeaturedItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${advertisingProduct.productDiscount}% OFF on Burgers!",
+                  "${productEntity.discount}% OFF on Burgers!",
                   style: theme.textStyles.displayMedium!.copyWith(
                     color: theme.colors.typography500,
                   ),
@@ -47,7 +46,7 @@ class FeaturedItem extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         DetailsView.routeName,
-                        arguments: convertToProductEntity(advertisingProduct),
+                        arguments:productEntity ,
                       );
                     },
                     backgroundColor: theme.colors.primary500,
@@ -89,7 +88,7 @@ class FeaturedItem extends StatelessWidget {
                     ),
                   ),
                   CustomNetowrkImage(
-                    imageUrl: advertisingProduct.baseImageUrl,
+                    imageUrl: productEntity.baseImageUrl,
                     fit: BoxFit.fill,
                   ),
                 ],
@@ -98,25 +97,6 @@ class FeaturedItem extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  ProductEntity convertToProductEntity(AdvertisingProductEntity product) {
-    return ProductEntity(
-      id: product.id,
-      name: product.name,
-      discount: product.productDiscount.toInt(),
-      category: "Advertising",
-      description: product.description,
-      price: product.price,
-      code: 1,
-      productType: product.productType,
-      avrageRating: product.avrageRating,
-      isFavourite: product.isFavourite ?? false,
-      baseImageUrl: product.baseImageUrl!,
-      productImageUrls: product.productImageUrls!,
-      calories: product.calories,
-      createdAt: product.createdAt!,
     );
   }
 }
