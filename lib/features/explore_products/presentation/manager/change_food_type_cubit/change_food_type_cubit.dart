@@ -1,42 +1,20 @@
 
+import 'package:app_delivey_food/core/utils/food_category.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'change_food_type_state.dart';
 
 class ChangeFoodTypeCubit extends Cubit<ChangeFoodTypeState> {
-  ChangeFoodTypeCubit() : super(ChangeFoodTypeInitial());
+  ChangeFoodTypeCubit() : super(const ChangeFoodTypeState(FoodCategory.none));
 
-  bool isFastFoodSelected = false;
-  bool isIndianFoodSelected = false;
-  bool isDessertFoodSelected = false;
-  bool isSeaFoodSelected = false;
-
-  void changeFastFoodSelected() {
-    isFastFoodSelected = !isFastFoodSelected;
-    emit(FastFoodChanged(isFastFoodSelected: isFastFoodSelected));
+  // create select category method;
+  void selectCategory(FoodCategory category) {
+    emit(ChangeFoodTypeState(category));
   }
 
-  void changeIndianFoodSelected() {
-    isIndianFoodSelected = !isIndianFoodSelected;
-    emit(IndianFoodChanged(isIndianFoodSelected: isIndianFoodSelected));
-  }
-
-  void changeDessertFoodSelected() {
-    isDessertFoodSelected = !isDessertFoodSelected;
-    emit(DessertFoodChanged(isDessertFoodSelected: isDessertFoodSelected));
-  }
-
-  void changeSeaFoodSelected() {
-    isSeaFoodSelected = !isSeaFoodSelected;
-    emit(SeaFoodChanged(isSeaFoodSelected: isSeaFoodSelected));
-  }
-
-  void backToNormalMode() {
-    isFastFoodSelected = false;
-    isIndianFoodSelected = false;
-    isDessertFoodSelected = false;
-    isSeaFoodSelected = false;
-    emit(ChangeFoodTypeInitial());
+  // create reset category method;
+  void resetCategory() {
+    emit(const ChangeFoodTypeState(FoodCategory.none));
   }
 }

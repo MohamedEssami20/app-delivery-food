@@ -20,7 +20,7 @@ class BackToNormalFoodTypeView extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {
-            context.read<ChangeFoodTypeCubit>().backToNormalMode();
+            context.read<ChangeFoodTypeCubit>().resetCategory();
           },
           icon: Icon(
             Icons.arrow_back_ios,

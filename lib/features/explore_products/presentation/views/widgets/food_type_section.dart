@@ -1,8 +1,10 @@
+import 'package:app_delivey_food/core/utils/food_category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/assets.dart';
 import '../../manager/change_food_type_cubit/change_food_type_cubit.dart';
+import 'food_image_type_item.dart';
 
 class FoodTypeSection extends StatelessWidget {
   const FoodTypeSection({super.key});
@@ -16,48 +18,37 @@ class FoodTypeSection extends StatelessWidget {
           FoodImageTypeItem(
             image: Assets.assetsImagesIndianFood,
             onTap: () {
-              context.read<ChangeFoodTypeCubit>().changeIndianFoodSelected();
+              context.read<ChangeFoodTypeCubit>().selectCategory(
+                FoodCategory.indianFood,
+              );
             },
           ),
           FoodImageTypeItem(
             image: Assets.assetsImagesDessertFood,
             onTap: () {
-              context.read<ChangeFoodTypeCubit>().changeDessertFoodSelected();
+              context.read<ChangeFoodTypeCubit>().selectCategory(
+                FoodCategory.desserts,
+              );
             },
           ),
           FoodImageTypeItem(
             image: Assets.assetsImagesFastFood,
             onTap: () {
-              context.read<ChangeFoodTypeCubit>().changeFastFoodSelected();
+              context.read<ChangeFoodTypeCubit>().selectCategory(
+                FoodCategory.fastFood,
+              );
             },
           ),
           FoodImageTypeItem(
             image: Assets.assetsImagesSeaFood,
             onTap: () {
-              context.read<ChangeFoodTypeCubit>().changeSeaFoodSelected();
+              context.read<ChangeFoodTypeCubit>().selectCategory(
+                FoodCategory.seaFood,
+              );
             },
           ),
         ],
       ),
-    );
-  }
-}
-
-class FoodImageTypeItem extends StatelessWidget {
-  const FoodImageTypeItem({
-    super.key,
-    required this.image,
-    required this.onTap,
-  });
-
-  final String image;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Image.asset(image, fit: BoxFit.fitWidth, width: double.infinity),
     );
   }
 }
