@@ -1,3 +1,5 @@
+import 'package:app_delivey_food/core/entities/product_entity.dart';
+import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -6,7 +8,8 @@ import '../../../../../core/utils/assets.dart';
 import 'food_type_details.dart';
 
 class FoodTypeItem extends StatelessWidget {
-  const FoodTypeItem({super.key});
+  const FoodTypeItem({super.key, required this.productEntity});
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -28,12 +31,14 @@ class FoodTypeItem extends StatelessWidget {
             flex: 2,
             child: Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                  child: Image.asset(
-                    Assets.assetsImagesBurgerProduct,
-                    height: 130,
-                    fit: BoxFit.fill,
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(12)),
+                    child: CustomNetowrkImage(
+                      imageUrl: productEntity.baseImageUrl,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
@@ -60,7 +65,7 @@ class FoodTypeItem extends StatelessWidget {
                           width: 12,
                         ),
                         Text(
-                          "4.5",
+                          "${productEntity.avrageRating}",
                           style: theme.textStyles.bodyMedium!.copyWith(
                             color: theme.colors.typography400,
                           ),
@@ -72,7 +77,10 @@ class FoodTypeItem extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(flex: 3, child: FoodTypeDetails(theme: theme)),
+          Expanded(
+            flex: 3,
+            child: FoodTypeDetails(theme: theme, productEntity: productEntity),
+          ),
         ],
       ),
     );

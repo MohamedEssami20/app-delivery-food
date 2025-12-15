@@ -1,4 +1,6 @@
-import 'package:app_delivey_food/core/utils/custom_button.dart' show CustomButton;
+import 'package:app_delivey_food/core/entities/product_entity.dart';
+import 'package:app_delivey_food/core/utils/custom_button.dart'
+    show CustomButton;
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
@@ -7,10 +9,11 @@ class FoodTypeDetails extends StatelessWidget {
   const FoodTypeDetails({
     super.key,
     required this.theme,
+    required this.productEntity,
   });
 
   final AppThemeHelper theme;
-
+  final ProductEntity productEntity;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,7 +23,7 @@ class FoodTypeDetails extends StatelessWidget {
         spacing: 8,
         children: [
           Text(
-            "Pepperoni Cheese Pizza",
+            productEntity.name,
             style: theme.textStyles.titleSmall!.copyWith(
               color: theme.colors.typography500,
               fontWeight: FontWeight.w500,
@@ -30,30 +33,30 @@ class FoodTypeDetails extends StatelessWidget {
             spacing: 12,
             children: [
               Text(
-                "\$ 8.99",
+                "\$ ${productEntity.price}",
                 style: theme.textStyles.bodyLarge!.copyWith(
                   color: theme.colors.typography500,
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 2,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: theme.colors.grey200,
-                ),
-                child: Text(
-                  "10 % Off",
-                  style: theme.textStyles.titleSmall!.copyWith(
-                    color: theme.colors.typography400,
+              Visibility(
+                visible: productEntity.discount > 0,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: theme.colors.grey200,
+                  ),
+                  child: Text(
+                    "${productEntity.discount} % Off",
+                    style: theme.textStyles.titleSmall!.copyWith(
+                      color: theme.colors.typography400,
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-    
+
           CustomButton(label: "Add to cart", onPressed: () {}),
         ],
       ),

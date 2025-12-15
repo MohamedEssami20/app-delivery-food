@@ -1,9 +1,9 @@
 import 'package:app_delivey_food/core/utils/food_category.dart';
+import 'package:app_delivey_food/features/explore_products/presentation/views/widgets/selected_food_category_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../manager/change_food_type_cubit/change_food_type_cubit.dart';
 import 'food_type_section.dart';
-import 'selected_food_category_section.dart';
 
 class FoodTypeSectionBuilder extends StatelessWidget {
   const FoodTypeSectionBuilder({super.key});
@@ -27,7 +27,7 @@ class FoodTypeSectionBuilder extends StatelessWidget {
           },
           child: state.selectedCategory == FoodCategory.none
               ? FoodTypeSection()
-              : SelectedFoodCategorySection(),
+              : SelectedFoodCategoryBuilder(),
         );
       },
     );

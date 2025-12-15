@@ -1,4 +1,6 @@
+import 'package:app_delivey_food/core/utils/backend_end_point.dart';
 import 'package:app_delivey_food/core/utils/food_category.dart';
+import 'package:app_delivey_food/features/explore_products/presentation/manager/get_explore_foods/get_explore_foods_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +13,7 @@ class FoodTypeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final getExploreCubit = context.read<GetExploreFoodsCubit>();
     return SingleChildScrollView(
       child: Column(
         spacing: 18,
@@ -21,6 +24,9 @@ class FoodTypeSection extends StatelessWidget {
               context.read<ChangeFoodTypeCubit>().selectCategory(
                 FoodCategory.indianFood,
               );
+              getExploreCubit.getExploreFoods(
+                category: BackendEndpoints.indianFood,
+              );
             },
           ),
           FoodImageTypeItem(
@@ -28,6 +34,9 @@ class FoodTypeSection extends StatelessWidget {
             onTap: () {
               context.read<ChangeFoodTypeCubit>().selectCategory(
                 FoodCategory.desserts,
+              );
+              getExploreCubit.getExploreFoods(
+                category: BackendEndpoints.desserts,
               );
             },
           ),
@@ -37,6 +46,9 @@ class FoodTypeSection extends StatelessWidget {
               context.read<ChangeFoodTypeCubit>().selectCategory(
                 FoodCategory.fastFood,
               );
+              getExploreCubit.getExploreFoods(
+                category: BackendEndpoints.fastFood,
+              );
             },
           ),
           FoodImageTypeItem(
@@ -44,6 +56,9 @@ class FoodTypeSection extends StatelessWidget {
             onTap: () {
               context.read<ChangeFoodTypeCubit>().selectCategory(
                 FoodCategory.seaFood,
+              );
+              getExploreCubit.getExploreFoods(
+                category: BackendEndpoints.seaFood,
               );
             },
           ),
