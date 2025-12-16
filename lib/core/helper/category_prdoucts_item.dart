@@ -4,6 +4,6 @@ abstract class CategoryPrdouctsItem {
   CategoryPrdouctsItem({required this.title});
 
   static List<String> getCategoryItems() {
-    return ["Offers", "Burger", "Pizza", "Dount", "Soft Drink", "Ice Cream"];
+    return ["Offers", "Pizza", "Soft Drink", "Burger", "Dount", "Ice Cream"];
   }
 }

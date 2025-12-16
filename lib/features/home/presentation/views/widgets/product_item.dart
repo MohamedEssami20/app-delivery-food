@@ -25,7 +25,7 @@ class ProductItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AspectRatio(
-            aspectRatio: 1.05,
+            aspectRatio: 1.08,
             child: Stack(
               children: [
                 ClipRRect(
@@ -39,6 +39,7 @@ class ProductItem extends StatelessWidget {
                     imageUrl: productEntity.baseImageUrl,
                     fit: BoxFit.cover,
                     width: double.infinity,
+                    height: double.infinity,
                   ),
                 ),
                 Positioned(

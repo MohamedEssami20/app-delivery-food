@@ -1,8 +1,11 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/search_products_cubit/search_products_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
 import 'food_type_section_builder.dart';
 
 class ExploreProductsViewBody extends StatelessWidget {
@@ -29,6 +32,24 @@ class ExploreProductsViewBody extends StatelessWidget {
                 ),
               ),
             ),
+            onChanged: (value) {
+              if (value.isNotEmpty && value.trim().isNotEmpty) {
+                context.read<SearchModeCubit>().changeSearchedExploreMode();
+                context.read<SearchProductsCubit>().getSearchProducts(
+                  query: value.trim(),
+                );
+              } else {
+                context.read<SearchModeCubit>().changeNormalExploreViewMode();
+              }
+            },
+            onSubmit: (value) {
+              if (value.isNotEmpty && value.trim().isNotEmpty) {
+                context.read<SearchModeCubit>().changeSearchedExploreMode();
+                context.read<SearchProductsCubit>().getSearchProducts(
+                  query: value.trim(),
+                );
+              }
+            },
           ),
           Expanded(child: FoodTypeSectionBuilder()),
         ],

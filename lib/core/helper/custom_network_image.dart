@@ -7,26 +7,27 @@ class CustomNetowrkImage extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.width,
+    this.height,
     this.fit,
   });
 
   final String? imageUrl;
   final double? width;
   final BoxFit? fit;
+  final double? height;
   @override
   Widget build(BuildContext context) {
     if (imageUrl == null || imageUrl!.isEmpty) {
       return Container(
-        width: 100,
+        width: double.infinity,
         height: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-        ),
+        decoration: BoxDecoration(color: Colors.grey.shade200),
       );
     } else {
       return CachedNetworkImage(
         imageUrl: imageUrl!,
         width: width,
+        height: height,
         fit: fit,
         placeholder: (context, url) => Skeletonizer(
           enableSwitchAnimation: true,
@@ -45,9 +46,8 @@ class CustomNetowrkImage extends StatelessWidget {
             ),
           ),
         ),
-        errorWidget: (context, url, error) => const Center(
-          child: Icon(Icons.error),
-        ),
+        errorWidget: (context, url, error) =>
+            const Center(child: Icon(Icons.error)),
       );
     }
   }

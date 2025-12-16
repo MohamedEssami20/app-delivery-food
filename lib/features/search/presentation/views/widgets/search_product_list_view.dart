@@ -14,7 +14,7 @@ class SearchProductListView extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
-        childAspectRatio: 0.75,
+        childAspectRatio: 0.70,
       ),
       itemCount: products.length,
       itemBuilder: (context, index) => GestureDetector(
