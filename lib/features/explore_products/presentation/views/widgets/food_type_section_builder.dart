@@ -1,6 +1,7 @@
 import 'package:app_delivey_food/core/utils/food_category.dart';
 import 'package:app_delivey_food/features/explore_products/presentation/views/widgets/selected_food_category_builder.dart';
 import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
+import 'package:app_delivey_food/features/search/presentation/views/latest_serach_view.dart';
 import 'package:app_delivey_food/features/search/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +49,7 @@ class FoodTypeSectionBuilder extends StatelessWidget {
     required SearchModeState searchState,
   }) {
     if (changeFoodTypeState.selectedCategory == FoodCategory.none &&
-        searchState is! ExplorerViewSearchModeChanged) {
+        searchState is ExplorerViewNormalModeChanged) {
       return FoodTypeSection();
     } else if (searchState is ExplorerViewSearchModeChanged &&
         changeFoodTypeState.selectedCategory == FoodCategory.none) {
@@ -56,6 +57,12 @@ class FoodTypeSectionBuilder extends StatelessWidget {
     } else if (changeFoodTypeState.selectedCategory != FoodCategory.none &&
         searchState is ExplorerViewSearchModeChanged) {
       return SearchView();
+    } else if (searchState is ExplorerViewLatestSearchedModeChanged &&
+        changeFoodTypeState.selectedCategory == FoodCategory.none) {
+      return LatestSerachView();
+    } else if (changeFoodTypeState.selectedCategory != FoodCategory.none &&
+        searchState is ExplorerViewLatestSearchedModeChanged) {
+      return LatestSerachView();
     } else {
       return SelectedFoodCategoryBuilder();
     }

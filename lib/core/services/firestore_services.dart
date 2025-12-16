@@ -131,7 +131,7 @@ class FirestoreService implements DataBaseService {
     required String mainPath,
     required String? subPath,
     String? documentId,
-    String? query,
+    Map<String, dynamic>? query,
   }) async* {
     Stream<QuerySnapshot<Map<String, dynamic>>> documentSnapshot;
     if (subPath != null && query == null) {
@@ -140,11 +140,21 @@ class FirestoreService implements DataBaseService {
           .doc(documentId)
           .collection(subPath)
           .snapshots();
+    } else if (query != null &&
+        query.containsKey("where") &&
+        query.containsKey("isEqualTo")) {
+      final where = query['where'];
+      final value = query['isEqualTo'];
+      documentSnapshot = firebaseFirestore
+          .collection(mainPath)
+          .where(where, isGreaterThanOrEqualTo: value)
+          .where(where, isLessThan: ("$value\uf8ff").toLowerCase())
+          .snapshots();
     } else {
       documentSnapshot = firebaseFirestore
           .collection(mainPath)
-          .where("name", isGreaterThanOrEqualTo: query)
-          .where("name", isLessThan: "${query!}\uf8ff")
+          .doc(documentId)
+          .collection(subPath!)
           .snapshots();
     }
 

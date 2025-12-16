@@ -8,15 +8,18 @@ Widget buildSearchHomeAppBar({
   required BuildContext context,
   required AppThemeHelper theme,
   TextEditingController? controller,
+  VoidCallback? onBackPress,
 }) {
   return Row(
     spacing: MediaQuery.sizeOf(context).width * 0.27,
     children: [
       IconButton(
-        onPressed: () {
-          context.read<SearchModeCubit>().changeNormalMode();
-          if (controller != null) controller.clear();
-        },
+        onPressed:
+            onBackPress ??
+            () {
+              context.read<SearchModeCubit>().changeNormalMode();
+              if (controller != null) controller.clear();
+            },
         icon: const Icon(Icons.arrow_back_ios),
       ),
       Text(

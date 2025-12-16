@@ -3,11 +3,11 @@ import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:app_delivey_food/features/home/presentation/manager/get_advertising_product/get_advertising_product_cubit.dart';
 import 'package:app_delivey_food/features/home/presentation/manager/get_product_cubit/get_products_cubit.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/build/build_user_home_bar_builder.dart';
-import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../search/presentation/manager/search_products_cubit/search_products_cubit.dart';
+import '../../../../../core/function/on_change_action_in_home_view.dart';
+import '../../../../../core/function/on_submit_action_in_home_view.dart';
 import '../../manager/user_cubit/user_cubit.dart';
 import 'build/Home_view_body_builder.dart';
 
@@ -52,27 +52,11 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                   height: 50,
                   child: CustomTextFormFiled(
                     controller: searchController,
-                    onSaved: (value) {},
                     onSubmit: (value) {
-                      context.read<SearchProductsCubit>().storeSearchQuery(
-                        query: value,
-                      );
-                      context.read<SearchProductsCubit>().getSearchProducts(
-                        query: value.trim(),
-                      );
+                      onSubmitActionInHomeView(value, context);
                     },
                     onChanged: (value) {
-                      if (value.isNotEmpty && value.trim().isNotEmpty) {
-                        context.read<SearchModeCubit>().changeSearchMode();
-                        context.read<SearchProductsCubit>().getSearchProducts(
-                          query: value.trim(),
-                        );
-                      } else {
-                        context
-                            .read<SearchModeCubit>()
-                            .changeLatestSearchedMode();
-                        context.read<SearchProductsCubit>().getSearchQuery();
-                      }
+                      onChangeActionInHomeView(value, context);
                     },
                     prefixIcon: FittedBox(
                       fit: BoxFit.scaleDown,

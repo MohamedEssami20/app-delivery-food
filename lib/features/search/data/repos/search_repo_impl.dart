@@ -1,4 +1,3 @@
-
 import 'package:app_delivey_food/core/errors/failure.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
 import 'package:app_delivey_food/core/services/shared_pref_services.dart';
@@ -22,7 +21,7 @@ class SearchRepoImpl implements SearchRepo {
     try {
       final data = dataBaseService.getStreamDataWithDocumentId(
         mainPath: BackendEndpoints.getProducts,
-        query: query,
+        query: {"where": "name", "isEqualTo": query},
         documentId: null,
         subPath: null,
       );
