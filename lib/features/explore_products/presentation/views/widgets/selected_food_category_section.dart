@@ -22,7 +22,7 @@ class SelectedFoodCategorySection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BackToNormalFoodTypeView(theme: theme),
-             FoodTypeListView(products: products),
+            FoodTypeListView(products: products),
           ],
         ),
       ),

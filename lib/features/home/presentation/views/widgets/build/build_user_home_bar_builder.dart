@@ -4,10 +4,12 @@ import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/helper/get_dummy_user_entity.dart';
 import 'package:app_delivey_food/core/utils/build_search_home_appbar.dart';
 import 'package:app_delivey_food/features/home/presentation/manager/user_cubit/user_cubit.dart';
-import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/home_search_mode_cubit/home_search_mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../../../../core/utils/home_search_mode.dart';
 
 class BuildUserHomeBarBuilder extends StatelessWidget {
   const BuildUserHomeBarBuilder({super.key, required this.searchController});
@@ -15,10 +17,10 @@ class BuildUserHomeBarBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
-    return BlocBuilder<SearchModeCubit, SearchModeState>(
+    return BlocBuilder<HomeSearchModeCubit, HomeSearchMode>(
       builder: (context, state) {
-        if (state is SearchModeChanged && state.isSearchMode ||
-            state is LatestSearchedModeChanged && state.isLatestSearchedMode) {
+        if (state == HomeSearchMode.searching ||
+            state == HomeSearchMode.latestSearched) {
           return buildSearchHomeAppBar(
             context: context,
             theme: theme,

@@ -1,6 +1,5 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart'
     show AppThemeHelper;
-import 'package:app_delivey_food/features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,8 +14,6 @@ class LatestSearchViewBody extends StatelessWidget {
     final theme = AppThemeHelper(context);
     return BlocBuilder<SearchProductsCubit, SearchProductsState>(
       buildWhen: (previous, current) =>
-          current is LatestSearchedModeChanged ||
-          current is ExplorerViewLatestSearchedModeChanged ||
           current is GetSearchQuerySuccess,
       builder: (context, state) {
         if (state is GetSearchQuerySuccess) {

@@ -2,12 +2,13 @@ import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/build_search_home_appbar.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/explore_search_mode/explore_search_mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/function/on_change_action_in_explore_view.dart';
 import '../../../../../core/function/on_submit_action_in_explore_view.dart';
-import '../../../../search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
+import '../../../../../core/utils/explore_search_mode.dart';
 import 'food_type_section_builder.dart';
 
 class ExploreProductsViewBody extends StatefulWidget {
@@ -28,24 +29,26 @@ class _ExploreProductsViewBodyState extends State<ExploreProductsViewBody> {
       child: Column(
         spacing: 20,
         children: [
-          BlocSelector<SearchModeCubit, SearchModeState, SearchModeState>(
+          BlocSelector<
+            ExploreSearchModeCubit,
+            ExploreSearchMode,
+            ExploreSearchMode
+          >(
             selector: (state) {
               return state;
             },
             builder: (context, state) {
               return Visibility(
                 visible:
-                    state is ExplorerViewSearchModeChanged &&
-                        state.isExplorerSearchMode ||
-                    state is ExplorerViewLatestSearchedModeChanged &&
-                        state.isExplorerLatestSearchedMode,
+                    state == ExploreSearchMode.searching ||
+                    state == ExploreSearchMode.latest,
                 child: buildSearchHomeAppBar(
                   context: context,
                   theme: theme,
                   onBackPress: () {
                     context
-                        .read<SearchModeCubit>()
-                        .changeNormalExploreViewMode();
+                        .read<ExploreSearchModeCubit>()
+                        .changeNormalMode();
                     searchController.clear();
                   },
                 ),

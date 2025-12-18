@@ -1,8 +1,8 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/home_search_mode_cubit/home_search_mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/search/presentation/manager/search_mode_cubit/search_mode_cubit.dart';
 
 Widget buildSearchHomeAppBar({
   required BuildContext context,
@@ -17,7 +17,7 @@ Widget buildSearchHomeAppBar({
         onPressed:
             onBackPress ??
             () {
-              context.read<SearchModeCubit>().changeNormalMode();
+              context.read<HomeSearchModeCubit>().changeNormalMode();
               if (controller != null) controller.clear();
             },
         icon: const Icon(Icons.arrow_back_ios),
