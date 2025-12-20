@@ -3,6 +3,7 @@ import 'package:app_delivey_food/features/search/presentation/manager/home_searc
 import 'package:app_delivey_food/features/search/presentation/views/latest_serach_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/utils/explore_search_mode.dart';
 import '../../../../../../core/utils/home_search_mode.dart';
 import '../../../../../search/presentation/views/search_view.dart';
 import '../home_view_body_section.dart';
@@ -28,7 +29,10 @@ class HomeViewBodyBuilder extends StatelessWidget {
     if (searhState == HomeSearchMode.searching) {
       return const SearchView();
     } else if (searhState == HomeSearchMode.latestSearched) {
-      return LatestSerachView();
+      return LatestSerachView(
+        homeSearchMode: HomeSearchMode.latestSearched,
+        exploreSearchMode: ExploreSearchMode.normal,
+      );
     }
     return const HomeViewBodySection();
   }

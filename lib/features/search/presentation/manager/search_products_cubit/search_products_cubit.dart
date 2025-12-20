@@ -12,7 +12,6 @@ class SearchProductsCubit extends Cubit<SearchProductsState> {
 
   final SearchRepo searchRepos;
   StreamSubscription? _streamSubscription;
-
   // create method that get a list of search products;
   Future<void> getSearchProducts(
       {required String query}) async {

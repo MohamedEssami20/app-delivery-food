@@ -7,6 +7,7 @@ import 'package:app_delivey_food/features/home/presentation/views/widgets/home_v
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../search/presentation/manager/home_search_input_cubit/search_input_cubit.dart';
 import '../../../search/presentation/manager/home_search_mode_cubit/home_search_mode_cubit.dart';
 
 class HomeView extends StatelessWidget {
@@ -30,6 +31,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
            BlocProvider(create: (context) => HomeSearchModeCubit()),
+           BlocProvider(create: (context) => HomeSearchInputCubit()),
         ],
         child: HomeViewBody(),
       ),

@@ -1,5 +1,5 @@
-
 import 'package:app_delivey_food/features/explore_products/presentation/views/widgets/explore_products_view_body.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/explore_search_input_cubit/explore_search_input_cubit.dart';
 import 'package:app_delivey_food/features/search/presentation/manager/explore_search_mode/explore_search_mode_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +23,7 @@ class ExplorePrductsView extends StatelessWidget {
             exploreProductRepo: GetItService.getIt.get<ExploreProductRepo>(),
           ),
         ),
+        BlocProvider(create: (context) => ExploreSearchInputCubit()),
       ],
       child: SafeArea(child: ExploreProductsViewBody()),
     );

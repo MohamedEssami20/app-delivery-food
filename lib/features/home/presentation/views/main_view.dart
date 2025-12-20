@@ -1,5 +1,6 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
-import 'package:app_delivey_food/features/home/presentation/views/widgets/main_view_body.dart';import 'package:app_delivey_food/features/search/presentation/manager/search_products_cubit/search_products_cubit.dart';
+import 'package:app_delivey_food/features/home/presentation/views/widgets/main_view_body.dart';
+import 'package:app_delivey_food/features/search/presentation/manager/search_products_cubit/search_products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

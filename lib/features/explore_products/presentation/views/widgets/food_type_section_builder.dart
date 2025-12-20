@@ -1,4 +1,5 @@
 import 'package:app_delivey_food/core/utils/food_category.dart';
+import 'package:app_delivey_food/core/utils/home_search_mode.dart';
 import 'package:app_delivey_food/features/explore_products/presentation/views/widgets/food_type_section.dart';
 import 'package:app_delivey_food/features/explore_products/presentation/views/widgets/selected_food_category_builder.dart';
 import 'package:app_delivey_food/features/search/presentation/manager/explore_search_mode/explore_search_mode_cubit.dart';
@@ -56,7 +57,10 @@ class FoodTypeSectionBuilder extends StatelessWidget {
     }
 
     if (searchState == ExploreSearchMode.latest) {
-      return const LatestSerachView();
+      return const LatestSerachView(
+        homeSearchMode: HomeSearchMode.normal,
+        exploreSearchMode: ExploreSearchMode.latest,
+      );
     }
 
     if (category != FoodCategory.none) {
