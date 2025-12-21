@@ -1,9 +1,9 @@
 import 'package:app_delivey_food/core/entities/product_entity.dart';
+import 'package:app_delivey_food/features/cart/presentation/views/widgets/cart_item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/assets.dart';
-import '../../../../explore_products/presentation/views/widgets/food_type_details.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({super.key, required this.productEntity});
@@ -77,7 +77,7 @@ class CartItem extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            child: FoodTypeDetails(theme: theme, productEntity: productEntity),
+            child: CartItemDetails(theme: theme, productEntity: productEntity),
           ),
         ],
       ),

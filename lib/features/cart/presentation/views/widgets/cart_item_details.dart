@@ -1,10 +1,10 @@
 import 'package:app_delivey_food/core/entities/product_entity.dart';
-import 'package:app_delivey_food/core/utils/custom_button.dart';
+import 'package:app_delivey_food/features/cart/presentation/views/widgets/increment_and_decrement_cart_item.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 
-class FoodTypeDetails extends StatelessWidget {
-  const FoodTypeDetails({
+class CartItemDetails extends StatelessWidget {
+  const CartItemDetails({
     super.key,
     required this.theme,
     required this.productEntity,
@@ -54,11 +54,8 @@ class FoodTypeDetails extends StatelessWidget {
               ),
             ],
           ),
-          CustomButton(
-            label: "Add to cart",
-            backgroundColor: theme.colors.primary600,
-            onPressed: () {},
-          ),
+          SizedBox(height: 8),
+          IcrementAndDecrementCartItem(),
         ],
       ),
     );

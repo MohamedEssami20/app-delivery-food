@@ -1,6 +1,6 @@
-import 'package:app_delivey_food/core/helper/get_dummy_product_entitiy.dart';
-import 'package:app_delivey_food/features/cart/presentation/views/widgets/cart_item.dart';
 import 'package:flutter/material.dart';
+import 'cart_item_list.dart';
+import 'cart_pay_button.dart';
 
 class CartViewBody extends StatelessWidget {
   const CartViewBody({super.key});
@@ -9,7 +9,12 @@ class CartViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Column(children: [CartItem(productEntity: getDummyProduct())]),
+      child: Column(
+        children: [
+          Expanded(child: CartItemList()),
+          CartPayButton(),
+        ],
+      ),
     );
   }
 }

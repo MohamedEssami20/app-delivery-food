@@ -11,12 +11,14 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.eleveation,
+    this.padding,
   });
   final Widget? child;
   final String? label;
   final void Function()? onPressed;
   final Color? backgroundColor, textColor;
   final double? eleveation;
+  final EdgeInsetsDirectional? padding;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -25,7 +27,8 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: eleveation ?? 0,
         backgroundColor: backgroundColor ?? theme.colors.primary600,
-        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+        padding:
+            padding ?? const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         alignment: Alignment.center,
       ),
