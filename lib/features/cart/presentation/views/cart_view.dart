@@ -3,6 +3,7 @@ import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helper/app_theme_helper.dart';
+import 'widgets/cart_view_body.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -18,6 +19,7 @@ class CartView extends StatelessWidget {
           title: "Cart",
           titleIcon: Assets.assetsIconsCartNavigationIcon,
         ),
+        body: CartViewBody(),
       ),
     );
   }

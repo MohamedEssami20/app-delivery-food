@@ -1,9 +1,8 @@
 import 'package:app_delivey_food/core/entities/product_entity.dart';
-import 'package:app_delivey_food/core/utils/custom_button.dart'
-    show CustomButton;
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
+import 'increment_and_decrement_count.dart';
 
 class FoodTypeDetails extends StatelessWidget {
   const FoodTypeDetails({
@@ -56,8 +55,8 @@ class FoodTypeDetails extends StatelessWidget {
               ),
             ],
           ),
-
-          CustomButton(label: "Add to cart", onPressed: () {}),
+          SizedBox(height: 8),
+          IcrementAndDecrement(),
         ],
       ),
     );
