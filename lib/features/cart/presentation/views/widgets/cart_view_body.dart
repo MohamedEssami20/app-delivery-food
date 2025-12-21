@@ -12,9 +12,10 @@ class CartViewBody extends StatelessWidget {
       child: Column(
         children: [
           Expanded(child: CartItemList()),
-          CartPayButton(),
+          Visibility(child: CartPayButton()),
         ],
       ),
     );
   }
 }
+
