@@ -46,7 +46,9 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
           const Spacer(),
           Expanded(
             flex: 2,
-            child: ProductPriceAndAddToCart(price: widget.productEntity.price),
+            child: ProductPriceAndAddToCart(
+              productEntity: widget.productEntity,
+            ),
           ),
           // const SizedBox(height: 20),
         ],

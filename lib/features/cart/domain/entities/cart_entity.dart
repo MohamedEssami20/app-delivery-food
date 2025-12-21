@@ -32,12 +32,12 @@ class CartEntity {
     return false;
   }
 
-  CartItemEntity getCartItemByProductId(String productId) {
+  CartItemEntity getCartItemByProductId(ProductEntity product) {
     for (var item in cartItemList) {
-      if (item.productEntity.id == productId) {
+      if (item.productEntity.id == product.id) {
         return item;
       }
     }
-    throw Exception('Product not found in cart');
+    return CartItemEntity(productEntity: product, quantity: 1);
   }
 }

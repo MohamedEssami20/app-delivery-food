@@ -1,4 +1,5 @@
 import 'package:app_delivey_food/core/entities/product_entity.dart';
+import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:app_delivey_food/features/cart/presentation/views/widgets/cart_item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,8 +34,8 @@ class CartItem extends StatelessWidget {
                   aspectRatio: 1.15,
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
-                    child: Image.asset(
-                      Assets.assetsImagesBurgerProduct,
+                    child: CustomNetowrkImage(
+                      imageUrl: productEntity.baseImageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),

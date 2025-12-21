@@ -1,28 +1,28 @@
 part of 'cart_cubit_cubit.dart';
 
-sealed class CartCubitState extends Equatable {
-  const CartCubitState();
+sealed class CartState extends Equatable {
+  const CartState();
 
   @override
   List<Object> get props => [];
 }
 
-final class CartCubitInitial extends CartCubitState {}
+final class CartCubitInitial extends CartState {}
 
-final class AddProductToCartLoading extends CartCubitState {}
+final class AddProductToCartLoading extends CartState {}
 
-final class AddProductToCartSuccess extends CartCubitState {}
+final class AddProductToCartSuccess extends CartState {}
 
-final class AddProductToCartError extends CartCubitState {
+final class AddProductToCartError extends CartState {
   final String errorMessage;
   const AddProductToCartError({required this.errorMessage});
 }
 
-final class RemoveProductFromCartLoading extends CartCubitState {}
+final class RemoveProductFromCartLoading extends CartState {}
 
-final class RemoveProductFromCartSuccess extends CartCubitState {}
+final class RemoveProductFromCartSuccess extends CartState {}
 
-final class RemoveProductFromCartError extends CartCubitState {
+final class RemoveProductFromCartError extends CartState {
   final String errorMessage;
   const RemoveProductFromCartError({required this.errorMessage});
 }

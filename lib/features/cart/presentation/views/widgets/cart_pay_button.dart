@@ -1,11 +1,12 @@
+
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/custom_button.dart';
 
 class CartPayButton extends StatelessWidget {
-  const CartPayButton({super.key});
-
+  const CartPayButton({super.key, required this.totalPrice});
+ final String totalPrice;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -13,7 +14,7 @@ class CartPayButton extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            "\$ 20.00",
+            "\$ $totalPrice",
             style: theme.textStyles.displaySmall!.copyWith(
               color: theme.colors.typography500,
             ),
