@@ -4,8 +4,15 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import 'increment_and_decrement_item.dart';
 
 class ProductNameAndCounter extends StatelessWidget {
-  const ProductNameAndCounter({super.key});
-
+  const ProductNameAndCounter({
+    super.key,
+    required this.counter,
+    this.onIcrement,
+    this.onDecrement,
+  });
+  final int counter;
+  final void Function()? onIcrement;
+  final void Function()? onDecrement;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -32,14 +39,20 @@ class ProductNameAndCounter extends StatelessWidget {
           child: Row(
             spacing: 12,
             children: [
-              IncrementAndDecremntItem(iconData: Icons.remove),
+              IncrementAndDecremntItem(
+                iconData: Icons.remove,
+                onPressed: onDecrement,
+              ),
               Text(
-                "1",
+                "$counter",
                 style: theme.textStyles.bodyMedium!.copyWith(
                   color: theme.colors.typography500,
                 ),
               ),
-              IncrementAndDecremntItem(iconData: Icons.add),
+              IncrementAndDecremntItem(
+                iconData: Icons.add,
+                onPressed: onIcrement,
+              ),
             ],
           ),
         ),

@@ -4,7 +4,7 @@ import 'package:app_delivey_food/core/helper/on_generate_route.dart';
 import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/core/services/get_it_services.dart';
 import 'package:app_delivey_food/core/services/shared_pref_services.dart';
-import 'package:app_delivey_food/features/cart/presentation/manager/cart_cubit/cart_cubit_cubit.dart';
+import 'package:app_delivey_food/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'package:app_delivey_food/features/splash/presentation/views/splash_view.dart';
 import 'package:app_delivey_food/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

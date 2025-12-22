@@ -1,7 +1,7 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../manager/cart_cubit/cart_cubit_cubit.dart';
+import '../../manager/cart_cubit/cart_cubit.dart';
 import 'cart_item_list.dart';
 import 'cart_pay_button.dart';
 

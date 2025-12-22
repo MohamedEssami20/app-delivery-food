@@ -1,13 +1,11 @@
 import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
-import 'package:app_delivey_food/features/cart/presentation/manager/cart_cubit/cart_cubit_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 class ProductPriceAndAddToCart extends StatelessWidget {
-  const ProductPriceAndAddToCart({super.key, required this.productEntity});
+  const ProductPriceAndAddToCart({super.key, required this.productEntity, this.onPressed});
   final ProductEntity productEntity;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -28,9 +26,7 @@ class ProductPriceAndAddToCart extends StatelessWidget {
             child: CustomButton(
               label: "Add to cart",
               backgroundColor: theme.colors.primary600,
-              onPressed: () {
-                context.read<CartCubit>().addProductToCart(product: productEntity);
-              },
+              onPressed: onPressed,
             ),
           ),
         ),

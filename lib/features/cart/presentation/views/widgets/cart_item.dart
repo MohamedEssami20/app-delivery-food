@@ -7,8 +7,13 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/assets.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key, required this.productEntity});
+  const CartItem({
+    super.key,
+    required this.productEntity,
+    required this.productQuantity,
+  });
   final ProductEntity productEntity;
+  final int productQuantity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -78,7 +83,11 @@ class CartItem extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            child: CartItemDetails(theme: theme, productEntity: productEntity),
+            child: CartItemDetails(
+              theme: theme,
+              productEntity: productEntity,
+              productQuantity: productQuantity,
+            ),
           ),
         ],
       ),

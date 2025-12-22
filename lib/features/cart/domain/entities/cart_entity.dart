@@ -20,7 +20,7 @@ class CartEntity {
     for (var product in cartItemList) {
       totalPrice += product.calculateTotalPrice();
     }
-    return totalPrice;
+    return totalPrice.toDouble();
   }
 
   bool isProductInCart(ProductEntity product) {
@@ -32,12 +32,12 @@ class CartEntity {
     return false;
   }
 
-  CartItemEntity getCartItemByProductId(ProductEntity product) {
+  CartItemEntity getCartItemByProductId(ProductEntity product, int quantity) {
     for (var item in cartItemList) {
       if (item.productEntity.id == product.id) {
         return item;
       }
     }
-    return CartItemEntity(productEntity: product, quantity: 1);
+    return CartItemEntity(productEntity: product, quantity: quantity);
   }
 }

@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
 
-class IcrementAndDecrementCartItem extends StatefulWidget {
-  const IcrementAndDecrementCartItem({super.key});
-
-  @override
-  State<IcrementAndDecrementCartItem> createState() =>
-      _IcrementAndDecrementCartItemState();
-}
-
-class _IcrementAndDecrementCartItemState
-    extends State<IcrementAndDecrementCartItem> {
-  int count = 1;
+class IcrementAndDecrementCartItem extends StatelessWidget {
+  const IcrementAndDecrementCartItem({
+    super.key,
+    required this.productQuantity,
+  });
+  final int productQuantity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -20,11 +15,7 @@ class _IcrementAndDecrementCartItemState
       spacing: 12,
       children: [
         GestureDetector(
-          onTap: () {
-            if (count > 1 && count != 0) {
-              setState(() => count--);
-            }
-          },
+          onTap: () {},
           child: Container(
             width: 30,
             height: 30,
@@ -34,20 +25,17 @@ class _IcrementAndDecrementCartItemState
               shape: BoxShape.circle,
               color: theme.colors.primary600,
             ),
-            child: Icon(
-              count == 1 ? Icons.delete_outline : Icons.remove,
-              color: theme.colors.white,
-            ),
+            child: Icon(Icons.remove, color: theme.colors.white),
           ),
         ),
         Text(
-          "$count",
+          "$productQuantity",
           style: theme.textStyles.bodyMedium!.copyWith(
             color: theme.colors.typography500,
           ),
         ),
         GestureDetector(
-          onTap: () => setState(() => count++),
+          onTap: () {},
           child: Container(
             width: 30,
             height: 30,

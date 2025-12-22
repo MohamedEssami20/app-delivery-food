@@ -1,10 +1,12 @@
 import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/assets.dart';
+import '../../../../cart/presentation/manager/cart_cubit/cart_cubit.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({super.key, required this.productEntity});
@@ -99,14 +101,22 @@ class ProductItem extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: theme.colors.primary500,
+                    GestureDetector(
+                      onTap: () {
+                        context.read<CartCubit>().addProductToCart(
+                          product: productEntity,
+                          quantity: 1,
+                        );
+                      },
+                      child: Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: theme.colors.primary500,
+                        ),
+                        child: const Icon(Icons.add, color: Colors.white),
                       ),
-                      child: const Icon(Icons.add, color: Colors.white),
                     ),
                   ],
                 ),

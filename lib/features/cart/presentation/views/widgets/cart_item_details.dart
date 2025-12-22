@@ -8,10 +8,12 @@ class CartItemDetails extends StatelessWidget {
     super.key,
     required this.theme,
     required this.productEntity,
+    required this.productQuantity,
   });
 
   final AppThemeHelper theme;
   final ProductEntity productEntity;
+  final int productQuantity;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -55,7 +57,7 @@ class CartItemDetails extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8),
-          IcrementAndDecrementCartItem(),
+          IcrementAndDecrementCartItem(productQuantity:  productQuantity,),
         ],
       ),
     );

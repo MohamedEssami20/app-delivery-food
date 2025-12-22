@@ -7,8 +7,12 @@ class CartItemEntity extends Equatable {
   int quantity;
   CartItemEntity({required this.productEntity, this.quantity = 1});
 
-  void incrementQuantity() {
-    quantity++;
+  void incrementQuantity({int? counter}) {
+    if (counter != null) {
+      quantity += counter;
+    } else {
+      quantity++;
+    }
   }
 
   void decrementQuantity() {
@@ -17,7 +21,9 @@ class CartItemEntity extends Equatable {
 
   num calculateTotalPrice() {
     int currentPrice = int.parse(productEntity.price);
-    double totalPrice = (currentPrice * quantity).toDouble();
+    double discountValue = productEntity.discount / 100;
+    double discount = currentPrice * discountValue;
+    double totalPrice = (currentPrice - discount) * quantity;
     return totalPrice;
   }
 

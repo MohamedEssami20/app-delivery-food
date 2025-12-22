@@ -2,6 +2,8 @@ import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/product_description.dart';
 import 'package:app_delivey_food/features/home/presentation/views/widgets/product_price_and_add_tocart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../cart/presentation/manager/cart_cubit/cart_cubit.dart';
 import 'details_product_images_list.dart';
 import 'dots_indicator_list.dart';
 import 'product_name_and_counter.dart';
@@ -17,6 +19,7 @@ class DetailsViewBody extends StatefulWidget {
 class _DetailsViewBodyState extends State<DetailsViewBody> {
   late PageController pageController;
   int selectedIndex = 0;
+  int productQuantity = 1;
   @override
   void initState() {
     pageController = PageController(initialPage: 0);
@@ -41,13 +44,24 @@ class _DetailsViewBodyState extends State<DetailsViewBody> {
           ),
           DotsIndicatorList(currentIndex: selectedIndex),
           ProductRatingAndCalorey(product: widget.productEntity),
-          const ProductNameAndCounter(),
+          ProductNameAndCounter(
+            counter: productQuantity,
+            onIcrement: () => setState(() => productQuantity++),
+            onDecrement: () =>
+                setState(() => productQuantity > 1 ? productQuantity-- : null),
+          ),
           ProductDescription(),
           const Spacer(),
           Expanded(
             flex: 2,
             child: ProductPriceAndAddToCart(
               productEntity: widget.productEntity,
+              onPressed: () {
+                context.read<CartCubit>().addProductToCart(
+                  product: widget.productEntity,
+                  quantity: productQuantity,
+                );
+              },
             ),
           ),
           // const SizedBox(height: 20),

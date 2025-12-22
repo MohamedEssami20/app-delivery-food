@@ -1,4 +1,4 @@
-part of 'cart_cubit_cubit.dart';
+part of 'cart_cubit.dart';
 
 sealed class CartState extends Equatable {
   const CartState();
