@@ -1,0 +1,4 @@
+enum CartAction {
+  add,
+  remove,
+}

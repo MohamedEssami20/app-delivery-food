@@ -1,4 +1,3 @@
-
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:flutter/material.dart';
 import 'cart_item.dart';
@@ -13,9 +12,8 @@ class CartItemList extends StatelessWidget {
       itemBuilder: (context, index) => Padding(
         padding: const EdgeInsets.only(bottom: 8),
         child: CartItem(
-          productEntity:
-              cartItemEntityList[index].productEntity,
-          productQuantity: cartItemEntityList[index].quantity,
+          key: ValueKey(cartItemEntityList[index].productEntity.id),
+          cartItemEntity: cartItemEntityList[index],
         ),
       ),
       itemCount: cartItemEntityList.length,

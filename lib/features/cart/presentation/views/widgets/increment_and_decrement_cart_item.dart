@@ -1,13 +1,13 @@
+import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
+import '../../manager/cart_cubit/cart_cubit.dart';
 
 class IcrementAndDecrementCartItem extends StatelessWidget {
-  const IcrementAndDecrementCartItem({
-    super.key,
-    required this.productQuantity,
-  });
-  final int productQuantity;
+  const IcrementAndDecrementCartItem({super.key, required this.cartItemEntity});
+  final CartItemEntity cartItemEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -15,7 +15,13 @@ class IcrementAndDecrementCartItem extends StatelessWidget {
       spacing: 12,
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            if (cartItemEntity.quantity > 1) {
+              context.read<CartCubit>().decrementQuantity(cartItemEntity);
+            } else {
+              context.read<CartCubit>().removeProductFromCart(cartItemEntity);
+            }
+          },
           child: Container(
             width: 30,
             height: 30,
@@ -25,17 +31,22 @@ class IcrementAndDecrementCartItem extends StatelessWidget {
               shape: BoxShape.circle,
               color: theme.colors.primary600,
             ),
-            child: Icon(Icons.remove, color: theme.colors.white),
+            child: Icon(
+              cartItemEntity.quantity == 1 ? Icons.delete : Icons.remove,
+              color: theme.colors.white,
+            ),
           ),
         ),
         Text(
-          "$productQuantity",
+          "${cartItemEntity.quantity}",
           style: theme.textStyles.bodyMedium!.copyWith(
             color: theme.colors.typography500,
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            context.read<CartCubit>().incrementQuantity(cartItemEntity);
+          },
           child: Container(
             width: 30,
             height: 30,

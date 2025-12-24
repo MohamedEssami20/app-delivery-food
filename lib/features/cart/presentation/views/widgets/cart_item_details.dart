@@ -1,4 +1,5 @@
-import 'package:app_delivey_food/core/entities/product_entity.dart';
+
+import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:app_delivey_food/features/cart/presentation/views/widgets/increment_and_decrement_cart_item.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
@@ -6,14 +7,11 @@ import '../../../../../core/helper/app_theme_helper.dart';
 class CartItemDetails extends StatelessWidget {
   const CartItemDetails({
     super.key,
-    required this.theme,
-    required this.productEntity,
-    required this.productQuantity,
+    required this.theme, required this.cartItemEntity,
   });
 
   final AppThemeHelper theme;
-  final ProductEntity productEntity;
-  final int productQuantity;
+  final CartItemEntity  cartItemEntity;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +21,7 @@ class CartItemDetails extends StatelessWidget {
         spacing: 8,
         children: [
           Text(
-            productEntity.name,
+            cartItemEntity.productEntity.name,
             style: theme.textStyles.titleSmall!.copyWith(
               color: theme.colors.typography500,
               fontWeight: FontWeight.w500,
@@ -33,13 +31,13 @@ class CartItemDetails extends StatelessWidget {
             spacing: 12,
             children: [
               Text(
-                "\$ ${productEntity.price}",
+                "\$ ${cartItemEntity.productEntity.price}",
                 style: theme.textStyles.bodyLarge!.copyWith(
                   color: theme.colors.typography500,
                 ),
               ),
               Visibility(
-                visible: productEntity.discount > 0,
+                visible: cartItemEntity.productEntity.discount > 0,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                   decoration: BoxDecoration(
@@ -47,7 +45,7 @@ class CartItemDetails extends StatelessWidget {
                     color: theme.colors.grey200,
                   ),
                   child: Text(
-                    "${productEntity.discount} % Off",
+                    "${cartItemEntity.productEntity.discount} % Off",
                     style: theme.textStyles.titleSmall!.copyWith(
                       color: theme.colors.typography400,
                     ),
@@ -57,7 +55,7 @@ class CartItemDetails extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8),
-          IcrementAndDecrementCartItem(productQuantity:  productQuantity,),
+          IcrementAndDecrementCartItem(cartItemEntity: cartItemEntity,),
         ],
       ),
     );

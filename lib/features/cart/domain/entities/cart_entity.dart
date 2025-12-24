@@ -41,3 +41,4 @@ class CartEntity {
     return CartItemEntity(productEntity: product, quantity: quantity);
   }
 }
+

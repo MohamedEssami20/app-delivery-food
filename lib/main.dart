@@ -1,4 +1,3 @@
-
 import 'package:app_delivey_food/core/helper/custom_bloc_observer.dart';
 import 'package:app_delivey_food/core/helper/on_generate_route.dart';
 import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
@@ -27,8 +26,10 @@ class AppDeliveryFood extends StatelessWidget {
   const AppDeliveryFood({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CartCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => CartCubit()),
+      ],
       child: MaterialApp(
         theme: AppTheme.lightTheme(),
         debugShowCheckedModeBanner: false,

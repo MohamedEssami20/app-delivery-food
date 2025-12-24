@@ -1,5 +1,5 @@
-import 'package:app_delivey_food/core/entities/product_entity.dart';
 import 'package:app_delivey_food/core/helper/custom_network_image.dart';
+import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:app_delivey_food/features/cart/presentation/views/widgets/cart_item_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,13 +7,9 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/assets.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({
-    super.key,
-    required this.productEntity,
-    required this.productQuantity,
-  });
-  final ProductEntity productEntity;
-  final int productQuantity;
+  const CartItem({super.key, required this.cartItemEntity});
+
+  final CartItemEntity cartItemEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -40,7 +36,7 @@ class CartItem extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(12)),
                     child: CustomNetowrkImage(
-                      imageUrl: productEntity.baseImageUrl,
+                      imageUrl: cartItemEntity.productEntity.baseImageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -69,7 +65,7 @@ class CartItem extends StatelessWidget {
                           width: 12,
                         ),
                         Text(
-                          "${productEntity.avrageRating}",
+                          "${cartItemEntity.productEntity.avrageRating}",
                           style: theme.textStyles.bodyMedium!.copyWith(
                             color: theme.colors.typography400,
                           ),
@@ -85,8 +81,7 @@ class CartItem extends StatelessWidget {
             flex: 3,
             child: CartItemDetails(
               theme: theme,
-              productEntity: productEntity,
-              productQuantity: productQuantity,
+              cartItemEntity: cartItemEntity,
             ),
           ),
         ],
