@@ -78,6 +78,10 @@ class Assets {
   /// assets/images/burger_product.jpg
   static const String assetsImagesBurgerProduct = "assets/images/burger_product.jpg";
 
+  /// Assets for assetsImagesCartEmptyImage
+  /// assets/images/cart_empty_image.svg
+  static const String assetsImagesCartEmptyImage = "assets/images/cart_empty_image.svg";
+
   /// Assets for assetsImagesChefCookingBackground
   /// assets/images/Chef_cooking_background.svg
   static const String assetsImagesChefCookingBackground = "assets/images/Chef_cooking_background.svg";

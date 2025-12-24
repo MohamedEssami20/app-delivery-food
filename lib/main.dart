@@ -27,9 +27,7 @@ class AppDeliveryFood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => CartCubit()),
-      ],
+      providers: [BlocProvider(create: (context) => CartCubit())],
       child: MaterialApp(
         theme: AppTheme.lightTheme(),
         debugShowCheckedModeBanner: false,

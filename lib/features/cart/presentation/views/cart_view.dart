@@ -13,6 +13,7 @@ class CartView extends StatelessWidget {
     final theme = AppThemeHelper(context);
     return SafeArea(
       child: Scaffold(
+        backgroundColor: theme.colors.grey0,
         appBar: buildSecondCustomAppBar(
           theme: theme,
           context: context,
