@@ -8,6 +8,9 @@ AppBar buildSecondCustomAppBar({
   required String title,
   required String titleIcon,
   required BuildContext context,
+  bool ? showTitleIcon,
+  bool ? showBackButton,
+  void Function()? onBackPress,
 }) {
   return AppBar(
     backgroundColor: theme.colors.grey0,
@@ -17,10 +20,13 @@ AppBar buildSecondCustomAppBar({
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: 8,
       children: [
-        SvgPicture.asset(
-          titleIcon,
-          alignment: Alignment.center,
-          colorFilter: ColorFilter.mode(theme.colors.black, BlendMode.srcIn),
+        Visibility(
+          visible: showTitleIcon ?? true,
+          child: SvgPicture.asset(
+            titleIcon,
+            alignment: Alignment.center,
+            colorFilter: ColorFilter.mode(theme.colors.black, BlendMode.srcIn),
+          ),
         ),
         Text(
           title,
@@ -29,6 +35,15 @@ AppBar buildSecondCustomAppBar({
           ),
         ),
       ],
+
+    ),
+    leadingWidth: 90,
+    leading: Visibility(
+      visible: showBackButton ?? false,
+      child: IconButton(
+        onPressed: onBackPress,
+        icon: const Icon(Icons.arrow_back_ios),
+      ),
     ),
   );
 }

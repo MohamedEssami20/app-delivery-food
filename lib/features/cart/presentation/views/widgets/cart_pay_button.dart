@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/features/checkout/presentation/views/address_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
@@ -25,7 +26,9 @@ class CartPayButton extends StatelessWidget {
             padding: EdgeInsetsDirectional.symmetric(vertical: 12),
             label: "Proceed to pay",
             backgroundColor: theme.colors.primary600,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, AddressView.routeName);
+            },
           ),
         ),
       ],
