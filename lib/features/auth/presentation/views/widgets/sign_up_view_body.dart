@@ -5,6 +5,7 @@ import 'package:app_delivey_food/core/utils/error_snackbar.dart';
 import 'package:app_delivey_food/features/auth/presentation/manager/signup_cubit/signup_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/function/global_validation_email.dart';
 import '../../../../../core/utils/custom_button.dart';
 import 'builder/signup_button_builder.dart';
 import 'terms_and_condititon.dart';
@@ -67,15 +68,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                     email = value;
                   },
                   validator: (value) {
-                    final RegExp emailRegex = RegExp(
-                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                    );
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email address';
-                    } else if (!emailRegex.hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
+                    return globalValidtaionEmail(value);
                   },
                 ),
                 CustomTextFormFiled(

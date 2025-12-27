@@ -8,8 +8,8 @@ AppBar buildSecondCustomAppBar({
   required String title,
   required String titleIcon,
   required BuildContext context,
-  bool ? showTitleIcon,
-  bool ? showBackButton,
+  bool? showTitleIcon,
+  bool? showBackButton,
   void Function()? onBackPress,
 }) {
   return AppBar(
@@ -18,6 +18,7 @@ AppBar buildSecondCustomAppBar({
     centerTitle: true,
     title: Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       spacing: 8,
       children: [
         Visibility(
@@ -35,7 +36,6 @@ AppBar buildSecondCustomAppBar({
           ),
         ),
       ],
-
     ),
     leadingWidth: 90,
     leading: Visibility(

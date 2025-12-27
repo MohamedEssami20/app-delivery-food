@@ -17,7 +17,9 @@ class AddressView extends StatelessWidget {
         titleIcon: "",
         context: context,
         showBackButton: true,
-        onBackPress: () {},
+        onBackPress: () {
+          Navigator.pop(context);
+        },
         showTitleIcon: false,
       ),
       body: AddressViewBody(),
