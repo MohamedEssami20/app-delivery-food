@@ -5,14 +5,13 @@ import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:app_delivey_food/features/checkout/entities/address_input_entity.dart';
+import 'package:app_delivey_food/features/checkout/domain/entities/address_input_entity.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../core/function/global_validation_address_inputs.dart';
 
 class AddressViewBody extends StatefulWidget {
-  const AddressViewBody({super.key});
-
+  const AddressViewBody({super.key, required this.cartItems});
+  final List<CartItemEntity> cartItems;
   @override
   State<AddressViewBody> createState() => _AddressViewBodyState();
 }
@@ -22,13 +21,6 @@ class _AddressViewBodyState extends State<AddressViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? name, email, country, city, street;
   int? houseNumber, apartmentNumber, phone;
-  
-  late List<CartItemEntity> cartItemEntity;
-  @override
-  void initState() {
-    super.initState();
-    cartItemEntity = ModalRoute.of(context)!.settings.arguments as List<CartItemEntity>;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +37,7 @@ class _AddressViewBodyState extends State<AddressViewBody> {
               CustomTextFormFiled(
                 hintText: "Your name",
                 textInputType: TextInputType.text,
-                onSaved: (value)=> name = value,
+                onSaved: (value) => name = value,
                 validator: (value) {
                   return globalValidationAddressInputs(
                     value: value!,
@@ -91,7 +83,7 @@ class _AddressViewBodyState extends State<AddressViewBody> {
               CustomTextFormFiled(
                 hintText: "House number",
                 textInputType: TextInputType.number,
-                onSaved: (value) => houseNumber,
+                onSaved: (value) => houseNumber = int.parse(value!),
                 validator: (value) => globalValidationAddressInputs(
                   value: value!,
                   message: "Please enter your house number",
@@ -100,7 +92,7 @@ class _AddressViewBodyState extends State<AddressViewBody> {
               CustomTextFormFiled(
                 hintText: "Apartment number",
                 textInputType: TextInputType.text,
-                onSaved: (value) => apartmentNumber,
+                onSaved: (value) => apartmentNumber = int.parse(value!),
                 validator: (value) => globalValidationAddressInputs(
                   value: value!,
                   message: "Please enter your Apartment number",
@@ -109,7 +101,7 @@ class _AddressViewBodyState extends State<AddressViewBody> {
               CustomTextFormFiled(
                 hintText: "Phone number",
                 textInputType: TextInputType.phone,
-                onSaved: (value) => phone,
+                onSaved: (value) => phone = int.parse(value!),
                 validator: (value) => globalValidationAddressInputs(
                   value: value!,
                   message: "Please enter your phone number",
@@ -122,7 +114,7 @@ class _AddressViewBodyState extends State<AddressViewBody> {
                 children: [
                   Expanded(
                     child: Text(
-                      "\$ 0.00",
+                      "\$ ${widget.cartItems.map((e) => e.calculateTotalPrice()).reduce((value, element) => value + element).toStringAsFixed(2)}",
                       style: theme.textStyles.displaySmall!.copyWith(
                         color: theme.colors.typography500,
                       ),
@@ -134,22 +126,21 @@ class _AddressViewBodyState extends State<AddressViewBody> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
-                          final AddressInputEntity addressInputEntity = AddressInputEntity(
-                            name: name!,
-                            email: email!,
-                            country: country!,
-                            city: city!,
-                            street: street!,
-                            houseNumber: houseNumber!,
-                            apartmentNumber: apartmentNumber!,
-                            phoneNumber: phone!,
-                            dateTime: DateTime.now(),
-                            cartItemEntity: cartItemEntity,
-                          );
-
-                          log("cart item entity = ${addressInputEntity.cartItemEntity}");
-                        }
-                        else{
+                          final AddressInputEntity addressInputEntity =
+                              AddressInputEntity(
+                                name: name!,
+                                email: email!,
+                                country: country!,
+                                city: city!,
+                                street: street!,
+                                houseNumber: houseNumber!,
+                                apartmentNumber: apartmentNumber!,
+                                phoneNumber: phone!,
+                                dateTime: DateTime.now(),
+                                cartItemEntity: widget.cartItems,
+                              );
+                        
+                        } else {
                           autovalidateMode = AutovalidateMode.always;
                         }
                       },

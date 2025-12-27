@@ -24,7 +24,7 @@ class AddressView extends StatelessWidget {
         },
         showTitleIcon: false,
       ),
-      body: AddressViewBody(),
+      body: AddressViewBody(cartItems: cartItemEntity,),
     );
   }
 }
