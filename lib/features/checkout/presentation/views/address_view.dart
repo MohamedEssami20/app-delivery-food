@@ -3,10 +3,12 @@ import 'package:app_delivey_food/features/checkout/presentation/views/widgets/ad
 import 'package:flutter/material.dart';
 
 import '../../../../core/helper/app_theme_helper.dart';
+import '../../../cart/domain/entities/cart_item_entity.dart';
 
 class AddressView extends StatelessWidget {
-  const AddressView({super.key});
+  const AddressView({super.key, required this.cartItemEntity});
   static const routeName = 'address';
+  final List<CartItemEntity> cartItemEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/forgot_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/sign_up_view.dart';
+import '../../features/cart/domain/entities/cart_item_entity.dart';
 import '../../features/checkout/presentation/views/address_view.dart';
 import '../entities/product_entity.dart';
 import '../../features/home/presentation/views/details_view.dart';
@@ -33,7 +34,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case AddressView.routeName:
       return MaterialPageRoute(
-        builder: (_) => AddressView(),
+        builder: (_) => AddressView(
+          cartItemEntity: settings.arguments as List<CartItemEntity>,
+        ),
       );
     default:
       return MaterialPageRoute(

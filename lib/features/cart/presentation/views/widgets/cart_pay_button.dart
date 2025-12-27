@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:app_delivey_food/features/checkout/presentation/views/address_view.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +6,13 @@ import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../../core/utils/custom_button.dart';
 
 class CartPayButton extends StatelessWidget {
-  const CartPayButton({super.key, required this.totalPrice});
+  const CartPayButton({
+    super.key,
+    required this.totalPrice,
+    required this.cartItemEntity,
+  });
   final num totalPrice;
+  final List<CartItemEntity> cartItemEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -27,7 +33,11 @@ class CartPayButton extends StatelessWidget {
             label: "Proceed to pay",
             backgroundColor: theme.colors.primary600,
             onPressed: () {
-              Navigator.pushNamed(context, AddressView.routeName);
+              Navigator.pushNamed(
+                context,
+                AddressView.routeName,
+                arguments: cartItemEntity,
+              );
             },
           ),
         ),

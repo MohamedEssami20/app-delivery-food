@@ -26,7 +26,10 @@ class CartViewBody extends StatelessWidget {
               Expanded(
                 child: CartItemList(cartItemEntityList: cart.cartItemList),
               ),
-              CartPayButton(totalPrice: cart.calculateTotalPrice()),
+              CartPayButton(
+                totalPrice: cart.calculateTotalPrice(),
+                cartItemEntity: cart.cartItemList,
+              ),
             ],
           );
         },
