@@ -3,6 +3,8 @@ import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/core/services/firestore_services.dart';
 import 'package:app_delivey_food/features/auth/data/repos_impl/auth_repos_impl.dart';
 import 'package:app_delivey_food/features/auth/domain/repos/auth_repos.dart';
+import 'package:app_delivey_food/features/checkout/data/repos/checkout_repos_impl.dart';
+import 'package:app_delivey_food/features/checkout/domain/repos/checkout_repo.dart';
 import 'package:app_delivey_food/features/explore_products/entities/repos/explore_product_repo.dart';
 import 'package:app_delivey_food/features/home/data/repos/home_repo_impl.dart';
 import 'package:app_delivey_food/features/home/domain/repos/home_repo.dart';
@@ -38,6 +40,10 @@ class GetItService {
 
     getIt.registerSingleton<ExploreProductRepo>(
       ExploreProductRepoImpl(dataBaseService: getIt<DataBaseService>()),
+    );
+
+    getIt.registerSingleton<CheckoutRepo>(
+      CheckoutReposImpl(dataBaseService: getIt<DataBaseService>()),
     );
   }
 }

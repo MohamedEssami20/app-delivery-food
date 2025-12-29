@@ -5,7 +5,7 @@ abstract class DataBaseService {
   Future<void> addData(
       {required String path,
       required Map<String, dynamic> data,
-      required String documentId});
+      required String? documentId});
 
   //create method that add data with extends document id;
   Future<void> addDataWithDocumentId(

@@ -8,6 +8,7 @@ class AddressInputModel {
   final String country;
   final String city;
   final String street;
+  final num totalPrice;
   final int apartmentNumber;
   final int houseNumber;
   final int phoneNumber;
@@ -24,6 +25,7 @@ class AddressInputModel {
     required this.phoneNumber,
     required this.dateTime,
     required this.cartItemEntityList,
+    required this.totalPrice,
   });
 
   Map<String, dynamic> toMap() {
@@ -37,8 +39,9 @@ class AddressInputModel {
       'houseNumber': houseNumber,
       'phoneNumber': phoneNumber,
       'dateTime': dateTime.toIso8601String(),
+      'totalPrice': totalPrice,
       'products': cartItemEntityList.map((x) {
-        CartProductModel.fromCartItemEnity(x).toMap();
+        return CartProductModel.fromCartItemEnity(x).toMap();
       }).toList(),
     };
   }
@@ -49,6 +52,7 @@ class AddressInputModel {
       email: map['email'] ?? '',
       country: map['country'] ?? '',
       city: map['city'] ?? '',
+      totalPrice: map['totalPrice'] ?? 0,
       street: map['street'] ?? '',
       apartmentNumber: map['apartmentNumber']?.toInt() ?? 0,
       houseNumber: map['houseNumber']?.toInt() ?? 0,
@@ -71,5 +75,21 @@ class AddressInputModel {
     phoneNumber: phoneNumber,
     dateTime: dateTime,
     cartItemEntity: cartItemEntityList,
+    totalPrice: totalPrice,
   );
+
+  factory AddressInputModel.fromEntity(AddressInputEntity entity) =>
+      AddressInputModel(
+        name: entity.name,
+        email: entity.email,
+        country: entity.country,
+        city: entity.city,
+        street: entity.street,
+        apartmentNumber: entity.apartmentNumber,
+        houseNumber: entity.houseNumber,
+        phoneNumber: entity.phoneNumber,
+        dateTime: entity.dateTime,
+        cartItemEntityList: entity.cartItemEntity,
+        totalPrice: entity.totalPrice,
+      );
 }

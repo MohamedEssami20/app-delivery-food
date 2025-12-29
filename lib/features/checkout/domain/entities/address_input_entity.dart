@@ -6,6 +6,7 @@ class AddressInputEntity {
   final String country;
   final String city;
   final String street;
+  final num totalPrice;
   final int apartmentNumber;
   final int houseNumber;
   final int phoneNumber;
@@ -14,6 +15,7 @@ class AddressInputEntity {
 
   AddressInputEntity(
     {
+    required this.totalPrice,
     required this.name,
     required this.email,
     required this.country,
@@ -23,7 +25,7 @@ class AddressInputEntity {
     required this.houseNumber,
     required this.phoneNumber,
     required this.cartItemEntity,
-    required this.dateTime
+    required this.dateTime,
   });
 
 }
