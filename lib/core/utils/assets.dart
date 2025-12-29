@@ -2,6 +2,10 @@
 class Assets {
   Assets._();
   
+  /// Assets for assetsIconsAmountIcon
+  /// assets/icons/amount_icon.svg
+  static const String assetsIconsAmountIcon = "assets/icons/amount_icon.svg";
+
   /// Assets for assetsIconsCaloryIcon
   /// assets/icons/calory_icon.svg
   static const String assetsIconsCaloryIcon = "assets/icons/calory_icon.svg";
@@ -9,6 +13,14 @@ class Assets {
   /// Assets for assetsIconsCartNavigationIcon
   /// assets/icons/cart_navigation_icon.svg
   static const String assetsIconsCartNavigationIcon = "assets/icons/cart_navigation_icon.svg";
+
+  /// Assets for assetsIconsCheckIcon
+  /// assets/icons/check_icon.svg
+  static const String assetsIconsCheckIcon = "assets/icons/check_icon.svg";
+
+  /// Assets for assetsIconsClockIcon
+  /// assets/icons/clock_icon.svg
+  static const String assetsIconsClockIcon = "assets/icons/clock_icon.svg";
 
   /// Assets for assetsIconsExplorerNavigationIcon
   /// assets/icons/explorer_navigation_icon.svg
@@ -33,6 +45,10 @@ class Assets {
   /// Assets for assetsIconsHomeNavigationIcon
   /// assets/icons/home_navigation_icon.svg
   static const String assetsIconsHomeNavigationIcon = "assets/icons/home_navigation_icon.svg";
+
+  /// Assets for assetsIconsLocationIcon
+  /// assets/icons/location_icon.svg
+  static const String assetsIconsLocationIcon = "assets/icons/location_icon.svg";
 
   /// Assets for assetsIconsNotificationNavigationIcon
   /// assets/icons/Notification_navigation_icon.svg

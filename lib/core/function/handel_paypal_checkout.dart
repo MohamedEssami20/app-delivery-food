@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:app_delivey_food/features/checkout/presentation/views/order_placed_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
@@ -28,13 +29,21 @@ void handelPayPalCheckout({
           sandboxMode: true,
           note: "thank you for your purchase",
           onSuccess: (Map parms) {
-            Navigator.pop(context);
+            addOrderCubit.addOrder(addressInputEntity: addressInputEntity);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              OrderPlacedView.routeName,
+              (_) => false,
+              arguments: cartItemEntity
+                  .map((e) => e.calculateTotalPrice())
+                  .reduce((value, element) => value + element)
+                  .toString(),
+            );
             buildSuccessSnackbar(
               message: "payment success",
               theme: theme,
               context: context,
             );
-            addOrderCubit.addOrder(addressInputEntity: addressInputEntity);
           },
           onError: (Map parms) {
             Navigator.pop(context);
