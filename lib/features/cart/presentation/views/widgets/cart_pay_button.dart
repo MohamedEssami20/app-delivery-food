@@ -1,5 +1,6 @@
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:app_delivey_food/features/checkout/presentation/views/address_view.dart';
+import 'package:app_delivey_food/features/orders/presentation/views/track_order_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
@@ -33,9 +34,14 @@ class CartPayButton extends StatelessWidget {
             label: "Proceed to pay",
             backgroundColor: theme.colors.primary600,
             onPressed: () {
+              // Navigator.pushNamed(
+              //   context,
+              //   AddressView.routeName,
+              //   arguments: cartItemEntity,
+              // );
               Navigator.pushNamed(
                 context,
-                AddressView.routeName,
+                TrackOrderView.routeName,
                 arguments: cartItemEntity,
               );
             },
