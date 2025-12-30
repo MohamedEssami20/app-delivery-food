@@ -2,6 +2,7 @@ import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
+import '../../../../orders/presentation/views/track_order_view.dart';
 import 'order_palced_header.dart';
 import 'order_placed_details_item.dart';
 
@@ -43,7 +44,9 @@ class OrderPlacedViewBody extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, TrackOrderView.routeName);
+              },
               padding: EdgeInsetsDirectional.symmetric(vertical: 12),
               backgroundColor: theme.colors.primary600,
               label: "Track my Order",

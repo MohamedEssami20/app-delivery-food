@@ -33,6 +33,7 @@ class AddressView extends StatelessWidget {
           showTitleIcon: false,
         ),
         body: PaymentListener(
+          cartItemEntity: cartItemEntity,
           child: AddressViewBody(cartItems: cartItemEntity),
         ),
       ),

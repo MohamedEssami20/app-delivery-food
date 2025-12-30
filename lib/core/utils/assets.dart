@@ -66,6 +66,10 @@ class Assets {
   /// assets/icons/time_icon.svg
   static const String assetsIconsTimeIcon = "assets/icons/time_icon.svg";
 
+  /// Assets for assetsIconsTrackOrderIcon
+  /// assets/icons/track_order_icon.svg
+  static const String assetsIconsTrackOrderIcon = "assets/icons/track_order_icon.svg";
+
   /// Assets for assetsImagesBackgroundOfImageOnBording1
   /// assets/images/background_of_image_onBording1.svg
   static const String assetsImagesBackgroundOfImageOnBording1 = "assets/images/background_of_image_onBording1.svg";
