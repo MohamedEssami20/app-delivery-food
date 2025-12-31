@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'delivery_details_section.dart';
 import 'track_order_map.dart';
 
 class TrackOrderViewBody extends StatelessWidget {
@@ -8,8 +9,19 @@ class TrackOrderViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        Expanded(child: TrackOrderMap()),
-        Expanded(child: ColoredBox(color: Colors.red)),
+        Expanded(
+          child: Stack(
+            children: [
+              TrackOrderMap(),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: DeliveryDetailsSection(),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

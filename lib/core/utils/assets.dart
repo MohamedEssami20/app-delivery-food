@@ -6,6 +6,10 @@ class Assets {
   /// assets/icons/amount_icon.svg
   static const String assetsIconsAmountIcon = "assets/icons/amount_icon.svg";
 
+  /// Assets for assetsIconsCallFilledIcon
+  /// assets/icons/Call_filled_icon.svg
+  static const String assetsIconsCallFilledIcon = "assets/icons/Call_filled_icon.svg";
+
   /// Assets for assetsIconsCaloryIcon
   /// assets/icons/calory_icon.svg
   static const String assetsIconsCaloryIcon = "assets/icons/calory_icon.svg";
@@ -49,6 +53,10 @@ class Assets {
   /// Assets for assetsIconsLocationIcon
   /// assets/icons/location_icon.svg
   static const String assetsIconsLocationIcon = "assets/icons/location_icon.svg";
+
+  /// Assets for assetsIconsMessageIcon
+  /// assets/icons/message_icon.svg
+  static const String assetsIconsMessageIcon = "assets/icons/message_icon.svg";
 
   /// Assets for assetsIconsNotificationNavigationIcon
   /// assets/icons/Notification_navigation_icon.svg
@@ -105,6 +113,10 @@ class Assets {
   /// Assets for assetsImagesChefCookingBackground
   /// assets/images/Chef_cooking_background.svg
   static const String assetsImagesChefCookingBackground = "assets/images/Chef_cooking_background.svg";
+
+  /// Assets for assetsImagesDeliveryGuy
+  /// assets/images/delivery_guy.png
+  static const String assetsImagesDeliveryGuy = "assets/images/delivery_guy.png";
 
   /// Assets for assetsImagesDeliveryGuyBackground
   /// assets/images/Delivery_guy_background.svg
