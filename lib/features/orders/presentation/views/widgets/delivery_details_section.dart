@@ -1,10 +1,12 @@
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/features/checkout/presentation/views/widgets/order_placed_details_item.dart';
+import 'package:app_delivey_food/features/orders/presentation/views/cancel_order_view.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 import 'delivery_guy_details.dart';
 import 'food_to_be_delivered_list.dart';
 import 'oreder_timeline_section.dart';
+import 'track_order_buttons_item.dart';
 
 class DeliveryDetailsSection extends StatefulWidget {
   const DeliveryDetailsSection({super.key});
@@ -65,31 +67,30 @@ class _DeliveryDetailsSectionState extends State<DeliveryDetailsSection> {
               ),
             ),
             Visibility(visible: isExpanded, child: FoodTobeDeliveredList()),
-            InkWell(
-              borderRadius: BorderRadius.circular(16),
-              onTap: () {
-                setState(() {
-                  isExpanded = !isExpanded;
-                });
-              },
-              child: Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(
-                  color: theme.colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  shape: BoxShape.rectangle,
-                  border: Border.all(color: theme.colors.grey200, width: 1.2),
-                ),
-                child: Center(
-                  child: Text(
-                    isExpanded ? "Less details" : "More details",
-                    style: theme.textStyles.headlineSmall?.copyWith(
-                      color: theme.colors.typography500,
-                    ),
+            Row(
+              spacing: 8,
+              children: [
+                Expanded(
+                  child: TrackOrderButtonsItem(
+                    theme: theme,
+                    title: isExpanded ? "Less Details" : "More Details",
+                    onPress: () {
+                      setState(() {
+                        isExpanded = !isExpanded;
+                      });
+                    },
                   ),
                 ),
-              ),
+                Expanded(
+                  child: TrackOrderButtonsItem(
+                    onPress: () {
+                      Navigator.pushNamed(context, CancelOrderView.routeName);
+                    },
+                    theme: theme,
+                    title: "Cancel Order",
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
           ],

@@ -8,6 +8,7 @@ import '../../features/auth/presentation/views/sign_up_view.dart';
 import '../../features/cart/domain/entities/cart_item_entity.dart';
 import '../../features/checkout/presentation/views/address_view.dart';
 import '../../features/checkout/presentation/views/order_placed_view.dart';
+import '../../features/orders/presentation/views/cancel_order_view.dart';
 import '../../features/orders/presentation/views/track_order_view.dart';
 import '../entities/product_entity.dart';
 import '../../features/home/presentation/views/details_view.dart';
@@ -47,6 +48,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case TrackOrderView.routeName:
       return MaterialPageRoute(builder: (_) => const TrackOrderView());
+    case CancelOrderView.routeName:
+      return MaterialPageRoute(builder: (_) => const CancelOrderView());
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(
