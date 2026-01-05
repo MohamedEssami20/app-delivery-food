@@ -1,12 +1,11 @@
+import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../core/helper/app_theme_helper.dart';
-import '../../../../../core/utils/assets.dart';
 import 'food_to_be_delivered_item.dart';
 
 class FoodTobeDeliveredList extends StatelessWidget {
-  const FoodTobeDeliveredList({super.key});
-
+  const FoodTobeDeliveredList({super.key, required this.cartItems});
+  final List<CartItemEntity> cartItems;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,12 +27,12 @@ class FoodTobeDeliveredList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: const FoodToBeDeliveredItem(
-                image: Assets.assetsImagesBurgerProduct,
-                quantity: 2,
+              child:  FoodToBeDeliveredItem(
+                image:  cartItems[index].productEntity.baseImageUrl,
+                quantity: cartItems[index].quantity,
               ),
             ),
-            itemCount: 10,
+            itemCount: cartItems.length,
           ),
         ),
       ],

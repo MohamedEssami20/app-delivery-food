@@ -18,10 +18,12 @@ class CheckoutReposImpl implements CheckoutRepo {
   CheckoutReposImpl({required this.dataBaseService});
   @override
   Future<Either<Failure, void>> addOreder({
-    required AddressInputEntity addressInputEntity,
+    required AddressAndOrderInputEntity addressInputEntity,
   }) async {
     try {
-      final data = AddressInputModel.fromEntity(addressInputEntity).toMap();
+      final data = AddressAndOrderInputModel.fromEntity(
+        addressInputEntity,
+      ).toMap();
       await dataBaseService.addDataWithDocumentId(
         mainPath: BackendEndpoints.addOrder,
         subPath: BackendEndpoints.userOrders,

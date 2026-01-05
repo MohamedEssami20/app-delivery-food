@@ -5,5 +5,7 @@ import '../entities/address_input_entity.dart';
 
 abstract class CheckoutRepo {
   // create method that add and save order to database;
-  Future<Either<Failure, void>> addOreder({required AddressInputEntity addressInputEntity});
+  Future<Either<Failure, void>> addOreder({
+    required AddressAndOrderInputEntity addressInputEntity,
+  });
 }

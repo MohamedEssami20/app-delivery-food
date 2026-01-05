@@ -13,7 +13,7 @@ import '../utils/success_snackbar.dart';
 import 'pay_pal_transation.dart';
 
 void handelPayPalCheckout({
-  required AddressInputEntity addressInputEntity,
+  required AddressAndOrderInputEntity addressInputEntity,
   required BuildContext context,
   required AppThemeHelper theme,
   required List<CartItemEntity> cartItemEntity,
@@ -27,7 +27,7 @@ void handelPayPalCheckout({
           sandboxMode: true,
           note: "thank you for your purchase",
           onSuccess: (Map parms) {
-            addOrderCubit.addOrder(addressInputEntity: addressInputEntity);       
+            addOrderCubit.addOrder(addressInputEntity: addressInputEntity);
             buildSuccessSnackbar(
               message: "payment success",
               theme: theme,

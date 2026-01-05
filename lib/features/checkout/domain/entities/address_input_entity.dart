@@ -1,6 +1,7 @@
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 
-class AddressInputEntity {
+class AddressAndOrderInputEntity {
+  final int id;
   final String name;
   final String email;
   final String country;
@@ -10,11 +11,12 @@ class AddressInputEntity {
   final int apartmentNumber;
   final int houseNumber;
   final int phoneNumber;
-  final  DateTime dateTime;
+  final DateTime dateTime;
   final List<CartItemEntity> cartItemEntity;
+  final String orderState;
 
-  AddressInputEntity(
-    {
+  AddressAndOrderInputEntity({
+    required this.id,
     required this.totalPrice,
     required this.name,
     required this.email,
@@ -26,6 +28,6 @@ class AddressInputEntity {
     required this.phoneNumber,
     required this.cartItemEntity,
     required this.dateTime,
+    required this.orderState,
   });
-
 }

@@ -1,6 +1,8 @@
+import 'package:app_delivey_food/core/function/generate_order_id.dart';
 import 'package:app_delivey_food/core/function/global_validation_email.dart';
 import 'package:app_delivey_food/core/function/handel_paypal_checkout.dart';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
+import 'package:app_delivey_food/core/helper/order_state.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
@@ -125,8 +127,9 @@ class _AddressViewBodyState extends State<AddressViewBody> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           formKey.currentState!.save();
-                          final AddressInputEntity addressInputEntity =
-                              AddressInputEntity(
+                          final AddressAndOrderInputEntity addressInputEntity =
+                              AddressAndOrderInputEntity(
+                                id: generateOrderId(),
                                 totalPrice: widget.cartItems
                                     .map((e) => e.calculateTotalPrice())
                                     .reduce((value, element) => value + element)
@@ -141,6 +144,7 @@ class _AddressViewBodyState extends State<AddressViewBody> {
                                 phoneNumber: phone!,
                                 dateTime: DateTime.now(),
                                 cartItemEntity: widget.cartItems,
+                                orderState: OrderState.preparing.name,
                               );
                           handelPayPalCheckout(
                             addressInputEntity: addressInputEntity,

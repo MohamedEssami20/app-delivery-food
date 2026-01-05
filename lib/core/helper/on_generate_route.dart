@@ -43,11 +43,16 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case OrderPlacedView.routeName:
       return MaterialPageRoute(
-        builder: (_) =>
-            OrderPlacedView(totalAmount: settings.arguments as String),
+        builder: (_) => OrderPlacedView(
+          cartItems: settings.arguments as List<CartItemEntity>,
+        ),
       );
     case TrackOrderView.routeName:
-      return MaterialPageRoute(builder: (_) => const TrackOrderView());
+      return MaterialPageRoute(
+        builder: (_) => TrackOrderView(
+          cartItem: settings.arguments as List<CartItemEntity>,
+        ),
+      );
     case CancelOrderView.routeName:
       return MaterialPageRoute(builder: (_) => const CancelOrderView());
     default:

@@ -30,10 +30,8 @@ class PaymentListener extends StatelessWidget {
             context,
             OrderPlacedView.routeName,
             (_) => false,
-            arguments: cartItemEntity
-                .map((e) => e.calculateTotalPrice())
-                .reduce((value, element) => value + element)
-                .toString(),
+            arguments: cartItemEntity,
+            
           );
         }
         if (state is AddOrderError) {

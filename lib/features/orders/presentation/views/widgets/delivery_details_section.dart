@@ -1,4 +1,5 @@
 import 'package:app_delivey_food/core/utils/assets.dart';
+import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:app_delivey_food/features/checkout/presentation/views/widgets/order_placed_details_item.dart';
 import 'package:app_delivey_food/features/orders/presentation/views/cancel_order_view.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,8 @@ import 'oreder_timeline_section.dart';
 import 'track_order_buttons_item.dart';
 
 class DeliveryDetailsSection extends StatefulWidget {
-  const DeliveryDetailsSection({super.key});
-
+  const DeliveryDetailsSection({super.key, required this.cartItems});
+  final List<CartItemEntity> cartItems;
   @override
   State<DeliveryDetailsSection> createState() => _DeliveryDetailsSectionState();
 }
@@ -63,10 +64,11 @@ class _DeliveryDetailsSectionState extends State<DeliveryDetailsSection> {
               child: OrderPlacedDetailsItem(
                 icon: Assets.assetsIconsAmountIcon,
                 title: "Amount paid",
-                subTiltle: "\$ 100",
+                subTiltle:
+                    "\$ ${widget.cartItems.map((e) => e.calculateTotalPrice()).reduce((value, element) => value + element).toStringAsFixed(2)}",
               ),
             ),
-            Visibility(visible: isExpanded, child: FoodTobeDeliveredList()),
+            Visibility(visible: isExpanded, child: FoodTobeDeliveredList(cartItems: widget.cartItems,)),
             Row(
               spacing: 8,
               children: [

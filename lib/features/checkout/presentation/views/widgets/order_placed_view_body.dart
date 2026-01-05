@@ -1,5 +1,6 @@
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
+import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../orders/presentation/views/track_order_view.dart';
@@ -7,8 +8,9 @@ import 'order_palced_header.dart';
 import 'order_placed_details_item.dart';
 
 class OrderPlacedViewBody extends StatelessWidget {
-  const OrderPlacedViewBody({super.key, required this.totalAmount});
+  const OrderPlacedViewBody({super.key, required this.totalAmount, required this.cartItemEntity});
   final String totalAmount;
+  final List<CartItemEntity> cartItemEntity;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -45,7 +47,9 @@ class OrderPlacedViewBody extends StatelessWidget {
             width: double.infinity,
             child: CustomButton(
               onPressed: () {
-                Navigator.pushNamed(context, TrackOrderView.routeName);
+                Navigator.pushNamed(context, TrackOrderView.routeName, 
+                arguments: cartItemEntity,
+                );
               },
               padding: EdgeInsetsDirectional.symmetric(vertical: 12),
               backgroundColor: theme.colors.primary600,

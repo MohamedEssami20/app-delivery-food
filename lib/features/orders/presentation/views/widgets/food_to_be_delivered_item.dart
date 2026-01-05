@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
@@ -30,7 +31,7 @@ class FoodToBeDeliveredItem extends StatelessWidget {
                 height: imageSize,
                 child: AspectRatio(
                   aspectRatio: 1,
-                  child: Image.asset(image, fit: BoxFit.cover),
+                  child: CustomNetowrkImage(imageUrl: image, fit: BoxFit.cover),
                 ),
               ),
             ),

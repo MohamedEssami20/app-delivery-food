@@ -2,7 +2,8 @@ import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.
 import 'package:app_delivey_food/features/checkout/data/models/cart_product_model.dart';
 import 'package:app_delivey_food/features/checkout/domain/entities/address_input_entity.dart';
 
-class AddressInputModel {
+class AddressAndOrderInputModel {
+  final int id;
   final String name;
   final String email;
   final String country;
@@ -14,7 +15,9 @@ class AddressInputModel {
   final int phoneNumber;
   final DateTime dateTime;
   final List<CartItemEntity> cartItemEntityList;
-  AddressInputModel({
+  final String orderState;
+  AddressAndOrderInputModel({
+    required this.id,
     required this.name,
     required this.email,
     required this.country,
@@ -26,10 +29,12 @@ class AddressInputModel {
     required this.dateTime,
     required this.cartItemEntityList,
     required this.totalPrice,
+    required this.orderState,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'email': email,
       'country': country,
@@ -40,14 +45,16 @@ class AddressInputModel {
       'phoneNumber': phoneNumber,
       'dateTime': dateTime.toIso8601String(),
       'totalPrice': totalPrice,
+      'orderState': orderState.toString(),
       'products': cartItemEntityList.map((x) {
         return CartProductModel.fromCartItemEnity(x).toMap();
       }).toList(),
     };
   }
 
-  factory AddressInputModel.fromMap(Map<String, dynamic> map) {
-    return AddressInputModel(
+  factory AddressAndOrderInputModel.fromMap(Map<String, dynamic> map) {
+    return AddressAndOrderInputModel(
+      id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       country: map['country'] ?? '',
@@ -58,16 +65,19 @@ class AddressInputModel {
       houseNumber: map['houseNumber']?.toInt() ?? 0,
       phoneNumber: map['phoneNumber']?.toInt() ?? 0,
       dateTime: DateTime.parse(map['dateTime'] ?? ''),
+      orderState: map['orderState'] ?? '',
       cartItemEntityList: List<CartItemEntity>.from(
         map['products']?.map((x) => CartProductModel.fromJson(x)),
       ),
     );
   }
 
-  AddressInputEntity toEntity() => AddressInputEntity(
+  AddressAndOrderInputEntity toEntity() => AddressAndOrderInputEntity(
+    id: id,
     name: name,
     email: email,
     country: country,
+    orderState: orderState,
     city: city,
     street: street,
     apartmentNumber: apartmentNumber,
@@ -78,18 +88,21 @@ class AddressInputModel {
     totalPrice: totalPrice,
   );
 
-  factory AddressInputModel.fromEntity(AddressInputEntity entity) =>
-      AddressInputModel(
-        name: entity.name,
-        email: entity.email,
-        country: entity.country,
-        city: entity.city,
-        street: entity.street,
-        apartmentNumber: entity.apartmentNumber,
-        houseNumber: entity.houseNumber,
-        phoneNumber: entity.phoneNumber,
-        dateTime: entity.dateTime,
-        cartItemEntityList: entity.cartItemEntity,
-        totalPrice: entity.totalPrice,
-      );
+  factory AddressAndOrderInputModel.fromEntity(
+    AddressAndOrderInputEntity entity,
+  ) => AddressAndOrderInputModel(
+    id: entity.id,
+    name: entity.name,
+    email: entity.email,
+    orderState: entity.orderState,
+    country: entity.country,
+    city: entity.city,
+    street: entity.street,
+    apartmentNumber: entity.apartmentNumber,
+    houseNumber: entity.houseNumber,
+    phoneNumber: entity.phoneNumber,
+    dateTime: entity.dateTime,
+    cartItemEntityList: entity.cartItemEntity,
+    totalPrice: entity.totalPrice,
+  );
 }

@@ -1,4 +1,3 @@
-
 import 'package:app_delivey_food/features/checkout/domain/repos/checkout_repo.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +11,9 @@ class AddOrderCubit extends Cubit<AddOrderState> {
   final CheckoutRepo checkoutRepol;
 
   // create method that add order;
-  void addOrder({required AddressInputEntity addressInputEntity}) async {
+  void addOrder({
+    required AddressAndOrderInputEntity addressInputEntity,
+  }) async {
     emit(AddOrderLoading());
     final result = await checkoutRepol.addOreder(
       addressInputEntity: addressInputEntity,
