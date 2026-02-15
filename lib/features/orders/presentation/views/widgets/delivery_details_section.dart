@@ -1,8 +1,11 @@
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:app_delivey_food/features/checkout/presentation/views/widgets/order_placed_details_item.dart';
+import 'package:app_delivey_food/features/orders/presentation/manager/get_order_status/get_order_status_cubit.dart';
 import 'package:app_delivey_food/features/orders/presentation/views/cancel_order_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 import 'delivery_guy_details.dart';
 import 'food_to_be_delivered_list.dart';
@@ -51,7 +54,7 @@ class _DeliveryDetailsSectionState extends State<DeliveryDetailsSection> {
               visible: isExpanded,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: OrderTimelineSection(),
+                child: OrderTimeLineSectionBuilder(),
               ),
             ),
             OrderPlacedDetailsItem(
@@ -68,7 +71,10 @@ class _DeliveryDetailsSectionState extends State<DeliveryDetailsSection> {
                     "\$ ${widget.cartItems.map((e) => e.calculateTotalPrice()).reduce((value, element) => value + element).toStringAsFixed(2)}",
               ),
             ),
-            Visibility(visible: isExpanded, child: FoodTobeDeliveredList(cartItems: widget.cartItems,)),
+            Visibility(
+              visible: isExpanded,
+              child: FoodTobeDeliveredList(cartItems: widget.cartItems),
+            ),
             Row(
               spacing: 8,
               children: [
@@ -98,6 +104,23 @@ class _DeliveryDetailsSectionState extends State<DeliveryDetailsSection> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class OrderTimeLineSectionBuilder extends StatelessWidget {
+  const OrderTimeLineSectionBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GetOrderStatusCubit, GetOrderStatusState>(
+      builder: (context, state) {
+        if (state is GetOrderStatusSuccess) {
+          return OrderTimelineSection();
+        } else {
+          return Skeletonizer(child: OrderTimelineSection());
+        }
+      },
     );
   }
 }

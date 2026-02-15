@@ -1,6 +1,5 @@
 import 'package:app_delivey_food/core/function/build_second_custom_app_bar.dart';
 import 'package:app_delivey_food/core/services/get_it_services.dart';
-import 'package:app_delivey_food/core/utils/payment_listener.dart';
 import 'package:app_delivey_food/features/checkout/presentation/manager/add_order_cubit/add_order_cubit.dart';
 import 'package:app_delivey_food/features/checkout/presentation/views/widgets/address_view_body.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +31,7 @@ class AddressView extends StatelessWidget {
           },
           showTitleIcon: false,
         ),
-        body: PaymentListener(
-          cartItemEntity: cartItemEntity,
-          child: AddressViewBody(cartItems: cartItemEntity),
-        ),
+        body: AddressViewBody(cartItems: cartItemEntity),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/core/helper/order_placed_args.dart';
 import 'package:app_delivey_food/core/utils/assets.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
@@ -8,9 +9,15 @@ import 'order_palced_header.dart';
 import 'order_placed_details_item.dart';
 
 class OrderPlacedViewBody extends StatelessWidget {
-  const OrderPlacedViewBody({super.key, required this.totalAmount, required this.cartItemEntity});
+  const OrderPlacedViewBody({
+    super.key,
+    required this.totalAmount,
+    required this.cartItemEntity,
+    required this.orderId,
+  });
   final String totalAmount;
   final List<CartItemEntity> cartItemEntity;
+  final int orderId;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -47,8 +54,14 @@ class OrderPlacedViewBody extends StatelessWidget {
             width: double.infinity,
             child: CustomButton(
               onPressed: () {
-                Navigator.pushNamed(context, TrackOrderView.routeName, 
-                arguments: cartItemEntity,
+                OrderPlacedArgs args = OrderPlacedArgs(
+                  orderId: orderId,
+                  cartItems: cartItemEntity,
+                );
+                Navigator.pushNamed(
+                  context,
+                  TrackOrderView.routeName,
+                  arguments: args,
                 );
               },
               padding: EdgeInsetsDirectional.symmetric(vertical: 12),
@@ -56,8 +69,6 @@ class OrderPlacedViewBody extends StatelessWidget {
               label: "Track my Order",
             ),
           ),
-
-          
         ],
       ),
     );

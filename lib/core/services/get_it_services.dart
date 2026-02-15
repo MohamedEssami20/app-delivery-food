@@ -8,11 +8,13 @@ import 'package:app_delivey_food/features/checkout/domain/repos/checkout_repo.da
 import 'package:app_delivey_food/features/explore_products/entities/repos/explore_product_repo.dart';
 import 'package:app_delivey_food/features/home/data/repos/home_repo_impl.dart';
 import 'package:app_delivey_food/features/home/domain/repos/home_repo.dart';
+import 'package:app_delivey_food/features/orders/domain/repos/orders_repos.dart';
 import 'package:app_delivey_food/features/search/data/repos/search_repo_impl.dart';
 import 'package:app_delivey_food/features/search/domain/repos/search_repo.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/explore_products/data/repos/explore_product_repo_impl.dart';
+import '../../features/orders/data/repos/orders_repos_impl.dart';
 
 class GetItService {
   static GetIt getIt = GetIt.instance;
@@ -44,6 +46,10 @@ class GetItService {
 
     getIt.registerSingleton<CheckoutRepo>(
       CheckoutReposImpl(dataBaseService: getIt<DataBaseService>()),
+    );
+
+    getIt.registerSingleton<OrdersRepos>(
+      OrdersReposImpl(dataBaseService: getIt<DataBaseService>()),
     );
   }
 }

@@ -251,4 +251,23 @@ class FirestoreService implements DataBaseService {
     QuerySnapshot<Map<String, dynamic>> result = await documentSnapshot.get();
     return result.docs.map((e) => e.data()).toList();
   }
+
+  @override
+  Stream<DocumentSnapshot<Map<String, dynamic>>>
+  getStreamDataWithSubDocumentId({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    String? subDocumentId,
+    Map<String, dynamic>? query,
+  }) async* {
+    Stream<DocumentSnapshot<Map<String, dynamic>>> documentSnapshot =
+        firebaseFirestore
+            .collection(mainPath)
+            .doc(mainDocumentId)
+            .collection(subPath)
+            .doc(subDocumentId)
+            .snapshots();
+    yield* documentSnapshot;
+  }
 }

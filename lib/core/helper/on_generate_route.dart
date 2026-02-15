@@ -1,5 +1,6 @@
 // create on generate route method;
 
+import 'package:app_delivey_food/core/helper/order_placed_args.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/auth/presentation/views/forgot_password_view.dart';
@@ -42,15 +43,17 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         ),
       );
     case OrderPlacedView.routeName:
+    final args = settings.arguments as OrderPlacedArgs;
       return MaterialPageRoute(
         builder: (_) => OrderPlacedView(
-          cartItems: settings.arguments as List<CartItemEntity>,
+          args: args,
         ),
       );
     case TrackOrderView.routeName:
+    final args = settings.arguments as OrderPlacedArgs;
       return MaterialPageRoute(
         builder: (_) => TrackOrderView(
-          cartItem: settings.arguments as List<CartItemEntity>,
+          args: args,
         ),
       );
     case CancelOrderView.routeName:

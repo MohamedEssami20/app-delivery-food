@@ -2,45 +2,57 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class DataBaseService {
   //create method to add data to database;
-  Future<void> addData(
-      {required String path,
-      required Map<String, dynamic> data,
-      required String? documentId});
+  Future<void> addData({
+    required String path,
+    required Map<String, dynamic> data,
+    required String? documentId,
+  });
 
   //create method that add data with extends document id;
-  Future<void> addDataWithDocumentId(
-      {required String mainPath,
-      required String subPath,
-      required Map<String, dynamic> data,
-      required String mainDocumentId,
-       String? subDocumentId});
+  Future<void> addDataWithDocumentId({
+    required String mainPath,
+    required String subPath,
+    required Map<String, dynamic> data,
+    required String mainDocumentId,
+    String? subDocumentId,
+  });
 
   //create method to get usesr data from database;
-  Future<dynamic> getData(
-      {required String path, String? documentId, Map<String, dynamic>? query});
-  
+  Future<dynamic> getData({
+    required String path,
+    String? documentId,
+    Map<String, dynamic>? query,
+  });
+
   // create method that get data from extends document id;
-  Future<List<Map<String, dynamic>>> getDataWithDocumentId(
-      {required String mainPath,
-      required String subPath,
-      String? mainDocumentId,
-      Map<String, dynamic>? query});
+  Future<List<Map<String, dynamic>>> getDataWithDocumentId({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    Map<String, dynamic>? query,
+  });
 
   // create get stream to get data from database;
-  Stream<Map<String, dynamic>> getStreamData(
-      {required String path, String? documentId, Map<String, dynamic>? query});
+  Stream<Map<String, dynamic>> getStreamData({
+    required String path,
+    String? documentId,
+    Map<String, dynamic>? query,
+  });
   // create method that check if data is exits;
 
   // create method that get stream data from extends document id;
   Stream<List<QueryDocumentSnapshot<Map<String, dynamic>>>>
-      getStreamDataWithDocumentId(
-          {required String mainPath,
-          required String? subPath,
-          String? documentId,
-          Map<String, dynamic>?  query});
+  getStreamDataWithDocumentId({
+    required String mainPath,
+    required String? subPath,
+    String? documentId,
+    Map<String, dynamic>? query,
+  });
 
-  Future<bool> checkDataExists(
-      {required String path, required String documentId});
+  Future<bool> checkDataExists({
+    required String path,
+    required String documentId,
+  });
 
   //create method to delete data from database;
   Future<void> deleteData({required String path, required String documentId});
@@ -49,24 +61,36 @@ abstract class DataBaseService {
   Future<bool> checkEmailExists({required String path, required String email});
 
   // create get stream of List<String> to get data from database;
-  Stream<List<String>> getStreamStringData(
-      {required String mainPath,
-      required String subPath,
-      String? mainDocumentId,
-      Map<String, dynamic>? query});
+  Stream<List<String>> getStreamStringData({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    Map<String, dynamic>? query,
+  });
 
   // create get stream of Map<String, dynamic> to get data from database;
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamMapData(
-      {required String mainPath,
-      required String subPath,
-      String? mainDocumentId,
-      Map<String, dynamic>? query});
-  
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamMapData({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    Map<String, dynamic>? query,
+  });
 
   // create method that delete docs from extends document id;
-  Future<void> deleteDataWithDocumentId(
-      {required String mainPath,
-      required String subPath,
-      required String mainDocumentId,
-      required String subDocumentId});
+  Future<void> deleteDataWithDocumentId({
+    required String mainPath,
+    required String subPath,
+    required String mainDocumentId,
+    required String subDocumentId,
+  });
+
+  // create method that get stream data with sub document id;
+  Stream<DocumentSnapshot<Map<String, dynamic>>>
+  getStreamDataWithSubDocumentId({
+    required String mainPath,
+    required String subPath,
+    String? mainDocumentId,
+    String? subDocumentId,
+    Map<String, dynamic>? query,
+  });
 }

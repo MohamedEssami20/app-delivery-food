@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/cart/domain/entities/cart_item_entity.dart';
 import '../../features/checkout/presentation/views/order_placed_view.dart';
 import '../helper/app_theme_helper.dart';
+import '../helper/order_placed_args.dart';
 import 'error_snackbar.dart';
 import 'success_snackbar.dart';
 
@@ -13,9 +14,11 @@ class PaymentListener extends StatelessWidget {
     super.key,
     required this.child,
     required this.cartItemEntity,
+    required this.orderId,
   });
   final Widget child;
   final List<CartItemEntity> cartItemEntity;
+  final int orderId;
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddOrderCubit, AddOrderState>(
@@ -30,8 +33,10 @@ class PaymentListener extends StatelessWidget {
             context,
             OrderPlacedView.routeName,
             (_) => false,
-            arguments: cartItemEntity,
-            
+            arguments: OrderPlacedArgs(
+              cartItems: cartItemEntity,
+              orderId: orderId,
+            ),
           );
         }
         if (state is AddOrderError) {

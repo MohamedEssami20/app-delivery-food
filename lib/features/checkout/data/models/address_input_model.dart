@@ -4,6 +4,7 @@ import 'package:app_delivey_food/features/checkout/domain/entities/address_input
 
 class AddressAndOrderInputModel {
   final int id;
+  final String userId;
   final String name;
   final String email;
   final String country;
@@ -18,6 +19,7 @@ class AddressAndOrderInputModel {
   final String orderState;
   AddressAndOrderInputModel({
     required this.id,
+    required this.userId,
     required this.name,
     required this.email,
     required this.country,
@@ -35,6 +37,7 @@ class AddressAndOrderInputModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'userId': userId,
       'name': name,
       'email': email,
       'country': country,
@@ -55,6 +58,7 @@ class AddressAndOrderInputModel {
   factory AddressAndOrderInputModel.fromMap(Map<String, dynamic> map) {
     return AddressAndOrderInputModel(
       id: map['id']?.toInt() ?? 0,
+      userId: map['userId'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       country: map['country'] ?? '',
@@ -74,6 +78,7 @@ class AddressAndOrderInputModel {
 
   AddressAndOrderInputEntity toEntity() => AddressAndOrderInputEntity(
     id: id,
+    userId: userId,
     name: name,
     email: email,
     country: country,
@@ -92,6 +97,7 @@ class AddressAndOrderInputModel {
     AddressAndOrderInputEntity entity,
   ) => AddressAndOrderInputModel(
     id: entity.id,
+    userId: entity.userId,
     name: entity.name,
     email: entity.email,
     orderState: entity.orderState,
@@ -106,3 +112,4 @@ class AddressAndOrderInputModel {
     totalPrice: entity.totalPrice,
   );
 }
+

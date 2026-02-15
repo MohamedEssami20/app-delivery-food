@@ -29,6 +29,7 @@ class CheckoutReposImpl implements CheckoutRepo {
         subPath: BackendEndpoints.userOrders,
         data: data,
         mainDocumentId: firebaseAuthService.getCurrentUser()!,
+        subDocumentId: data['id'].toString(),
       );
       return right(null);
     } on FirebaseException catch (e) {
