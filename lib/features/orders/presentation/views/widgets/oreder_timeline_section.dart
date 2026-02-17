@@ -5,11 +5,12 @@ import 'package:timelines_upgraded/timelines_upgraded.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 
 class OrderTimelineSection extends StatelessWidget {
-  const OrderTimelineSection({super.key});
-
+  const OrderTimelineSection({super.key, required this.currentStatus});
+  final String currentStatus;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
+    final currentSteps = getCurrentSteps(currentStatus);
     return Container(
       padding: const EdgeInsets.all(16),
       width: double.infinity,
@@ -27,45 +28,56 @@ class OrderTimelineSection extends StatelessWidget {
         builder: TimelineTileBuilder.connected(
           connectionDirection: ConnectionDirection.before,
           itemCount: 3,
-      
+
           connectorBuilder: (_, index, ___) {
             return SolidLineConnector(
-              color: index == 0
+              color: index <= currentSteps
                   ? theme.colors.primary600
                   : Colors.grey.shade300,
             );
           },
 
           indicatorBuilder: (_, index) {
-            final isActive = index == 0;
-            if (index == 0) {
-              return DotIndicator(
-                size: isActive ? 28 : 25,
-                color: theme.colors.primary600,
-                child: Icon(
-                  Icons.location_on,
-                  color: Colors.white,
-                  size: isActive ? 22 : 18,
-                ),
-              );
-            } else {
-              return DotIndicator(color: Colors.grey.shade300);
-            }
+            final isActive = index <= currentSteps;
+            return DotIndicator(
+              color: isActive ? theme.colors.primary600 : Colors.grey.shade300,
+              size: 28,
+              child: isActive
+                  ? Icon(
+                      Icons.location_pin,
+                      color: theme.colors.white,
+                      size: 20,
+                    )
+                  : null,
+            );
           },
 
           contentsBuilder: (_, index) {
-            final isActive = index == 0;
+            final isActive = index <= currentSteps;
             return Padding(
               padding: EdgeInsets.only(
                 left: 16,
                 bottom: 24,
                 top: isActive ? 6 : 0,
               ),
-              child: buildOrderTimelineContent(index, theme),
+              child: buildOrderTimelineContent(index, theme, isActive),
             );
           },
         ),
       ),
     );
+  }
+}
+
+int getCurrentSteps(String currentStatus) {
+  switch (currentStatus) {
+    case "preparing":
+      return 0;
+    case "onTheWay":
+      return 1;
+    case "delivered":
+      return 2;
+    default:
+      return 0;
   }
 }

@@ -13,11 +13,15 @@ final class GetOrderStatusInitial extends GetOrderStatusState {}
 final class GetOrderStatusSuccess extends GetOrderStatusState {
   const GetOrderStatusSuccess({required this.orderStatus});
   final String orderStatus;
+  @override
+  List<Object> get props => [orderStatus];
 }
 
 final class GetOrderStatusFailed extends GetOrderStatusState {
   const GetOrderStatusFailed({required this.errorMessage});
   final String errorMessage;
+  @override
+  List<Object> get props => [errorMessage];
 }
 
 final class GetOrderStatusLoading extends GetOrderStatusState {}
