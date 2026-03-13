@@ -32,7 +32,7 @@ class _TrackOrderViewBodyState extends State<TrackOrderViewBody> {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: DeliveryDetailsSection(cartItems: widget.cartItems),
+                child: DeliveryDetailsSection(cartItems: widget.cartItems, orderId: widget.orderId,),
               ),
             ],
           ),

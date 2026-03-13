@@ -57,7 +57,9 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         ),
       );
     case CancelOrderView.routeName:
-      return MaterialPageRoute(builder: (_) => const CancelOrderView());
+      return MaterialPageRoute(builder: (_) =>  CancelOrderView(
+        orderId: settings.arguments as int,
+      ));
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(

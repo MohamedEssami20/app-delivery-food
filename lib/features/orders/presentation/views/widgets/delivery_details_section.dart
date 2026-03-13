@@ -10,8 +10,13 @@ import 'order_time_line_section_builder.dart';
 import 'track_order_buttons_item.dart';
 
 class DeliveryDetailsSection extends StatefulWidget {
-  const DeliveryDetailsSection({super.key, required this.cartItems});
+  const DeliveryDetailsSection({
+    super.key,
+    required this.cartItems,
+    required this.orderId,
+  });
   final List<CartItemEntity> cartItems;
+  final int orderId;
   @override
   State<DeliveryDetailsSection> createState() => _DeliveryDetailsSectionState();
 }
@@ -89,7 +94,11 @@ class _DeliveryDetailsSectionState extends State<DeliveryDetailsSection> {
                 Expanded(
                   child: TrackOrderButtonsItem(
                     onPress: () {
-                      Navigator.pushNamed(context, CancelOrderView.routeName);
+                      Navigator.pushNamed(
+                        context,
+                        CancelOrderView.routeName,
+                        arguments: widget.orderId,
+                      );
                     },
                     theme: theme,
                     title: "Cancel Order",

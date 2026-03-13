@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:app_delivey_food/core/errors/failure.dart';
 import 'package:app_delivey_food/core/errors/firebase_exception_handler.dart';
+import 'package:app_delivey_food/core/helper/order_state.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
 import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/features/orders/domain/repos/orders_repos.dart'
@@ -33,5 +34,32 @@ class OrdersReposImpl implements OrdersRepos {
       log("error to get status of order 2 = $e");
       yield Left(Failure(errorMessage: e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, void>> cancelOrder({
+    required int orderId,
+    required String reason,
+  }) async {
+   try {
+     await dataBaseService.addDataWithDocumentId(
+       mainPath: BackendEndpoints.addOrder,
+       subPath: BackendEndpoints.userOrders,
+       mainDocumentId: FirebaseAuthService().getCurrentUser()!,
+       subDocumentId: orderId.toString(),
+       data: {
+         'orderState': OrderState.cancelled.name,
+        //  'cancelReason': reason
+       }
+     );
+     return right(null);
+   }
+   on FirebaseException catch (e) {
+     log("error to cancel order 1 = $e");
+     return left(FirebaseExceptionHandler.fromFirebaseException(e));
+   } catch (e) {
+     log("error to cancel order 2 = $e");
+     return left(Failure(errorMessage: e.toString()));
+   }
   }
 }

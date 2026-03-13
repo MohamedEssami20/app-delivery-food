@@ -1,10 +1,15 @@
 import 'package:app_delivey_food/core/function/build_custom_app_bar.dart';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
+import 'package:app_delivey_food/core/services/get_it_services.dart';
+import 'package:app_delivey_food/features/orders/domain/repos/orders_repos.dart';
+import 'package:app_delivey_food/features/orders/presentation/manager/cancel_order_state/cancel_order_cubit.dart';
 import 'package:app_delivey_food/features/orders/presentation/views/widgets/cancel_order_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CancelOrderView extends StatelessWidget {
-  const CancelOrderView({super.key});
+  const CancelOrderView({super.key, required this.orderId});
+  final int orderId;
   static const String routeName = "CanelOrder";
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,12 @@ class CancelOrderView extends StatelessWidget {
         title: "Cancel order",
         showTitle: true,
       ),
-      body: CancelOrderViewBody(),
+      body: BlocProvider(
+        create: (context) => CancelOrderCubit(
+          ordersRepos: GetItService.getIt.get<OrdersRepos>(),
+        ),
+        child: CancelOrderViewBody(orderId: orderId,),
+      ),
     );
   }
 }
