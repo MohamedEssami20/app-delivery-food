@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/core/cubit/cubit/bottom_naviagtion_bar_cubit.dart';
 import 'package:app_delivey_food/core/helper/custom_bloc_observer.dart';
 import 'package:app_delivey_food/core/helper/on_generate_route.dart';
 import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
@@ -27,7 +28,10 @@ class AppDeliveryFood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => CartCubit())],
+      providers: [
+        BlocProvider(create: (context) => CartCubit()),
+        BlocProvider(create: (context) => BottomNavigtionBarCubit()),
+      ],
       child: MaterialApp(
         theme: AppTheme.lightTheme(),
         debugShowCheckedModeBanner: false,

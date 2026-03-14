@@ -1,11 +1,11 @@
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
-import 'package:app_delivey_food/core/utils/error_snackbar.dart';
-import 'package:app_delivey_food/features/home/presentation/views/main_view.dart';
 import 'package:app_delivey_food/features/orders/presentation/manager/cancel_order_state/cancel_order_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'cancel_order_button_builder.dart';
 
 class CancelOrderViewBody extends StatefulWidget {
   const CancelOrderViewBody({super.key, required this.orderId});
@@ -96,50 +96,6 @@ class _CancelOrderViewBodyState extends State<CancelOrderViewBody> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CancelOrderButtonBuilder extends StatelessWidget {
-  const CancelOrderButtonBuilder({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = AppThemeHelper(context);
-    return BlocConsumer<CancelOrderCubit, CancelOrderState>(
-      builder: (context, state) {
-        if (state is CancelOrderLoading) {
-          return CircularProgressIndicator(color: theme.colors.white);
-        } else {
-          return Text(
-            "Cancel order",
-            style: theme.textStyles.headlineSmall?.copyWith(
-              color: theme.colors.white,
-            ),
-          );
-        }
-      },
-      listener: (context, state) {
-        if (state is CancelOrderSuccess) {
-          buildErrorSnackbar(
-            message: "Cancel order successfully",
-            theme: theme,
-            context: context,
-          );
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            MainView.routeName,
-            (_) => false,
-          );
-        }
-        if (state is CancelOrderError) {
-          buildErrorSnackbar(
-            message: "Cancel order error, try later",
-            theme: theme,
-            context: context,
-          );
-        }
-      },
     );
   }
 }
