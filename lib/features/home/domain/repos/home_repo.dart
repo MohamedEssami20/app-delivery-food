@@ -16,4 +16,9 @@ abstract class HomeRepo {
 
   // create method that get advertise products;
   Future<Either<Failure, List<ProductEntity>>> getAdvertiseProducts();
+   
+   // create method that add favorite food;
+   Future<Either<Failure, void>> addFavoriteFood({
+    required String foodId,
+  });
 }

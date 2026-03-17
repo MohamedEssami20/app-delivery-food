@@ -5,6 +5,7 @@ import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/core/services/get_it_services.dart';
 import 'package:app_delivey_food/core/services/shared_pref_services.dart';
 import 'package:app_delivey_food/features/cart/presentation/manager/cart_cubit/cart_cubit.dart';
+import 'package:app_delivey_food/features/home/domain/repos/home_repo.dart';
 import 'package:app_delivey_food/features/splash/presentation/views/splash_view.dart';
 import 'package:app_delivey_food/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/utils/app_theme.dart';
+import 'features/home/presentation/manager/favorite_cubit/favorite_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,11 @@ class AppDeliveryFood extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => CartCubit()),
         BlocProvider(create: (context) => BottomNavigtionBarCubit()),
+        BlocProvider(
+          create: (context) => FavoriteFoodCubit(
+            favoriteFoodRepos: GetItService.getIt.get<HomeRepo>(),
+          ),
+        ),
       ],
       child: MaterialApp(
         theme: AppTheme.lightTheme(),

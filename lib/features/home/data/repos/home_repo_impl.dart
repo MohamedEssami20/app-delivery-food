@@ -1,3 +1,6 @@
+
+import 'dart:developer';
+
 import 'package:app_delivey_food/core/errors/failure.dart';
 import 'package:app_delivey_food/core/errors/firebase_exception_handler.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
@@ -47,7 +50,13 @@ class HomeRepoImpl implements HomeRepo {
       final products = data
           .map((e) => ProductModel.fromJson(e).toEntity())
           .toList();
-      return Right(products);
+      final favSnapShot = await dataBaseService.getDataWithDocumentId(
+        mainPath: BackendEndpoints.favourites,
+        mainDocumentId: firebaseAuthService.getCurrentUser()!,
+        subPath: BackendEndpoints.userFavourite,
+      );
+      final finalProducts = getFinalProducts(products, favSnapShot);
+      return Right(finalProducts);
     } on FirebaseException catch (e) {
       return left(FirebaseExceptionHandler.fromFirebaseException(e));
     } catch (e) {
@@ -76,4 +85,62 @@ class HomeRepoImpl implements HomeRepo {
       return left(Failure(errorMessage: e.toString()));
     }
   }
+
+  // create methdod that get final products with final favorite products;
+
+  List<ProductEntity> getFinalProducts(
+    List<ProductEntity> products,
+    List<Map<String, dynamic>> favProducts,
+  ) {
+    List<String> favIds = [];
+
+    for (var element in favProducts) {
+      favIds.add(element['id']);
+    }
+    List<ProductEntity> finalProducts = products.map((e) {
+      return ProductEntity(
+        id: e.id,
+        code: e.code,
+        category: e.category,
+        discount: e.discount,
+        name: e.name,
+        description: e.description,
+        price: e.price,
+        productType: e.productType,
+        avrageRating: e.avrageRating,
+        isFavourite: favIds.contains(e.id),
+        calories: e.calories,
+        createdAt: e.createdAt,
+        baseImageUrl: e.baseImageUrl,
+        productImageUrls: e.productImageUrls,
+      );
+    }).toList();
+
+    return finalProducts;
+  }
+
+  @override
+  Future<Either<Failure, void>> addFavoriteFood({
+    required String foodId,
+  }) async {
+    try {
+      await dataBaseService.addDataWithDocumentId(
+        mainPath: BackendEndpoints.favourites,
+        subPath: BackendEndpoints.userFavourite,
+        mainDocumentId: firebaseAuthService.getCurrentUser()!,
+        subDocumentId: foodId.toString(),
+        data: {
+          'id': foodId,
+        },
+      );
+      return right(null);
+    } on FirebaseException catch (e) {
+      log("Exception in favorite repo 1= ${e.toString()}");
+      return left(FirebaseExceptionHandler.fromFirebaseException(e));
+    } catch (e) {
+      log("Exception in favorite repo 2= ${e.toString()}");
+      return left(Failure(errorMessage: e.toString()));
+    }
+  }
+
 }

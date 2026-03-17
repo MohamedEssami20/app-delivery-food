@@ -1,4 +1,6 @@
+import 'package:app_delivey_food/features/home/presentation/manager/favorite_cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../helper/app_theme_helper.dart';
@@ -10,7 +12,9 @@ AppBar buildCustomAppBar({
   bool? showActionButton,
   bool? showTitle,
   String? title,
+  bool? isFavourite,
   VoidCallback? onBackPress,
+  VoidCallback? onFavoritePress,
   required BuildContext context,
 }) {
   return AppBar(
@@ -35,7 +39,7 @@ AppBar buildCustomAppBar({
     leading: Visibility(
       visible: showBackButton ?? false,
       child: Padding(
-        padding: EdgeInsets.only(left:20),
+        padding: EdgeInsets.only(left: 20),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -78,11 +82,54 @@ AppBar buildCustomAppBar({
                   BlendMode.srcIn,
                 ),
               ),
-              SvgPicture.asset(Assets.assetsIconsFavoriteNavigatioinIcon),
+              GestureDetector(
+                onTap: onFavoritePress ?? () {},
+                child: AddFavoriteIconBuilder(
+                  isAlreadyFavorite: isFavourite ?? false,
+                ),
+              ),
             ],
           ),
         ),
       ),
     ],
   );
+}
+
+class AddFavoriteIconBuilder extends StatelessWidget {
+  const AddFavoriteIconBuilder({super.key, required this.isAlreadyFavorite});
+  final bool isAlreadyFavorite;
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FavoriteFoodCubit, FavoriteFoodState>(
+      builder: (context, state) {
+        if (state is AddFavoriteSuccess || isAlreadyFavorite) {
+          return SvgPicture.asset(
+            Assets.assetsIconsFavoriteNavigatioinIcon,
+            colorFilter: ColorFilter.mode(
+              Colors.red,
+              BlendMode.srcIn,
+            ), //Colors.red(),
+          );
+        } else if (state is AddFavoriteLoading) {
+          return FittedBox(
+            fit: BoxFit.scaleDown,
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(
+                color: Colors.grey,
+                strokeWidth: 2,
+              ),
+            ),
+          );
+        } else {
+          return SvgPicture.asset(
+            Assets.assetsIconsFavoriteNavigatioinIcon,
+            colorFilter: ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+          );
+        }
+      },
+    );
+  }
 }

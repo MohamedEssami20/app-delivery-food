@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/features/home/presentation/manager/favorite_cubit/favorite_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +14,10 @@ class GetProductsListBuilder extends StatelessWidget {
     final theme = AppThemeHelper(context);
     return BlocBuilder<GetProductsCubit, GetProductsState>(
       builder: (context, state) {
-        if (state is GetProductsSuccess) {
+        if (state is GetProductsSuccess){
+          context.read<FavoriteFoodCubit>().loadFavoriteFoods(
+            state.productsEntity,
+          );
           return ProductsListView(products: state.productsEntity);
         } else if (state is GetProductsFailure) {
           return Center(
