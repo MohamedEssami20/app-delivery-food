@@ -21,4 +21,9 @@ abstract class HomeRepo {
    Future<Either<Failure, void>> addFavoriteFood({
     required String foodId,
   });
+
+  // create method that remove favorite food;
+  Future<Either<Failure, void>> removeFavoriteFood({
+    required String foodId,
+  });
 }

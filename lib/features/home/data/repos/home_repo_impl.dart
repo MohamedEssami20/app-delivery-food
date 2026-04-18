@@ -128,17 +128,38 @@ class HomeRepoImpl implements HomeRepo {
         mainPath: BackendEndpoints.favourites,
         subPath: BackendEndpoints.userFavourite,
         mainDocumentId: firebaseAuthService.getCurrentUser()!,
-        subDocumentId: foodId.toString(),
+        subDocumentId: foodId,
         data: {
           'id': foodId,
         },
       );
       return right(null);
     } on FirebaseException catch (e) {
-      log("Exception in favorite repo 1= ${e.toString()}");
+      log("Exception in add favorite repo 1= ${e.toString()}");
       return left(FirebaseExceptionHandler.fromFirebaseException(e));
     } catch (e) {
-      log("Exception in favorite repo 2= ${e.toString()}");
+      log("Exception in add favorite repo 2= ${e.toString()}");
+      return left(Failure(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeFavoriteFood({
+    required String foodId,
+  }) async {
+    try {
+      await dataBaseService.deleteDataWithDocumentId(
+        mainPath: BackendEndpoints.favourites,
+        subPath: BackendEndpoints.userFavourite,
+        mainDocumentId: firebaseAuthService.getCurrentUser()!,
+        subDocumentId: foodId,
+      );
+      return right(null);
+    } on FirebaseException catch (e) {
+      log("Exception in remove favorite repo 1= ${e.toString()}");
+      return left(FirebaseExceptionHandler.fromFirebaseException(e));
+    } catch (e) {
+      log("Exception in remove favorite repo 2= ${e.toString()}");
       return left(Failure(errorMessage: e.toString()));
     }
   }

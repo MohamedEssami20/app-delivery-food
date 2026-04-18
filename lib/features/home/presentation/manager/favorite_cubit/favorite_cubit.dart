@@ -10,10 +10,9 @@ part 'favorite_state.dart';
 
 class FavoriteFoodCubit extends Cubit<FavoriteFoodState> {
   FavoriteFoodCubit({required this.favoriteFoodRepos})
-    : super(AddFavoriteInitial());
+      : super(AddFavoriteInitial());
 
   final HomeRepo favoriteFoodRepos;
-  String? currentFavoriteFoodId;
   final Set<String> _favoritedFoodsIds = {};
 
   Set<String> get favoriteFoods => Set.unmodifiable(_favoritedFoodsIds);
@@ -30,13 +29,14 @@ class FavoriteFoodCubit extends Cubit<FavoriteFoodState> {
       ..addAll(_favoritedFoodsIds)
       ..addAll(favoriteIds);
 
-    if (merged.length == _favoritedFoodsIds.length &&
-        _favoritedFoodsIds.containsAll(merged)) {
-      return;
+    if (merged.length == _favoritedFoodsIds.length) {
+      return; // No new favorites added
     }
+    
     _favoritedFoodsIds
       ..clear()
       ..addAll(merged);
+      
     log("favorite ids = ${_favoritedFoodsIds.toString()}");
     emit(UpdateFavoriteState());
   }
@@ -47,12 +47,41 @@ class FavoriteFoodCubit extends Cubit<FavoriteFoodState> {
     if (_favoritedFoodsIds.contains(foodId)) {
       return;
     }
-    currentFavoriteFoodId = foodId;
+    
     emit(AddFavoriteLoading(foodId: foodId));
     final result = await favoriteFoodRepos.addFavoriteFood(foodId: foodId);
+    
     result.fold(
-      (l) => emit(AddFavoriteError(errorMessage: l.errorMessage)),
-      (r) => emit(AddFavoriteSuccess()),
+      (failure) => emit(AddFavoriteError(foodId: foodId, errorMessage: failure.errorMessage)),
+      (_) {
+        _favoritedFoodsIds.add(foodId);
+        emit(AddFavoriteSuccess(foodId: foodId));
+      },
     );
+  }
+
+  // create method that remove favorite food;
+
+  Future<void> removeFavoriteFood({required String foodId}) async {
+    if (!_favoritedFoodsIds.contains(foodId)) {
+      return;
+    }
+    
+    emit(RemoveFavoriteLoading(foodId: foodId));
+    final result = await favoriteFoodRepos.removeFavoriteFood(foodId: foodId);
+    
+    result.fold(
+      (failure) => emit(RemoveFavoriteError(foodId: foodId, errorMessage: failure.errorMessage)),
+      (_) {
+        _favoritedFoodsIds.remove(foodId);
+        emit(RemoveFavoriteSuccess(foodId: foodId));
+      },
+    );
+  }
+
+  // create method that check if food is favorite
+
+  bool isFavorite(String foodId) {
+    return _favoritedFoodsIds.contains(foodId);
   }
 }

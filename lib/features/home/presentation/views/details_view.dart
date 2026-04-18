@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app_delivey_food/core/function/build_custom_app_bar.dart';
 import 'package:app_delivey_food/core/helper/add_favorite_listener.dart';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
@@ -15,6 +17,7 @@ class DetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
+    log("is Favorite now 11= ${product.isFavourite}");
     return Scaffold(
       backgroundColor: theme.colors.grey0,
       appBar: buildCustomAppBar(
@@ -23,13 +26,14 @@ class DetailsView extends StatelessWidget {
         showBackButton: true,
         showActionButton: true,
         isFavourite: product.isFavourite,
+        foodId: product.id,
         onFavoritePress: () {
-          if (product.isFavourite) {
-            // remove favorite
+          log("is Favorite now= ${product.isFavourite}");
+          final favCubit = context.read<FavoriteFoodCubit>();
+          if (favCubit.isFavorite(product.id)) {
+            favCubit.removeFavoriteFood(foodId: product.id);
           } else {
-            BlocProvider.of<FavoriteFoodCubit>(
-              context,
-            ).addFavoriteFood(foodId: product.id);
+            favCubit.addFavoriteFood(foodId: product.id);
           }
         },
       ),
