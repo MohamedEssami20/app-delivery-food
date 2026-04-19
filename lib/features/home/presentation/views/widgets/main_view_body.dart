@@ -2,6 +2,7 @@ import 'package:app_delivey_food/features/cart/presentation/views/cart_view.dart
 import 'package:app_delivey_food/features/explore_products/presentation/views/explore_prducts_view.dart';
 import 'package:app_delivey_food/features/favorites/presentation/views/favorite_view.dart';
 import 'package:app_delivey_food/features/home/presentation/views/home_view.dart';
+import 'package:app_delivey_food/features/notifications/presentation/views/notification_view.dart';
 import 'package:flutter/material.dart';
 
 import 'lazy_index_stack.dart';
@@ -18,7 +19,7 @@ class MainViewBody extends StatelessWidget {
         ExplorePrductsView(),
         CartView(),
         FavoriteView(),
-        SizedBox(),
+        NotificationView(),
       ],
     );
   }
