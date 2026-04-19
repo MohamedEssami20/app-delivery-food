@@ -19,6 +19,15 @@ import '../../features/splash/presentation/views/splash_view.dart';
 import '../../features/user_profile/presentation/views/edit_account_view.dart';
 import '../../features/user_profile/presentation/views/my_account_view.dart';
 import '../../features/user_profile/presentation/views/user_profile_view.dart';
+import '../../features/user_profile/presentation/views/payment_methods_view.dart';
+import '../../features/user_profile/presentation/views/add_card_view.dart';
+import '../../features/user_profile/presentation/views/edit_card_view.dart';
+import '../../features/user_profile/presentation/views/addresses_view.dart';
+import '../../features/user_profile/presentation/views/edit_address_view.dart';
+import '../../features/user_profile/presentation/views/settings_view.dart';
+import '../../features/user_profile/presentation/views/language_view.dart';
+import '../../features/user_profile/presentation/views/customer_support_view.dart';
+import '../../features/user_profile/presentation/views/delete_account_view.dart';
 import '../../features/auth/domain/entities/user_entity.dart';
 import '../../features/orders/presentation/views/my_orders_view.dart';
 
@@ -80,6 +89,42 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case MyOrdersView.routeName:
       return MaterialPageRoute(
         builder: (_) => const MyOrdersView(),
+      );
+    case PaymentMethodsView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const PaymentMethodsView(),
+      );
+    case AddCardView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const AddCardView(),
+      );
+    case EditCardView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const EditCardView(),
+      );
+    case AddressesView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const AddressesView(),
+      );
+    case EditAddressView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const EditAddressView(),
+      );
+    case SettingsView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const SettingsView(),
+      );
+    case LanguageView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const LanguageView(),
+      );
+    case CustomerSupportView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const CustomerSupportView(),
+      );
+    case DeleteAccountView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const DeleteAccountView(),
       );
     default:
       return MaterialPageRoute(

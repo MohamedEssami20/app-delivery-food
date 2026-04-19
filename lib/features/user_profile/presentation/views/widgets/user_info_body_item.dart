@@ -48,13 +48,17 @@ class UserProfileBodyItem extends StatelessWidget {
           context: context,
           icon: Icons.payment_outlined,
           title: "Payment",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, '/payment_methods');
+          },
         ),
         buildMenuItem(
           context: context,
           icon: Icons.location_on_outlined,
           title: "Addresses",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, '/addresses');
+          },
         ),
         buildMenuItem(
           context: context,
@@ -66,7 +70,9 @@ class UserProfileBodyItem extends StatelessWidget {
           context: context,
           icon: Icons.settings_outlined,
           title: "Settings",
-          onTap: () {},
+          onTap: () {
+            Navigator.pushNamed(context, '/settings');
+          },
         ),
         const SizedBox(height: 24),
         Text(

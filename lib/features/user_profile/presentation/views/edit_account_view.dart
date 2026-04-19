@@ -2,6 +2,8 @@ import 'package:app_delivey_food/features/auth/domain/entities/user_entity.dart'
 import 'package:flutter/material.dart';
 
 import '../../../../core/helper/app_theme_helper.dart';
+import '../../../../core/function/build_profile_text_field.dart';
+
 import '../../../../core/helper/custom_network_image.dart';
 
 class EditAccountView extends StatefulWidget {
@@ -123,14 +125,15 @@ class _EditAccountViewState extends State<EditAccountView> {
                 ],
               ),
               const SizedBox(height: 32),
-              _buildTextField(context: context, controller: nameController),
+              buildProfileTextField(context: context, controller: nameController, hint: ''),
               const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
                     flex: 1,
-                    child: _buildTextField(
+                    child: buildProfileTextField(
                       context: context,
+                      hint: '',
                       controller: phoneCodeController,
                       textAlign: TextAlign.center,
                     ),
@@ -138,12 +141,12 @@ class _EditAccountViewState extends State<EditAccountView> {
                   const SizedBox(width: 12),
                   Expanded(
                     flex: 3,
-                    child: _buildTextField(context: context, controller: phoneController),
+                    child: buildProfileTextField(context: context, controller: phoneController, hint: ''),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
-              _buildTextField(context: context, controller: birthdayController),
+              buildProfileTextField(context: context, controller: birthdayController, hint: ''),
               const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -173,35 +176,4 @@ class _EditAccountViewState extends State<EditAccountView> {
     );
   }
 
-  Widget _buildTextField({
-    required BuildContext context,
-    required TextEditingController controller,
-    TextAlign textAlign = TextAlign.start,
-  }) {
-    final theme = AppThemeHelper(context);
-    return TextFormField(
-      controller: controller,
-      textAlign: textAlign,
-      style: theme.textStyles.bodyLarge!.copyWith(
-        color: theme.colors.typography500,
-      ),
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        filled: true,
-        fillColor: theme.colors.grey0,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: theme.colors.grey200),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: theme.colors.grey200),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: theme.colors.primary600),
-        ),
-      ),
-    );
-  }
 }
