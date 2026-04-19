@@ -16,6 +16,11 @@ import '../../features/home/presentation/views/details_view.dart';
 import '../../features/home/presentation/views/main_view.dart';
 import '../../features/on_borading/presentation/views/on_boarding_view.dart';
 import '../../features/splash/presentation/views/splash_view.dart';
+import '../../features/user_profile/presentation/views/edit_account_view.dart';
+import '../../features/user_profile/presentation/views/my_account_view.dart';
+import '../../features/user_profile/presentation/views/user_profile_view.dart';
+import '../../features/auth/domain/entities/user_entity.dart';
+import '../../features/orders/presentation/views/my_orders_view.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -60,6 +65,22 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) =>  CancelOrderView(
         orderId: settings.arguments as int,
       ));
+    case UserProfileView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => UserProfileView(user: settings.arguments as UserEntity),
+      );
+    case MyAccountView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => MyAccountView(user: settings.arguments as UserEntity),
+      );
+    case EditAccountView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => EditAccountView(user: settings.arguments as UserEntity),
+      );
+    case MyOrdersView.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const MyOrdersView(),
+      );
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(

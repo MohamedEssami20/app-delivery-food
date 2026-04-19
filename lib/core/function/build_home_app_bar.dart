@@ -12,13 +12,20 @@ Widget buildNormalHomeAppBar(AppThemeHelper theme, UserEntity user) {
         color: theme.colors.typography500,
       ),
     ),
-    trailing: CircleAvatar(
-      radius: 40,
-      backgroundColor: Colors.grey.shade100,
-      child: CustomNetowrkImage(
-        imageUrl: user.userImage,
-        width: 40,
-        fit: BoxFit.fill,
+    trailing: Builder(
+      builder: (context) => GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/user_profile', arguments: user);
+        },
+        child: CircleAvatar(
+          radius: 40,
+          backgroundColor: Colors.grey.shade100,
+          child: CustomNetowrkImage(
+            imageUrl: user.userImage,
+            width: 40,
+            fit: BoxFit.fill,
+          ),
+        ),
       ),
     ),
     subtitle: Text(
