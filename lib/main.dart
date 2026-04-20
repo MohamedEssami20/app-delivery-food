@@ -12,11 +12,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/services/supabase_storage_service.dart';
 import 'core/utils/app_theme.dart';
 import 'features/home/presentation/manager/favorite_cubit/favorite_cubit.dart';
+import 'features/home/presentation/manager/user_cubit/user_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await SupabaseStorageService.initSupabase();
+  await SupabaseStorageService.createBucket("avatars");
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAuthService().initializeGoogleSignIn();
   Bloc.observer = CustomBlocObserver();
@@ -37,6 +43,10 @@ class AppDeliveryFood extends StatelessWidget {
           create: (context) => FavoriteFoodCubit(
             favoriteFoodRepos: GetItService.getIt.get<HomeRepo>(),
           ),
+        ),
+        BlocProvider(
+          create: (context) =>
+              UserCubit(homeRepo: GetItService.getIt.get<HomeRepo>()),
         ),
       ],
       child: MaterialApp(

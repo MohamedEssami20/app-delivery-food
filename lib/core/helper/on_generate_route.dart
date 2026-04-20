@@ -1,7 +1,11 @@
 // create on generate route method;
 
 import 'package:app_delivey_food/core/helper/order_placed_args.dart';
+import 'package:app_delivey_food/core/services/get_it_services.dart';
+import 'package:app_delivey_food/features/user_profile/domain/repos/user_profile_repo.dart';
+import 'package:app_delivey_food/features/user_profile/presentation/manager/update_profile_cubit/update_profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/auth/presentation/views/forgot_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
@@ -57,23 +61,15 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
         ),
       );
     case OrderPlacedView.routeName:
-    final args = settings.arguments as OrderPlacedArgs;
-      return MaterialPageRoute(
-        builder: (_) => OrderPlacedView(
-          args: args,
-        ),
-      );
+      final args = settings.arguments as OrderPlacedArgs;
+      return MaterialPageRoute(builder: (_) => OrderPlacedView(args: args));
     case TrackOrderView.routeName:
-    final args = settings.arguments as OrderPlacedArgs;
-      return MaterialPageRoute(
-        builder: (_) => TrackOrderView(
-          args: args,
-        ),
-      );
+      final args = settings.arguments as OrderPlacedArgs;
+      return MaterialPageRoute(builder: (_) => TrackOrderView(args: args));
     case CancelOrderView.routeName:
-      return MaterialPageRoute(builder: (_) =>  CancelOrderView(
-        orderId: settings.arguments as int,
-      ));
+      return MaterialPageRoute(
+        builder: (_) => CancelOrderView(orderId: settings.arguments as int),
+      );
     case UserProfileView.routeName:
       return MaterialPageRoute(
         builder: (_) => UserProfileView(user: settings.arguments as UserEntity),
@@ -84,48 +80,32 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       );
     case EditAccountView.routeName:
       return MaterialPageRoute(
-        builder: (_) => EditAccountView(user: settings.arguments as UserEntity),
+        builder: (_) => BlocProvider(
+          create: (context) =>
+              UpdateProfileCubit(GetItService.getIt.get<UserProfileRepo>()),
+          child: EditAccountView(user: settings.arguments as UserEntity),
+        ),
       );
     case MyOrdersView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const MyOrdersView(),
-      );
+      return MaterialPageRoute(builder: (_) => const MyOrdersView());
     case PaymentMethodsView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const PaymentMethodsView(),
-      );
+      return MaterialPageRoute(builder: (_) => const PaymentMethodsView());
     case AddCardView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const AddCardView(),
-      );
+      return MaterialPageRoute(builder: (_) => const AddCardView());
     case EditCardView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const EditCardView(),
-      );
+      return MaterialPageRoute(builder: (_) => const EditCardView());
     case AddressesView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const AddressesView(),
-      );
+      return MaterialPageRoute(builder: (_) => const AddressesView());
     case EditAddressView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const EditAddressView(),
-      );
+      return MaterialPageRoute(builder: (_) => const EditAddressView());
     case SettingsView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const SettingsView(),
-      );
+      return MaterialPageRoute(builder: (_) => const SettingsView());
     case LanguageView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const LanguageView(),
-      );
+      return MaterialPageRoute(builder: (_) => const LanguageView());
     case CustomerSupportView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const CustomerSupportView(),
-      );
+      return MaterialPageRoute(builder: (_) => const CustomerSupportView());
     case DeleteAccountView.routeName:
-      return MaterialPageRoute(
-        builder: (_) => const DeleteAccountView(),
-      );
+      return MaterialPageRoute(builder: (_) => const DeleteAccountView());
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(

@@ -17,6 +17,8 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/explore_products/data/repos/explore_product_repo_impl.dart';
 import '../../features/orders/data/repos/orders_repos_impl.dart';
+import '../../features/user_profile/data/repos_impl/user_profile_repo_impl.dart';
+import '../../features/user_profile/domain/repos/user_profile_repo.dart';
 
 class GetItService {
   static GetIt getIt = GetIt.instance;
@@ -59,6 +61,9 @@ class GetItService {
 
     getIt.registerSingleton<OrdersRepos>(
       OrdersReposImpl(dataBaseService: getIt<DataBaseService>()),
+    );
+    getIt.registerSingleton<UserProfileRepo>(
+      UserProfileRepoImpl(dataBaseService: getIt<DataBaseService>()),
     );
   }
 }

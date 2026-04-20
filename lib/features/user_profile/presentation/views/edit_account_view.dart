@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:app_delivey_food/features/auth/domain/entities/user_entity.dart';
+import 'package:app_delivey_food/features/user_profile/presentation/views/addresses_view.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/helper/app_theme_helper.dart';
 import '../../../../core/function/build_profile_text_field.dart';
 
 import '../../../../core/helper/custom_network_image.dart';
+import 'widgets/update_user_profile_builder.dart';
 
 class EditAccountView extends StatefulWidget {
   const EditAccountView({super.key, required this.user});
@@ -21,14 +26,29 @@ class _EditAccountViewState extends State<EditAccountView> {
   late TextEditingController phoneCodeController;
   late TextEditingController phoneController;
   late TextEditingController birthdayController;
+  File? selectedImage;
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        selectedImage = File(image.path);
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     nameController = TextEditingController(text: widget.user.username);
-    phoneCodeController = TextEditingController(text: "405");
-    phoneController = TextEditingController(text: "555-0128");
-    birthdayController = TextEditingController(text: "12-10-1996");
+    phoneCodeController = TextEditingController(
+      text: widget.user.phoneCode.toString(),
+    );
+    phoneController = TextEditingController(
+      text: widget.user.phoneNumber.toString(),
+    );
+    birthdayController = TextEditingController(text: widget.user.birthDate);
   }
 
   @override
@@ -69,18 +89,14 @@ class _EditAccountViewState extends State<EditAccountView> {
         ),
         centerTitle: true,
         actions: [
-          TextButton(
-            onPressed: () {
-              // Handle save action here
-              Navigator.pop(context);
-            },
-            child: Text(
-              "Save",
-              style: theme.textStyles.titleMedium!.copyWith(
-                color: theme.colors.green,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
+          UpdateUserProfileBuilder(
+            theme: theme,
+            widget: widget,
+            nameController: nameController,
+            phoneController: phoneController,
+            phoneCodeController: phoneCodeController,
+            birthdayController: birthdayController,
+            selectedImage: selectedImage,
           ),
           const SizedBox(width: 8),
         ],
@@ -95,37 +111,51 @@ class _EditAccountViewState extends State<EditAccountView> {
                 alignment: Alignment.bottomRight,
                 children: [
                   ClipOval(
-                    child: CustomNetowrkImage(
-                      imageUrl: widget.user.userImage,
-                      width: 120,
-                      height: 120,
-                      fit: BoxFit.cover,
+                    child: selectedImage != null
+                        ? Image.file(
+                            selectedImage!,
+                            width: 120,
+                            height: 120,
+                            fit: BoxFit.cover,
+                          )
+                        : CustomNetowrkImage(
+                            imageUrl: widget.user.userImage,
+                            width: 120,
+                            height: 120,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                  GestureDetector(
+                    onTap: _pickImage,
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 4, right: 4),
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: theme.colors.grey50,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: theme.colors.black.withValues(alpha: 0.1),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: theme.colors.typography400,
+                        size: 20,
+                      ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 4, right: 4),
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: theme.colors.grey50,
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: theme.colors.black.withValues(alpha: 0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      Icons.camera_alt,
-                      color: theme.colors.typography400,
-                      size: 20,
-                    ),
-                  )
                 ],
               ),
               const SizedBox(height: 32),
-              buildProfileTextField(context: context, controller: nameController, hint: ''),
+              buildProfileTextField(
+                context: context,
+                controller: nameController,
+                hint: 'user name',
+              ),
               const SizedBox(height: 16),
               Row(
                 children: [
@@ -133,7 +163,7 @@ class _EditAccountViewState extends State<EditAccountView> {
                     flex: 1,
                     child: buildProfileTextField(
                       context: context,
-                      hint: '',
+                      hint: 'phone code',
                       controller: phoneCodeController,
                       textAlign: TextAlign.center,
                     ),
@@ -141,32 +171,52 @@ class _EditAccountViewState extends State<EditAccountView> {
                   const SizedBox(width: 12),
                   Expanded(
                     flex: 3,
-                    child: buildProfileTextField(context: context, controller: phoneController, hint: ''),
+                    child: buildProfileTextField(
+                      context: context,
+                      controller: phoneController,
+                      hint: 'phone number',
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
-              buildProfileTextField(context: context, controller: birthdayController, hint: ''),
+              buildProfileTextField(
+                context: context,
+                controller: birthdayController,
+                hint: 'birth date',
+              ),
               const SizedBox(height: 16),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 16,
+                ),
                 decoration: BoxDecoration(
                   border: Border.all(color: theme.colors.grey200),
                   borderRadius: BorderRadius.circular(12),
                   color: theme.colors.grey0,
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Address - Home",
-                        style: theme.textStyles.bodyLarge!.copyWith(
-                          color: theme.colors.typography500,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, AddressesView.routeName);
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Address - Home",
+                          style: theme.textStyles.bodyLarge!.copyWith(
+                            color: theme.colors.typography500,
+                          ),
                         ),
                       ),
-                    ),
-                    Icon(Icons.arrow_forward_ios, color: theme.colors.grey400, size: 16),
-                  ],
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: theme.colors.grey400,
+                        size: 16,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -175,5 +225,4 @@ class _EditAccountViewState extends State<EditAccountView> {
       ),
     );
   }
-
 }

@@ -9,6 +9,9 @@ class UserModel extends UserEntity {
     required super.username,
     required super.userEmail,
     required super.userImage,
+    required super.phoneNumber,
+    required super.phoneCode,
+    required super.birthDate,
   });
 
   factory UserModel.formUserEntity({required UserEntity userEntity}) {
@@ -17,6 +20,9 @@ class UserModel extends UserEntity {
       username: userEntity.username,
       userEmail: userEntity.userEmail,
       userImage: userEntity.userImage,
+      phoneNumber: userEntity.phoneNumber,
+      phoneCode: userEntity.phoneCode,
+      birthDate: userEntity.birthDate,
     );
   }
 
@@ -26,6 +32,9 @@ class UserModel extends UserEntity {
       username: user.displayName ?? 'User',
       userEmail: user.email ?? '',
       userImage: user.photoURL ?? BackendEndpoints.defaultImage,
+      phoneNumber: 0,
+      phoneCode: 0,
+      birthDate: '',
     );
   }
 
@@ -35,6 +44,9 @@ class UserModel extends UserEntity {
       'userName': username,
       'email': userEmail,
       'imageUrl': userImage,
+      'phoneNumber': phoneNumber,
+      'phoneCode': phoneCode,
+      'birthDate': birthDate,
     };
   }
 
@@ -44,6 +56,9 @@ class UserModel extends UserEntity {
       username: username,
       userEmail: userEmail,
       userImage: userImage,
+      phoneNumber: phoneNumber,
+      phoneCode: phoneCode,
+      birthDate: birthDate,
     );
   }
 
@@ -53,6 +68,9 @@ class UserModel extends UserEntity {
       username: map['userName'] ?? '',
       userEmail: map['email'] ?? '',
       userImage: map['imageUrl'] ?? BackendEndpoints.defaultImage,
+      phoneNumber: map['phoneNumber'] ?? 0,
+      phoneCode: map['phoneCode'] ?? 0,
+      birthDate: map['birthDate'] ?? '',
     );
   }
 }

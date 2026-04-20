@@ -4,15 +4,27 @@ import 'package:flutter/material.dart';
 import '../../../../core/helper/app_theme_helper.dart';
 import '../../../../core/function/build_account_menu_item.dart';
 
-
 import '../../../../core/helper/custom_network_image.dart';
 import 'edit_account_view.dart';
 
-class MyAccountView extends StatelessWidget {
+class MyAccountView extends StatefulWidget {
   const MyAccountView({super.key, required this.user});
 
   static const String routeName = '/my_account';
   final UserEntity user;
+
+  @override
+  State<MyAccountView> createState() => _MyAccountViewState();
+}
+
+class _MyAccountViewState extends State<MyAccountView> {
+  late UserEntity user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = widget.user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +37,12 @@ class MyAccountView extends StatelessWidget {
         elevation: 0,
         leadingWidth: 80,
         leading: TextButton.icon(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios, color: theme.colors.typography500, size: 18),
+          onPressed: () => Navigator.pop(context, user),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: theme.colors.typography500,
+            size: 18,
+          ),
           label: Text(
             "Back",
             style: theme.textStyles.titleMedium!.copyWith(
@@ -49,8 +65,17 @@ class MyAccountView extends StatelessWidget {
         centerTitle: true,
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, EditAccountView.routeName, arguments: user);
+            onPressed: () async {
+              final updatedUser = await Navigator.pushNamed(
+                context,
+                EditAccountView.routeName,
+                arguments: user,
+              );
+              if (updatedUser != null && updatedUser is UserEntity) {
+                setState(() {
+                  user = updatedUser;
+                });
+              }
             },
             child: Text(
               "Edit",
@@ -94,7 +119,7 @@ class MyAccountView extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                "+405 555-0128", // Mock phone
+                "+${user.phoneCode} ${user.phoneNumber}", // Mock phone
                 style: theme.textStyles.titleMedium!.copyWith(
                   color: theme.colors.typography500,
                   fontWeight: FontWeight.w700,
@@ -102,29 +127,29 @@ class MyAccountView extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               buildAccountMenuItem(
-                context: context, 
-                title: "Addresses", 
+                context: context,
+                title: "Addresses",
                 onTap: () {
                   Navigator.pushNamed(context, '/addresses');
                 },
               ),
               buildAccountMenuItem(
-                context: context, 
-                title: "Payment", 
+                context: context,
+                title: "Payment",
                 onTap: () {
                   Navigator.pushNamed(context, '/payment_methods');
                 },
               ),
               buildAccountMenuItem(
-                context: context, 
-                title: "My Orders", 
+                context: context,
+                title: "My Orders",
                 onTap: () {
                   Navigator.pushNamed(context, '/my_orders');
                 },
               ),
               buildAccountMenuItem(
-                context: context, 
-                title: "Settings", 
+                context: context,
+                title: "Settings",
                 onTap: () {
                   Navigator.pushNamed(context, '/settings');
                 },
@@ -135,5 +160,4 @@ class MyAccountView extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -40,6 +40,9 @@ class AuthRepoImpl extends AuthRepos {
         username: name,
         uid: user.uid,
         userImage: BackendEndpoints.defaultImage,
+        phoneNumber: 0,
+        phoneCode: 0,
+        birthDate: "",
       );
       Map<String, dynamic> userData = UserModel.formUserEntity(
         userEntity: userEntity,

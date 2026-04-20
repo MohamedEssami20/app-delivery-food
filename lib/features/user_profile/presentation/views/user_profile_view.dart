@@ -1,17 +1,29 @@
 import 'package:app_delivey_food/features/auth/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../core/helper/app_theme_helper.dart';
 import '../../../../core/helper/custom_network_image.dart';
 import '../../../../core/utils/assets.dart';
 import 'widgets/user_info_body_item.dart';
 
-class UserProfileView extends StatelessWidget {
+class UserProfileView extends StatefulWidget {
   const UserProfileView({super.key, required this.user});
 
   static const String routeName = '/user_profile';
   final UserEntity user;
+
+  @override
+  State<UserProfileView> createState() => _UserProfileViewState();
+}
+
+class _UserProfileViewState extends State<UserProfileView> {
+  late UserEntity user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = widget.user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +36,9 @@ class UserProfileView extends StatelessWidget {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.close, color: theme.colors.black, size: 28),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: SvgPicture.asset(
           Assets.assetsImagesLogoText, // Assuming Bobo logo is this
@@ -103,7 +117,14 @@ class UserProfileView extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 32),
-              UserProfileBodyItem(user: user),
+              UserProfileBodyItem(
+                user: user,
+                onUserUpdated: (updatedUser) {
+                  setState(() {
+                    user = updatedUser;
+                  });
+                },
+              ),
             ],
           ),
         ),

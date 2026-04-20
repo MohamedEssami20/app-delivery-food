@@ -6,8 +6,13 @@ import '../../../../auth/domain/entities/user_entity.dart';
 import '../my_account_view.dart';
 
 class UserProfileBodyItem extends StatelessWidget {
-  const UserProfileBodyItem({super.key, required this.user});
+  const UserProfileBodyItem({
+    super.key,
+    required this.user,
+    required this.onUserUpdated,
+  });
   final UserEntity user;
+  final ValueChanged<UserEntity> onUserUpdated;
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
@@ -28,12 +33,15 @@ class UserProfileBodyItem extends StatelessWidget {
           context: context,
           icon: Icons.person_outline,
           title: "My Account",
-          onTap: () {
-            Navigator.pushNamed(
+          onTap: () async {
+            final updatedUser = await Navigator.pushNamed(
               context,
               MyAccountView.routeName,
               arguments: user,
             );
+            if (updatedUser != null && updatedUser is UserEntity) {
+              onUserUpdated(updatedUser);
+            }
           },
         ),
         buildMenuItem(
