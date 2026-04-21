@@ -1,6 +1,8 @@
 import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../../core/entities/product_entity.dart';
+
 
 class CartProductModel {
   final String id;
@@ -96,4 +98,26 @@ class CartProductModel {
       quantity: cartItemEntity.quantity,
     );
   }
+
+  CartItemEntity toCartItemEntity() {
+    return CartItemEntity(
+      productEntity: ProductEntity(
+        id: id,
+        name: name,
+        description: description,
+        price: price,
+        code: code,
+        discount: discount,
+        category: category,
+        productType: productType,
+        avrageRating: avrageRating,
+        isFavourite: isFavourite,
+        baseImageUrl: imageFile,
+        productImageUrls: productImages,
+        calories: calories,
+        createdAt: createdAt,
+      ),
+      quantity: quantity,
+    );
   }
+}

@@ -1,9 +1,9 @@
+import 'package:app_delivey_food/features/orders/presentation/manager/get_all_orders/get_all_orders_cubit.dart';
 import 'package:flutter/material.dart';
-
-import '../../../domain/entities/get_dummy_orders.dart';
-import '../../../domain/entities/order_entity.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entities/my_order_entity.dart';
+import 'my_order_section_builder.dart';
 import 'my_orders_tab_switcher.dart';
-import 'order_item.dart';
 
 class MyOrdersViewBody extends StatefulWidget {
   const MyOrdersViewBody({super.key});
@@ -15,13 +15,17 @@ class MyOrdersViewBody extends StatefulWidget {
 class _MyOrdersViewBodyState extends State<MyOrdersViewBody> {
   bool _isCurrentSelected = true;
 
-  final List<OrderEntity> _allOrders = getDummyOrders();
+  late List<MyOrderEntity> _allOrders;
+  @override
+  void initState() {
+    context.read<GetAllOrdersCubit>().getAllOrders();
+    _allOrders = context.read<GetAllOrdersCubit>().allOrders ?? [];
+    super.initState();
+  }
 
-  List<OrderEntity> get _currentOrders =>
-      _allOrders.where((o) => o.isCurrent).toList();
-
-  List<OrderEntity> get _previousOrders =>
-      _allOrders.where((o) => !o.isCurrent).toList();
+  List<MyOrderEntity> get _currentOrders => _allOrders.isNotEmpty
+      ? _allOrders.where((o) => o.isCurrent).toList()
+      : [];
 
   bool get _hasCurrentOrders => _currentOrders.isNotEmpty;
 
@@ -36,35 +40,7 @@ class _MyOrdersViewBodyState extends State<MyOrdersViewBody> {
           onPreviousTap: () => setState(() => _isCurrentSelected = false),
         ),
         Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 250),
-              transitionBuilder: (child, animation) => FadeTransition(
-                opacity: animation,
-                child: SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(0.04, 0),
-                    end: Offset.zero,
-                  ).animate(animation),
-                  child: child,
-                ),
-              ),
-              child: ListView.builder(
-                key: ValueKey(_isCurrentSelected),
-                padding: const EdgeInsets.only(top: 24),
-                itemCount: _isCurrentSelected
-                    ? _currentOrders.length
-                    : _previousOrders.length,
-                itemBuilder: (context, index) {
-                  final order = _isCurrentSelected
-                      ? _currentOrders[index]
-                      : _previousOrders[index];
-                  return OrderItem(order: order);
-                },
-              ),
-            ),
-          ),
+          child: MyOrdesSectionBuilder(isCurrentSelected: _isCurrentSelected),
         ),
       ],
     );

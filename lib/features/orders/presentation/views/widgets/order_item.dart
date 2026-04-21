@@ -1,17 +1,17 @@
+import 'package:app_delivey_food/core/helper/custom_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
-import '../../../domain/entities/order_entity.dart';
+import '../../../domain/entities/my_order_entity.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({super.key, required this.order});
 
-  final OrderEntity order;
+  final MyOrderEntity order;
 
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: Column(
@@ -27,11 +27,11 @@ class OrderItem extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        order.mainImage,
+                      child: CustomNetowrkImage(
+                        imageUrl: order.mainImage,
+                        fit: BoxFit.cover,
                         width: 72,
                         height: 72,
-                        fit: BoxFit.cover,
                       ),
                     ),
                     if (order.extraImages.isNotEmpty) ...[
@@ -40,8 +40,8 @@ class OrderItem extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              order.extraImages.first,
+                            child: CustomNetowrkImage(
+                              imageUrl: order.extraImages.first.toString(),
                               width: 32,
                               height: 32,
                               fit: BoxFit.cover,
@@ -66,7 +66,7 @@ class OrderItem extends StatelessWidget {
                           ),
                         ],
                       ),
-                    ]
+                    ],
                   ],
                 ),
               ),
@@ -84,11 +84,19 @@ class OrderItem extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    _buildRowDetail(theme, order.dateOrTimeTitle, order.dateOrTimeValue),
+                    _buildRowDetail(
+                      theme,
+                      order.dateOrTimeTitle,
+                      order.dateOrTimeValue,
+                    ),
                     const SizedBox(height: 6),
                     _buildRowDetail(theme, "Order summary", order.summary),
                     const SizedBox(height: 6),
-                    _buildRowDetail(theme, "Total price paid", "\$${order.totalPrice}"),
+                    _buildRowDetail(
+                      theme,
+                      "Total price paid",
+                      "\$${order.orderTotalPrice}",
+                    ),
                   ],
                 ),
               ),
@@ -125,7 +133,11 @@ class OrderItem extends StatelessWidget {
                 ),
                 child: IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.more_vert, color: theme.colors.typography500, size: 20),
+                  icon: Icon(
+                    Icons.more_vert,
+                    color: theme.colors.typography500,
+                    size: 20,
+                  ),
                 ),
               ),
             ],
