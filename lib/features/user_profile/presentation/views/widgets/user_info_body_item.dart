@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/cubit/theme_cubit/theme_cubit.dart';
 import '../../../../../core/function/buid_user_info_menue_item.dart';
 import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../../auth/domain/entities/user_entity.dart';
@@ -108,10 +110,16 @@ class UserProfileBodyItem extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Switch(
-                value: false,
-                onChanged: (val) {},
-                activeThumbColor: theme.colors.primary600,
+              BlocBuilder<ThemeCubit, ThemeMode>(
+                builder: (context, themeMode) {
+                  return Switch(
+                    value: themeMode == ThemeMode.dark,
+                    onChanged: (val) {
+                      context.read<ThemeCubit>().toggleTheme(val);
+                    },
+                    activeThumbColor: theme.colors.primary600,
+                  );
+                },
               ),
             ],
           ),

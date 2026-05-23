@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../../core/helper/get_dummy_product_entitiy.dart';
+import '../../../../home/presentation/manager/favorite_cubit/favorite_cubit.dart';
 import '../../manager/get_explore_foods/get_explore_foods_cubit.dart';
 import 'selected_food_category_section.dart';
 
@@ -15,6 +16,7 @@ class SelectedFoodCategoryBuilder extends StatelessWidget {
     return BlocBuilder<GetExploreFoodsCubit, GetExploreFoodsState>(
       builder: (context, state) {
         if (state is GetExploreFoodsSuccess) {
+          context.read<FavoriteFoodCubit>().loadFavoriteFoods(state.products);
           return SelectedFoodCategorySection(products: state.products);
         } else if (state is GetExploreFoodsFailure) {
           return Column(

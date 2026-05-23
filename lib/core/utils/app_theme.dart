@@ -61,7 +61,7 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.dark,
       useMaterial3: true,
-      scaffoldBackgroundColor: AppColors.blackDark,
+      scaffoldBackgroundColor: AppColors.grey0Dark,
       extensions: <ThemeExtension<dynamic>>[
         AppThemeColors(
           // Primary

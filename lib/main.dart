@@ -12,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/cubit/theme_cubit/theme_cubit.dart';
 import 'core/services/supabase_storage_service.dart';
 import 'core/utils/app_theme.dart';
 import 'features/home/presentation/manager/favorite_cubit/favorite_cubit.dart';
@@ -37,6 +38,7 @@ class AppDeliveryFood extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(create: (context) => CartCubit()),
         BlocProvider(create: (context) => BottomNavigtionBarCubit()),
         BlocProvider(
@@ -49,12 +51,19 @@ class AppDeliveryFood extends StatelessWidget {
               UserCubit(homeRepo: GetItService.getIt.get<HomeRepo>()),
         ),
       ],
-      child: MaterialApp(
-        theme: AppTheme.lightTheme(),
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: onGenerateRoute,
-        initialRoute: SplashView.routeName,
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeMode) {
+          return MaterialApp(
+            theme: AppTheme.lightTheme(),
+            darkTheme: AppTheme.darkTheme(),
+            themeMode: themeMode,
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: onGenerateRoute,
+            initialRoute: SplashView.routeName,
+          );
+        },
       ),
     );
   }
 }
+

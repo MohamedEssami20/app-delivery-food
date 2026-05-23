@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/cubit/theme_cubit/theme_cubit.dart';
 import '../../../../core/helper/app_theme_helper.dart';
 import '../../../../core/function/build_switch_item.dart';
 
@@ -81,12 +83,18 @@ class SettingsView extends StatelessWidget {
                   Navigator.pushNamed(context, LanguageView.routeName);
                 },
               ),
-              buildSwitchItem(
-                context: context,
-                icon: Icons.dark_mode_outlined,
-                title: "Dark mode",
-                value: false,
-                onChanged: (val) {},
+              BlocBuilder<ThemeCubit, ThemeMode>(
+                builder: (context, themeMode) {
+                  return buildSwitchItem(
+                    context: context,
+                    icon: Icons.dark_mode_outlined,
+                    title: "Dark mode",
+                    value: themeMode == ThemeMode.dark,
+                    onChanged: (val) {
+                      context.read<ThemeCubit>().toggleTheme(val);
+                    },
+                  );
+                },
               ),
               const SizedBox(height: 24),
               Text(
