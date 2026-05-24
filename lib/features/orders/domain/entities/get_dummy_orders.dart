@@ -4,7 +4,7 @@ import 'package:app_delivey_food/features/orders/domain/entities/my_order_entity
 List<MyOrderEntity> getDummyOrders() {
   return [
     MyOrderEntity(
-      orderId: '1',
+      orderId: 1,
       status: 'Out for delivery',
       dateOrTimeTitle: 'Est. delivery',
       dateOrTimeValue: '30mins',
@@ -13,9 +13,10 @@ List<MyOrderEntity> getDummyOrders() {
       mainImage: Assets.assetsImagesFastFood,
       extraImages: [Assets.assetsImagesBurgerProduct],
       isCurrent: true,
+      cartItemEntity: [],
     ),
     MyOrderEntity(
-      orderId: '2',
+      orderId: 2,
       status: 'Order delivered',
       dateOrTimeTitle: 'Delivered on',
       dateOrTimeValue: '26 October',
@@ -24,9 +25,10 @@ List<MyOrderEntity> getDummyOrders() {
       mainImage: Assets.assetsImagesDessertFood,
       extraImages: [],
       isCurrent: false,
+      cartItemEntity: [],
     ),
     MyOrderEntity(
-      orderId: '3',
+      orderId: 3,
       status: 'Order delivered',
       dateOrTimeTitle: 'Delivered on',
       dateOrTimeValue: '20 October',
@@ -35,9 +37,10 @@ List<MyOrderEntity> getDummyOrders() {
       mainImage: Assets.assetsImagesDessertFood,
       extraImages: [],
       isCurrent: false,
+      cartItemEntity: [],
     ),
     MyOrderEntity(
-      orderId: '4',
+      orderId: 4,
       status: 'Order delivered',
       dateOrTimeTitle: 'Delivered on',
       dateOrTimeValue: '16 October',
@@ -46,6 +49,7 @@ List<MyOrderEntity> getDummyOrders() {
       mainImage: Assets.assetsImagesBurgerProduct,
       extraImages: [Assets.assetsImagesFastFood],
       isCurrent: false,
+      cartItemEntity: [],
     ),
   ];
 }

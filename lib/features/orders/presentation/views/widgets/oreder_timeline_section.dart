@@ -15,9 +15,9 @@ class OrderTimelineSection extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: theme.colors.grey200, width: 1.2),
       ),
       child: FixedTimeline.tileBuilder(
         theme: TimelineThemeData(
@@ -33,14 +33,14 @@ class OrderTimelineSection extends StatelessWidget {
             return SolidLineConnector(
               color: index <= currentSteps
                   ? theme.colors.primary600
-                  : Colors.grey.shade300,
+                  : theme.colors.grey200,
             );
           },
 
           indicatorBuilder: (_, index) {
             final isActive = index <= currentSteps;
             return DotIndicator(
-              color: isActive ? theme.colors.primary600 : Colors.grey.shade300,
+              color: isActive ? theme.colors.primary600 : theme.colors.grey200,
               size: 28,
               child: isActive
                   ? Icon(

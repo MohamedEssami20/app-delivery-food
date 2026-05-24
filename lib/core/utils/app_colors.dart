@@ -35,10 +35,10 @@ abstract class AppColors {
   static const Color orangeLight = Color(0xFFE8712E);
 
   // Transparent
-  static  Color grey500_6Light = Color(0xFF60635E).withValues(alpha: 0.06);
-  static  Color grey0_92Light = Color(0xFFFFFFFF).withValues(alpha: 0.92);
-  static  Color primary600_24Light = Color(0xFF54A312).withValues(alpha: 0.24);
-  static  Color backgroundBlurLight = Color(0xFF9FA19E).withValues(alpha: 0.8);
+  static Color grey500_6Light = Color(0xFF60635E).withValues(alpha: 0.06);
+  static Color grey0_92Light = Color(0xFFFFFFFF).withValues(alpha: 0.92);
+  static Color primary600_24Light = Color(0xFF54A312).withValues(alpha: 0.24);
+  static Color backgroundBlurLight = Color(0xFF9FA19E).withValues(alpha: 0.8);
 
   // Gradient
   static const Color gradientLightStart = Color(0xFF5EAD1D);
@@ -82,16 +82,16 @@ abstract class AppColors {
   static const Color orangeDark = Color(0xFFE48047);
 
   // Transparent
-  static  Color grey500_6Dark = Color(0xFFD5D6D3).withValues(alpha: 0.06);
-  static  Color grey0_92Dark = Color(0xFF262725).withValues(alpha: 0.92);
-  static  Color primary600_24Dark = Color(0xFF70BA32).withValues(alpha: 0.24);
-  static  Color backgroundBlurDark = Color(0xFF262725).withValues(alpha: 0.8);
+  static Color grey500_6Dark = Color(0xFFD5D6D3).withValues(alpha: 0.06);
+  static Color grey0_92Dark = Color(0xFF262725).withValues(alpha: 0.92);
+  static Color primary600_24Dark = Color(0xFF70BA32).withValues(alpha: 0.24);
+  static Color backgroundBlurDark = Color(0xFF262725).withValues(alpha: 0.8);
 
   // Gradient
   static const Color gradientDarkStart = Color(0xFF6CB231);
   static const Color gradientDarkEnd = Color(0xFF6CB231);
 
   // Base
-  static const Color whiteDark = Color(0xFFFFFFFF);
+  static const Color whiteDark = Color(0xFF010101);
   static const Color blackDark = Color(0xFFF0EFED);
 }

@@ -34,7 +34,7 @@ class MyOrderModel extends MyOrderEntity {
     required this.totalPrice,
     required this.orderState,
   }) : super(
-         orderId: '',
+         orderId: 0,
          status: '',
          dateOrTimeTitle: '',
          dateOrTimeValue: '',
@@ -43,6 +43,7 @@ class MyOrderModel extends MyOrderEntity {
          mainImage: '',
          extraImages: [],
          isCurrent: false,
+         cartItemEntity: [],
        );
 
   factory MyOrderModel.fromMap(Map<String, dynamic> map) {
@@ -69,7 +70,7 @@ class MyOrderModel extends MyOrderEntity {
   }
 
   MyOrderEntity toEntity() => MyOrderEntity(
-    orderId: id.toString(),
+    orderId: id,
     status: orderState,
     dateOrTimeTitle: dateTime.toString().split(' ')[0],
     dateOrTimeValue: dateTime.toString().split(' ')[1].substring(0, 5),
@@ -91,5 +92,6 @@ class MyOrderModel extends MyOrderEntity {
             orderState == OrderState.cancelled.name
         ? false
         : true,
+    cartItemEntity: cartItemEntityList,
   );
 }

@@ -1,8 +1,10 @@
 import 'package:app_delivey_food/core/helper/custom_network_image.dart';
+import 'package:app_delivey_food/core/helper/order_placed_args.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helper/app_theme_helper.dart';
 import '../../../domain/entities/my_order_entity.dart';
+import '../track_order_view.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({super.key, required this.order});
@@ -108,7 +110,22 @@ class OrderItem extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (order.isCurrent) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TrackOrderView(
+                            args: OrderPlacedArgs(
+                              orderId: order.orderId,
+                              cartItems: order.cartItemEntity,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      // reorder logic;
+                    }
+                  },
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(

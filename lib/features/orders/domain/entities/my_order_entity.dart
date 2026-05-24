@@ -1,5 +1,7 @@
+import '../../../cart/domain/entities/cart_item_entity.dart';
+
 class MyOrderEntity {
-  final String orderId;
+  final int orderId;
   final String status;
   final String dateOrTimeTitle;
   final String dateOrTimeValue;
@@ -7,6 +9,7 @@ class MyOrderEntity {
   final double orderTotalPrice;
   final String mainImage;
   final List<dynamic> extraImages;
+  final List<CartItemEntity> cartItemEntity;
   final bool isCurrent;
 
   MyOrderEntity({
@@ -18,6 +21,7 @@ class MyOrderEntity {
     required this.orderTotalPrice,
     required this.mainImage,
     required this.extraImages,
+    required this.cartItemEntity,
     required this.isCurrent,
   });
 }
