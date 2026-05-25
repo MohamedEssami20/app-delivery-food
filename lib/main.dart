@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/cubit/theme_cubit/theme_cubit.dart';
+import 'core/services/notificaction_service.dart';
 import 'core/services/supabase_storage_service.dart';
 import 'core/utils/app_theme.dart';
 import 'features/home/presentation/manager/favorite_cubit/favorite_cubit.dart';
@@ -29,6 +30,7 @@ void main() async {
   Bloc.observer = CustomBlocObserver();
   GetItService().setupGetIt();
   await SharedPrefrenceSigelton.init();
+  await GetItService.getIt.get<NotificationService>().init();
   runApp(const AppDeliveryFood());
 }
 
