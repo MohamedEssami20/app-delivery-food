@@ -5,6 +5,8 @@ import 'package:app_delivey_food/features/auth/presentation/views/login_view.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/function/get_onboarding_view.dart';
+import '../../../../../core/services/shared_pref_services.dart';
+import '../../../../../core/utils/app_keys.dart';
 import 'on_boarding_dots_indicator.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
@@ -67,6 +69,10 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                 child: CustomButton(
                   label: "Skip",
                   onPressed: () {
+                    SharedPrefrenceSigelton.setBoolean(
+                      AppKeys.isShowedOnboarding,
+                      true,
+                    );
                     Navigator.pushReplacementNamed(
                       context,
                       LoginView.routeName,
@@ -82,6 +88,10 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   label: "Next",
                   onPressed: () {
                     if (pageController.page == 2) {
+                      SharedPrefrenceSigelton.setBoolean(
+                        AppKeys.isShowedOnboarding,
+                        true,
+                      );
                       Navigator.pushReplacementNamed(
                         context,
                         LoginView.routeName,

@@ -270,4 +270,24 @@ class FirestoreService implements DataBaseService {
             .snapshots();
     yield* documentSnapshot;
   }
+
+  @override
+  Future<void> updateData({
+    required String path,
+    required Map<String, dynamic> data,
+    required String documentId,
+    String? subPath,
+    String? subDocumentId,
+  }) async {
+    if (subPath != null && subDocumentId != null) {
+      await firebaseFirestore
+          .collection(path)
+          .doc(documentId)
+          .collection(subPath)
+          .doc(subDocumentId)
+          .update(data);
+    } else {
+      await firebaseFirestore.collection(path).doc(documentId).update(data);
+    }
+  }
 }

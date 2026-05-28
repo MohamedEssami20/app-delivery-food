@@ -8,4 +8,5 @@ UserEntity getDummyUserEntity() => UserEntity(
   phoneNumber: 0,
   phoneCode: 0,
   birthDate: "",
+  fcmToken: "fcmToken",
 );

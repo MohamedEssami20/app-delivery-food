@@ -46,6 +46,7 @@ class UserProfileRepoImpl extends UserProfileRepo {
         phoneNumber: userEntity.phoneNumber,
         phoneCode: userEntity.phoneCode,
         birthDate: userEntity.birthDate,
+        fcmToken: userEntity.fcmToken,
       );
 
       Map<String, dynamic> userData = UserModel.formUserEntity(

@@ -12,6 +12,7 @@ class UserModel extends UserEntity {
     required super.phoneNumber,
     required super.phoneCode,
     required super.birthDate,
+    required super.fcmToken,
   });
 
   factory UserModel.formUserEntity({required UserEntity userEntity}) {
@@ -23,6 +24,7 @@ class UserModel extends UserEntity {
       phoneNumber: userEntity.phoneNumber,
       phoneCode: userEntity.phoneCode,
       birthDate: userEntity.birthDate,
+      fcmToken: userEntity.fcmToken,
     );
   }
 
@@ -35,6 +37,7 @@ class UserModel extends UserEntity {
       phoneNumber: 0,
       phoneCode: 0,
       birthDate: '',
+      fcmToken: '',
     );
   }
 
@@ -47,6 +50,7 @@ class UserModel extends UserEntity {
       'phoneNumber': phoneNumber,
       'phoneCode': phoneCode,
       'birthDate': birthDate,
+      'fcmToken': fcmToken,
     };
   }
 
@@ -59,6 +63,7 @@ class UserModel extends UserEntity {
       phoneNumber: phoneNumber,
       phoneCode: phoneCode,
       birthDate: birthDate,
+      fcmToken: fcmToken,
     );
   }
 
@@ -71,6 +76,7 @@ class UserModel extends UserEntity {
       phoneNumber: map['phoneNumber'] ?? 0,
       phoneCode: map['phoneCode'] ?? 0,
       birthDate: map['birthDate'] ?? '',
+      fcmToken: map['fcmToken'] ?? '',
     );
   }
 }

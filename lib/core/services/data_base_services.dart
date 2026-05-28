@@ -93,4 +93,13 @@ abstract class DataBaseService {
     String? subDocumentId,
     Map<String, dynamic>? query,
   });
+
+  // create method that update data from database;
+  Future<void> updateData({
+    required String path,
+    required Map<String, dynamic> data,
+    required String documentId,
+    String? subPath,
+    String? subDocumentId,
+  });
 }

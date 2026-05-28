@@ -6,6 +6,8 @@ class UserEntity {
   final int phoneNumber;
   final int phoneCode;
   final String birthDate;
+  final String fcmToken;
+  
 
   UserEntity({
     required this.uid,
@@ -15,5 +17,6 @@ class UserEntity {
     required this.phoneNumber,
     required this.phoneCode,
     required this.birthDate,
+    required this.fcmToken,
   });
 }

@@ -18,7 +18,9 @@ class CustomTextFormFiled extends StatelessWidget {
     this.initialValue,
     this.validator,
     this.enabled,
-    this.prefixIcon, this.onSubmit, this.maxLine,
+    this.prefixIcon,
+    this.onSubmit,
+    this.maxLine,
   });
 
   final String hintText;
@@ -45,7 +47,7 @@ class CustomTextFormFiled extends StatelessWidget {
       onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
       controller: controller,
       maxLength: maxLength,
-      maxLines: maxLine,
+      maxLines: maxLine ?? 1,
       onChanged: onChanged,
       onFieldSubmitted: onSubmit,
       inputFormatters: inputFormatters,

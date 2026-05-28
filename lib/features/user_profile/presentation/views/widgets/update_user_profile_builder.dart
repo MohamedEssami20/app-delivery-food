@@ -76,6 +76,7 @@ class UpdateUserProfileBuilder extends StatelessWidget {
               phoneNumber: int.tryParse(phoneController.text.trim()) ?? 0,
               phoneCode: int.tryParse(phoneCodeController.text.trim()) ?? 0,
               birthDate: birthdayController.text.trim(),
+              fcmToken: widget.user.fcmToken,
             );
             context.read<UpdateProfileCubit>().updateProfile(
               userEntity: updatedUser,

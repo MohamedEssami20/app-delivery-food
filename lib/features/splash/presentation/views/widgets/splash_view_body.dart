@@ -32,6 +32,9 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         SharedPrefrenceSigelton.getBoolean(key: AppKeys.isShowedOnboarding) ??
         false;
     final isLogin = FirebaseAuthService().isUserAuthenticated();
+    // if(isLogin){
+    //   Navigator.pushReplacementNamed(context, MainView.routeName);
+    // }
     if (isShowOnboarding && isLogin) {
       Navigator.pushReplacementNamed(context, MainView.routeName);
     } else if (isShowOnboarding && !isLogin) {

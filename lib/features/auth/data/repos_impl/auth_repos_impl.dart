@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:app_delivey_food/core/errors/failure.dart';
+import 'package:app_delivey_food/core/errors/firebase_exception_handler.dart';
 import 'package:app_delivey_food/core/errors/google_signin_exeception_handler.dart';
 import 'package:app_delivey_food/core/utils/app_keys.dart';
 import 'package:dartz/dartz.dart';
@@ -10,6 +11,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/errors/firebse_auth_exception_handler.dart';
 import '../../../../core/services/data_base_services.dart';
 import '../../../../core/services/firebase_auth_services.dart';
+import '../../../../core/services/get_it_services.dart';
+import '../../../../core/services/notificaction_service.dart';
 import '../../../../core/services/shared_pref_services.dart';
 import '../../../../core/utils/backend_end_point.dart';
 import '../../domain/entities/user_entity.dart';
@@ -35,6 +38,8 @@ class AuthRepoImpl extends AuthRepos {
         email: email,
         password: password,
       );
+      final String fcmToken =
+          await GetItService.getIt.get<NotificationService>().getToken() ?? "";
       UserEntity userEntity = UserEntity(
         userEmail: user.email!,
         username: name,
@@ -43,6 +48,7 @@ class AuthRepoImpl extends AuthRepos {
         phoneNumber: 0,
         phoneCode: 0,
         birthDate: "",
+        fcmToken: fcmToken,
       );
       Map<String, dynamic> userData = UserModel.formUserEntity(
         userEntity: userEntity,
@@ -87,7 +93,9 @@ class AuthRepoImpl extends AuthRepos {
         email: email,
         password: password,
       );
-      log("user id= ${user.uid.toString()}");
+      final String fcmToken =
+          await GetItService.getIt.get<NotificationService>().getToken() ?? "";
+      await updateFCMToken(uid: user.uid, fcmToken: fcmToken);
       UserEntity userEntity = await getUserData(uid: user.uid);
       log("user entity= ${userEntity.toString()}");
       saveUserData(userEntity: userEntity);
@@ -217,6 +225,28 @@ class AuthRepoImpl extends AuthRepos {
         Failure(
           errorMessage: "An unexpected error occurred. Please try again later.",
         ),
+      );
+    }
+  }
+
+  @override
+  Future<void> updateFCMToken({
+    required String uid,
+    required String fcmToken,
+  }) async {
+    try {
+      await dataBaseService.updateData(
+        path: BackendEndpoints.addUser,
+        documentId: uid,
+        data: {'fcmToken': fcmToken},
+      );
+    } on FirebaseException catch (error) {
+      log("FirebaseException to update fcm token= ${error.toString()}");
+      FirebaseExceptionHandler.fromFirebaseException(error);
+    } catch (e) {
+      log("Exception to update fcm token= ${e.toString()}");
+      Failure(
+        errorMessage: 'An unexpected error occurred. Please try again later.',
       );
     }
   }

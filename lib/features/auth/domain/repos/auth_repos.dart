@@ -35,4 +35,7 @@ abstract class AuthRepos {
 
   // create method that reset password;
   Future<Either<Failure, void>> resetPassword({required String email});
+
+  // create method that update fcm token;
+  Future<void> updateFCMToken({required String uid, required String fcmToken});
 }
