@@ -35,11 +35,11 @@ class SharedPrefrenceSigelton {
     await _instance.clear();
   }
 
-  static void remove(String key,) async {
+  static void remove(String key) async {
     await _instance.remove(key);
   }
 
-  static void deleteListOfStrings(String key,) async {
+  static void deleteListOfStrings(String key) async {
     await _instance.remove(key);
   }
 }

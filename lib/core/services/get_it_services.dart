@@ -21,6 +21,8 @@ import '../../features/orders/data/repos/orders_repos_impl.dart';
 import '../../features/user_profile/data/repos_impl/user_profile_repo_impl.dart';
 import '../../features/user_profile/domain/repos/user_profile_repo.dart';
 import 'fcm_notification_services.dart';
+import 'dio_service.dart';
+import 'cloudflare_notification_service.dart';
 
 class GetItService {
   static GetIt getIt = GetIt.instance;
@@ -57,8 +59,19 @@ class GetItService {
       ExploreProductRepoImpl(dataBaseService: getIt<DataBaseService>()),
     );
 
+    getIt.registerSingleton<DioService>(
+      DioServiceImpl(),
+    );
+
+    getIt.registerSingleton<CloudflareNotificationService>(
+      CloudflareNotificationServiceImpl(dioService: getIt<DioService>()),
+    );
+
     getIt.registerSingleton<CheckoutRepo>(
-      CheckoutReposImpl(dataBaseService: getIt<DataBaseService>()),
+      CheckoutReposImpl(
+        dataBaseService: getIt<DataBaseService>(),
+        cloudflareNotificationService: getIt<CloudflareNotificationService>(),
+      ),
     );
 
     getIt.registerSingleton<OrdersRepos>(
