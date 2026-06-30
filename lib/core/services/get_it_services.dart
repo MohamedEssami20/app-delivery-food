@@ -1,3 +1,4 @@
+import 'package:app_delivey_food/core/repos/user_repo.dart';
 import 'package:app_delivey_food/core/services/data_base_services.dart';
 import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
 import 'package:app_delivey_food/core/services/firestore_services.dart';
@@ -20,6 +21,7 @@ import '../../features/explore_products/data/repos/explore_product_repo_impl.dar
 import '../../features/orders/data/repos/orders_repos_impl.dart';
 import '../../features/user_profile/data/repos_impl/user_profile_repo_impl.dart';
 import '../../features/user_profile/domain/repos/user_profile_repo.dart';
+import '../repos/user_repo_impl.dart';
 import 'fcm_notification_services.dart';
 import 'dio_service.dart';
 import 'cloudflare_notification_service.dart';
@@ -83,6 +85,10 @@ class GetItService {
 
     getIt.registerSingleton<NotificationService>(
       FcmNotificationService(),
+    );
+
+    getIt.registerSingleton<UserRepo>(
+      UserRepoImpl(dataBaseService: getIt<DataBaseService>()),
     );
   }
 }
