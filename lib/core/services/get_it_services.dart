@@ -21,6 +21,8 @@ import '../../features/explore_products/data/repos/explore_product_repo_impl.dar
 import '../../features/orders/data/repos/orders_repos_impl.dart';
 import '../../features/user_profile/data/repos_impl/user_profile_repo_impl.dart';
 import '../../features/user_profile/domain/repos/user_profile_repo.dart';
+import '../repos/admin_repo.dart';
+import '../repos/admin_repo_impl.dart';
 import '../repos/user_repo_impl.dart';
 import 'fcm_notification_services.dart';
 import 'dio_service.dart';
@@ -61,18 +63,21 @@ class GetItService {
       ExploreProductRepoImpl(dataBaseService: getIt<DataBaseService>()),
     );
 
-    getIt.registerSingleton<DioService>(
-      DioServiceImpl(),
-    );
+    getIt.registerSingleton<DioService>(DioServiceImpl());
 
     getIt.registerSingleton<CloudflareNotificationService>(
       CloudflareNotificationServiceImpl(dioService: getIt<DioService>()),
+    );
+
+    getIt.registerSingleton<AdminRepo>(
+      AdminRepoImpl(dataBaseService: getIt<DataBaseService>()),
     );
 
     getIt.registerSingleton<CheckoutRepo>(
       CheckoutReposImpl(
         dataBaseService: getIt<DataBaseService>(),
         cloudflareNotificationService: getIt<CloudflareNotificationService>(),
+        adminRepo: getIt<AdminRepo>(),
       ),
     );
 
@@ -83,9 +88,7 @@ class GetItService {
       UserProfileRepoImpl(dataBaseService: getIt<DataBaseService>()),
     );
 
-    getIt.registerSingleton<NotificationService>(
-      FcmNotificationService(),
-    );
+    getIt.registerSingleton<NotificationService>(FcmNotificationService());
 
     getIt.registerSingleton<UserRepo>(
       UserRepoImpl(dataBaseService: getIt<DataBaseService>()),

@@ -3,6 +3,7 @@ import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.
 class AddressAndOrderInputEntity {
   final int id;
   final String userId;
+  final String fcmToken;
   final String name;
   final String email;
   final String country;
@@ -18,6 +19,7 @@ class AddressAndOrderInputEntity {
 
   AddressAndOrderInputEntity({
     required this.id,
+    required this.fcmToken,
     required this.userId,
     required this.totalPrice,
     required this.name,

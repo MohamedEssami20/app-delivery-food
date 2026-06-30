@@ -2,6 +2,7 @@ import '../../../cart/domain/entities/cart_item_entity.dart';
 
 class MyOrderEntity {
   final int orderId;
+  
   final String status;
   final String dateOrTimeTitle;
   final String dateOrTimeValue;

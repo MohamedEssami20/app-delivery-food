@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:app_delivey_food/core/function/generate_order_id.dart';
 import 'package:app_delivey_food/core/function/global_validation_email.dart';
 import 'package:app_delivey_food/core/function/handel_paypal_checkout.dart';
 import 'package:app_delivey_food/core/helper/app_theme_helper.dart';
 import 'package:app_delivey_food/core/helper/order_state.dart';
 import 'package:app_delivey_food/core/services/firebase_auth_services.dart';
+import 'package:app_delivey_food/core/services/get_it_services.dart';
 import 'package:app_delivey_food/core/utils/custom_button.dart';
 import 'package:app_delivey_food/core/utils/custom_text_field.dart';
 import 'package:app_delivey_food/core/utils/payment_listener.dart';
@@ -11,6 +14,7 @@ import 'package:app_delivey_food/features/cart/domain/entities/cart_item_entity.
 import 'package:app_delivey_food/features/checkout/domain/entities/address_input_entity.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/function/global_validation_address_inputs.dart';
+import '../../../../../core/repos/user_repo.dart';
 
 class AddressViewBody extends StatefulWidget {
   const AddressViewBody({super.key, required this.cartItems});
@@ -24,16 +28,34 @@ class _AddressViewBodyState extends State<AddressViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? name, email, country, city, street;
   int? houseNumber, apartmentNumber, phone;
+  String? fcmToken;
+
+  Future getFCMToken() async {
+    final tokenResult = await GetItService.getIt.get<UserRepo>().getUserToken();
+    tokenResult.fold((failure) => null, (token) => fcmToken = token);
+    log("fcmToken in build address : $fcmToken");
+  }
+
+  @override
+  void initState() {
+    getFCMToken();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = AppThemeHelper(context);
-    final orderId=generateOrderId();
+    final orderId = generateOrderId();
     return PaymentListener(
       cartItemEntity: widget.cartItems,
       orderId: orderId,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 40),
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 20,
+          bottom: 40,
+        ),
         child: Form(
           key: formKey,
           child: SingleChildScrollView(
@@ -133,26 +155,27 @@ class _AddressViewBodyState extends State<AddressViewBody> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             formKey.currentState!.save();
-                            final AddressAndOrderInputEntity addressInputEntity =
-                                AddressAndOrderInputEntity(
-                                  id: orderId,
-                                  userId: FirebaseAuthService().getCurrentUser()!,
-                                  totalPrice: widget.cartItems
-                                      .map((e) => e.calculateTotalPrice())
-                                      .reduce((value, element) => value + element)
-                                      .toDouble(),
-                                  name: name!,
-                                  email: email!,
-                                  country: country!,
-                                  city: city!,
-                                  street: street!,
-                                  houseNumber: houseNumber!,
-                                  apartmentNumber: apartmentNumber!,
-                                  phoneNumber: phone!,
-                                  dateTime: DateTime.now(),
-                                  cartItemEntity: widget.cartItems,
-                                  orderState: OrderState.preparing.name,
-                                );
+                            final AddressAndOrderInputEntity
+                            addressInputEntity = AddressAndOrderInputEntity(
+                              id: orderId,
+                              fcmToken: fcmToken ?? "",
+                              userId: FirebaseAuthService().getCurrentUser()!,
+                              totalPrice: widget.cartItems
+                                  .map((e) => e.calculateTotalPrice())
+                                  .reduce((value, element) => value + element)
+                                  .toDouble(),
+                              name: name!,
+                              email: email!,
+                              country: country!,
+                              city: city!,
+                              street: street!,
+                              houseNumber: houseNumber!,
+                              apartmentNumber: apartmentNumber!,
+                              phoneNumber: phone!,
+                              dateTime: DateTime.now(),
+                              cartItemEntity: widget.cartItems,
+                              orderState: OrderState.preparing.name,
+                            );
                             handelPayPalCheckout(
                               addressInputEntity: addressInputEntity,
                               context: context,

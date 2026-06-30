@@ -5,6 +5,7 @@ import 'package:app_delivey_food/features/checkout/domain/entities/address_input
 class AddressAndOrderInputModel {
   final int id;
   final String userId;
+  final String fcmToken;
   final String name;
   final String email;
   final String country;
@@ -20,6 +21,7 @@ class AddressAndOrderInputModel {
   AddressAndOrderInputModel({
     required this.id,
     required this.userId,
+    required this.fcmToken,
     required this.name,
     required this.email,
     required this.country,
@@ -38,6 +40,7 @@ class AddressAndOrderInputModel {
     return {
       'id': id,
       'userId': userId,
+      'fcmToken': fcmToken,
       'name': name,
       'email': email,
       'country': country,
@@ -58,6 +61,7 @@ class AddressAndOrderInputModel {
   factory AddressAndOrderInputModel.fromMap(Map<String, dynamic> map) {
     return AddressAndOrderInputModel(
       id: map['id']?.toInt() ?? 0,
+      fcmToken: map['fcmToken'] ?? '',
       userId: map['userId'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
@@ -78,6 +82,7 @@ class AddressAndOrderInputModel {
 
   AddressAndOrderInputEntity toEntity() => AddressAndOrderInputEntity(
     id: id,
+    fcmToken: fcmToken,
     userId: userId,
     name: name,
     email: email,
@@ -97,6 +102,7 @@ class AddressAndOrderInputModel {
     AddressAndOrderInputEntity entity,
   ) => AddressAndOrderInputModel(
     id: entity.id,
+    fcmToken: entity.fcmToken,
     userId: entity.userId,
     name: entity.name,
     email: entity.email,

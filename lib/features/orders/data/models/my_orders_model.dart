@@ -6,6 +6,7 @@ import 'package:app_delivey_food/features/orders/domain/entities/my_order_entity
 class MyOrderModel extends MyOrderEntity {
   final int id;
   final String userId;
+  final String fcmToken;
   final String name;
   final String email;
   final String country;
@@ -20,6 +21,7 @@ class MyOrderModel extends MyOrderEntity {
   final String orderState;
   MyOrderModel({
     required this.id,
+    required this.fcmToken,
     required this.userId,
     required this.name,
     required this.email,
@@ -50,6 +52,7 @@ class MyOrderModel extends MyOrderEntity {
     return MyOrderModel(
       id: map['id']?.toInt() ?? 0,
       userId: map['userId'] ?? '',
+      fcmToken: map['fcmToken'] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       country: map['country'] ?? '',

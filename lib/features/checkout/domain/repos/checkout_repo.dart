@@ -8,7 +8,4 @@ abstract class CheckoutRepo {
   Future<Either<Failure, void>> addOreder({
     required AddressAndOrderInputEntity addressInputEntity,
   });
-
-  // Get admin token from Firestore
-  Future<Either<Failure, String>> getAdminToken();
 }
